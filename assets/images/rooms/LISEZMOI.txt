@@ -1,0 +1,23 @@
+MÉMOIRE MORTE — fonds et sprites
+
+natif_480x270/   : taille réelle du pixel art (1 pixel = 1 pixel)
+jeu_1920x1080/   : agrandi x4, à afficher tel quel dans une fenêtre 1920x1080
+sprites/         : lustre en PNG transparent (natif et x4)
+
+POSITION DU LUSTRE (sous le crochet du bureau)
+- Natif 480x270 : coin haut-gauche x=205, y=38 ; taille 68x78
+- 1920x1080     : coin haut-gauche x=820, y=152 ; taille 272x312
+- Arcade (origine en bas à gauche, fenêtre 1920x1080) :
+    lustre.center_x = 956
+    lustre.center_y = 772
+
+ENCHAÎNEMENT SALLE 4
+1. Fond salle4_bureau.png + sprite du lustre accroché
+2. Le lustre tombe (animer center_y vers le bas) -> mort de Jam
+3. Après le fondu : fond salle4_bureau_trou.png (lustre écrasé et trou inclus), on retire le sprite
+4. Zone du trou (1920x1080) : environ x = 680 à 1200. Quand Jam y entre -> chute vers le Néant
+
+SOL DES PIÈCES (1920x1080, Arcade)
+- Pieds de Jam vers y = 220 depuis le bas
+- Bande sombre en bas (~185 px) : emplacement de la boîte de dialogue
+- Attention salle4_bureau_trou : le trou déborde dans cette bande sombre
