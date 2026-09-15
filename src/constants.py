@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import arcade
 from arcade.key import E, ENTER, LEFT, RIGHT, SPACE
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -22,6 +23,23 @@ KEY_SKIP = SPACE
 DATA_DIALOGUES = PROJECT_ROOT / "src" / "data" / "dialogues"
 DATA_ROOMS = PROJECT_ROOT / "src" / "data" / "rooms"
 DATA_SCENES = PROJECT_ROOT / "src" / "data" / "scenes.json"
+
+FONTS_DIR = PROJECT_ROOT / "assets" / "fonts"
+FONT_TITLE = "Lora"
+FONT_BODY = "Verdana"
+_FONTS_LOADED = False
+
+
+def load_fonts():
+    global _FONTS_LOADED
+    if _FONTS_LOADED:
+        return
+    arcade.load_font(FONTS_DIR / "Verdana.ttf")
+    arcade.load_font(FONTS_DIR / "static" / "Lora-Regular.ttf")
+    arcade.load_font(FONTS_DIR / "static" / "Lora-Bold.ttf")
+    arcade.load_font(FONTS_DIR / "static" / "Lora-Italic.ttf")
+    _FONTS_LOADED = True
+
 
 DIALOGUE_CHARS_PER_SECOND = 42
 DIALOGUE_PORTRAIT_SCALE = 0.38

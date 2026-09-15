@@ -5,6 +5,7 @@ from src import constants
 
 class DialogueBox:
     def __init__(self):
+        constants.load_fonts()
         self.speaker = ""
         self.full_text = ""
         self.visible = False
@@ -19,6 +20,7 @@ class DialogueBox:
             constants.DIALOGUE_BOX_TOP - 46,
             (232, 214, 170),
             26,
+            font_name=constants.FONT_TITLE,
             bold=True,
         )
         self._body_label = self._make_body_label(italic=False)
@@ -28,6 +30,7 @@ class DialogueBox:
             constants.DIALOGUE_BOX_BOTTOM + 18,
             (200, 190, 170),
             16,
+            font_name=constants.FONT_BODY,
         )
 
     def _make_body_label(self, italic):
@@ -37,6 +40,7 @@ class DialogueBox:
             constants.DIALOGUE_BOX_TOP - 88,
             arcade.color.WHITE,
             22,
+            font_name=constants.FONT_BODY,
             width=int(constants.DIALOGUE_BOX_RIGHT - constants.DIALOGUE_BOX_LEFT - 56),
             multiline=True,
             italic=italic,

@@ -1,29 +1,22 @@
 {
   "id": "room_1",
   "name": "Le couloir",
-  "entry_x": 220,
-  "floor_y": 168,
+  "background": "couloir",
+  "entry_x": 280,
+  "floor_y": 220,
   "on_enter": "corridor_intro",
   "tutorial": true,
-  "layers": [
-    {"left": 0, "right": 1920, "bottom": 168, "top": 1080, "color": [236, 224, 204]},
-    {"left": 0, "right": 1920, "bottom": 990, "top": 1080, "color": [214, 200, 178]},
-    {"left": 0, "right": 1920, "bottom": 0, "top": 168, "color": [108, 82, 60]},
-    {"left": 0, "right": 1920, "bottom": 168, "top": 182, "color": [78, 56, 40]}
-  ],
   "interactables": [
     {
       "name": "photo",
       "kind": "photo",
-      "hitbox": [560, 820, 168, 620],
-      "rect": [610, 770, 380, 590],
+      "hitbox": [720, 1180, 220, 720],
       "dialogue_id": "photo"
     },
     {
       "name": "door",
       "kind": "door",
-      "hitbox": [1680, 1920, 168, 720],
-      "rect": [1740, 1890, 168, 680],
+      "hitbox": [1680, 1920, 220, 720],
       "leads_to": "room_2"
     }
   ]

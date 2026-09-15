@@ -3,9 +3,41 @@
     "type": "color",
     "color": [8, 8, 10]
   },
+  "accueil": {
+    "type": "image",
+    "path": "assets/sprites/rooms/jeu_1920x1080/salle1_couloir.png"
+  },
   "manoir": {
     "type": "image",
-    "path": "assets/images/rooms/manoir.webp"
+    "path": "assets/sprites/rooms/jeu_1920x1080/salle1_couloir.png"
+    },
+  "couloir": {
+    "type": "image",
+    "path": "assets/sprites/rooms/jeu_1920x1080/salle1_couloir.png"
+  },
+  "bar": {
+    "type": "image",
+    "path": "assets/sprites/rooms/jeu_1920x1080/salle2_bar.png"
+  },
+  "chambre": {
+    "type": "image",
+    "path": "assets/sprites/rooms/jeu_1920x1080/salle3_chambre.png"
+  },
+  "bureau": {
+    "type": "image",
+    "path": "assets/sprites/rooms/jeu_1920x1080/salle4_bureau.png"
+  },
+  "bureau_trou": {
+    "type": "image",
+    "path": "assets/sprites/rooms/jeu_1920x1080/salle4_bureau_trou.png"
+  },
+  "neant": {
+    "type": "image",
+    "path": "assets/sprites/rooms/jeu_1920x1080/neant.png"
+  },
+  "flashback": {
+    "type": "image",
+    "path": "assets/sprites/rooms/jeu_1920x1080/flashback.png"
   },
   "room": {
     "type": "room"

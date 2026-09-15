@@ -1,11 +1,8 @@
 {
   "id": "room_2",
   "name": "Le bar à whisky",
-  "entry_x": 220,
-  "floor_y": 168,
-  "layers": [
-    {"left": 0, "right": 1920, "bottom": 168, "top": 1080, "color": [48, 42, 40]},
-    {"left": 0, "right": 1920, "bottom": 0, "top": 168, "color": [72, 52, 40]}
-  ],
+  "background": "bar",
+  "entry_x": 280,
+  "floor_y": 220,
   "interactables": []
 }

@@ -5,14 +5,14 @@
       "text": "Si je récapitule bien, monsieur Plènozas a disparu il y a trois semaines.",
       "sprite": "assets/sprites/jam/dialogs/jam_speechless_1.png",
       "thought": true,
-      "scene": "manoir"
+      "scene": "accueil"
     },
     {
       "speaker": "Jam",
       "text": "Personne ne l'a revu depuis le soir de son anniversaire.",
       "sprite": "assets/sprites/jam/dialogs/jam_speechless_2.png",
       "thought": true,
-      "scene": "manoir"
+      "scene": "accueil"
     }
   ],
   "photo": [

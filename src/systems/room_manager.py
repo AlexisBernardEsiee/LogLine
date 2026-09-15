@@ -99,9 +99,8 @@ class RoomManager:
                     layer["top"],
                     tuple(layer["color"]),
                 )
-
-        for item in self.interactables:
-            self._draw_item(item)
+            for item in self.interactables:
+                self._draw_item(item)
 
     def _fill(self, color):
         arcade.draw_lrbt_rectangle_filled(
@@ -117,6 +116,8 @@ class RoomManager:
     def _texture(self, relative_path):
         if relative_path not in self._textures:
             full_path = constants.PROJECT_ROOT / relative_path
+            if not full_path.exists():
+                raise FileNotFoundError(f"Image introuvable : {full_path}")
             self._textures[relative_path] = arcade.load_texture(str(full_path))
         return self._textures[relative_path]
 

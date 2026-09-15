@@ -5,6 +5,7 @@ from src.views.game_view import GameView
 
 
 def main():
+    constants.load_fonts()
     window = arcade.Window(
         constants.SCREEN_WIDTH,
         constants.SCREEN_HEIGHT,
