@@ -12,7 +12,6 @@ from src.ui.tutorial_overlay import TutorialOverlay
 class GameView(arcade.View):
     def __init__(self):
         super().__init__()
-        self.state = constants.STATE_INTRO
         self.player = None
         self.keys_held = set()
         self.room_manager = RoomManager()
@@ -20,44 +19,28 @@ class GameView(arcade.View):
         self.dialogue_box = DialogueBox()
         self.prompt = InteractionPrompt()
         self.tutorial = TutorialOverlay()
-        self.background_image = None
+        self._pending_tutorial = False
 
     def setup(self):
-        self.state = constants.STATE_INTRO
-        self.player = None
         self.keys_held.clear()
-        self.dialogue_manager.load_room(constants.ROOM_CORRIDOR)
-        self.dialogue_manager.start("corridor_intro")
-        self.dialogue_box.show(self.dialogue_manager.current())
+        self._pending_tutorial = False
+        self._enter_room(constants.ROOM_CORRIDOR)
 
     def on_show_view(self):
-        if self.state == constants.STATE_INTRO:
-            self.background_image = arcade.load_texture("assets/images/rooms/manoir.webp")
-        else:
-            self.window.background_color = (236, 224, 204)
+        self.window.background_color = (8, 8, 10)
 
     def on_draw(self):
         self.clear()
-        if self.state == constants.STATE_INTRO:
-            arcade.draw_texture_rect(
-            self.background_image,
-            arcade.LBWH(0, 0, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT),
-        )
-
-        if self.state == constants.STATE_EXPLORE:
-            self.room_manager.draw()
-            if self.player:
-                arcade.draw_sprite(self.player)
+        self.room_manager.draw()
+        if self.room_manager.shows_world and self.player:
+            arcade.draw_sprite(self.player)
             self.prompt.draw()
             self.tutorial.draw()
         self.dialogue_box.draw()
 
     def on_update(self, delta_time):
         self.dialogue_box.update(delta_time)
-        if self.state != constants.STATE_EXPLORE or self.player is None:
-            return
-        if self.dialogue_manager.is_active:
-            self.prompt.visible = False
+        if self.player is None or self.dialogue_manager.is_active or not self.room_manager.shows_world:
             return
 
         self.player.speed_x = 0
@@ -90,6 +73,38 @@ class GameView(arcade.View):
         if self.dialogue_manager.is_active:
             self._advance_dialogue()
 
+    def _enter_room(self, room_id):
+        self.room_manager.show(room_id)
+        self.dialogue_manager.load_room(room_id)
+        self._spawn_player()
+        self.prompt.visible = False
+        self.tutorial.visible = False
+        on_enter = self.room_manager.consume_on_enter()
+        if on_enter:
+            self._pending_tutorial = self.room_manager.tutorial
+            self._start_dialogue(on_enter)
+        elif self.room_manager.tutorial:
+            self.tutorial.show()
+
+    def _spawn_player(self):
+        if self.player is None:
+            self.player = Player()
+        self.player.center_x = self.room_manager.entry_x
+        self.player.bottom = self.room_manager.floor_y
+        self.player.speed_x = 0
+        self.keys_held.clear()
+
+    def _start_dialogue(self, scene_id):
+        if self.dialogue_manager.start(scene_id):
+            self._apply_line(self.dialogue_manager.current())
+
+    def _apply_line(self, line):
+        if line is None:
+            return
+        self.dialogue_box.show(line)
+        if "scene" in line:
+            self.room_manager.set_scene(line["scene"])
+
     def _advance_dialogue(self):
         if self.dialogue_box.is_typing():
             self.dialogue_box.skip_typing()
@@ -97,37 +112,19 @@ class GameView(arcade.View):
         ended = self.dialogue_manager.advance()
         if ended:
             self.dialogue_box.hide()
-            if self.state == constants.STATE_INTRO:
-                self._enter_corridor()
+            self.room_manager.set_scene(constants.SCENE_ROOM)
+            if self._pending_tutorial:
+                self.tutorial.show()
+                self._pending_tutorial = False
             return
-        self.dialogue_box.show(self.dialogue_manager.current())
-
-    def _enter_corridor(self):
-        self.state = constants.STATE_EXPLORE
-        self.room_manager.load_room(constants.ROOM_CORRIDOR)
-        self.player = Player()
-        self.player.center_x = self.room_manager.entry_x
-        self.player.bottom = self.room_manager.floor_y
-        self.keys_held.clear()
-        self.tutorial.show()
-        self.window.background_color = (236, 224, 204)
+        self._apply_line(self.dialogue_manager.current())
 
     def _interact(self):
         target = self.room_manager.get_nearby_interactable(self.player)
         if target is None:
             return
         if target.leads_to:
-            self._change_room(target.leads_to)
+            self._enter_room(target.leads_to)
             return
         if target.dialogue_id:
-            if self.dialogue_manager.start(target.dialogue_id):
-                self.dialogue_box.show(self.dialogue_manager.current())
-
-    def _change_room(self, room_id):
-        self.room_manager.load_room(room_id)
-        self.dialogue_manager.load_room(room_id)
-        self.player.center_x = self.room_manager.entry_x
-        self.player.bottom = self.room_manager.floor_y
-        self.keys_held.clear()
-        self.prompt.visible = False
-        self.tutorial.visible = False
+            self._start_dialogue(target.dialogue_id)

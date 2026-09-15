@@ -1,0 +1,13 @@
+{
+  "black": {
+    "type": "color",
+    "color": [8, 8, 10]
+  },
+  "manoir": {
+    "type": "image",
+    "path": "assets/images/rooms/manoir.webp"
+  },
+  "room": {
+    "type": "room"
+  }
+}

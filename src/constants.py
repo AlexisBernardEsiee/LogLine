@@ -21,6 +21,7 @@ KEY_SKIP = SPACE
 
 DATA_DIALOGUES = PROJECT_ROOT / "src" / "data" / "dialogues"
 DATA_ROOMS = PROJECT_ROOT / "src" / "data" / "rooms"
+DATA_SCENES = PROJECT_ROOT / "src" / "data" / "scenes.json"
 
 DIALOGUE_CHARS_PER_SECOND = 42
 DIALOGUE_PORTRAIT_SCALE = 0.38
@@ -29,8 +30,6 @@ DIALOGUE_BOX_RIGHT = 1280
 DIALOGUE_BOX_BOTTOM = 36
 DIALOGUE_BOX_TOP = 290
 
-STATE_INTRO = "intro"
-STATE_EXPLORE = "explore"
-
 ROOM_CORRIDOR = "room_1"
 ROOM_BAR = "room_2"
+SCENE_ROOM = "room"

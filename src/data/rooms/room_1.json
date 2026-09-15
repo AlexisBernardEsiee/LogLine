@@ -3,6 +3,14 @@
   "name": "Le couloir",
   "entry_x": 220,
   "floor_y": 168,
+  "on_enter": "corridor_intro",
+  "tutorial": true,
+  "layers": [
+    {"left": 0, "right": 1920, "bottom": 168, "top": 1080, "color": [236, 224, 204]},
+    {"left": 0, "right": 1920, "bottom": 990, "top": 1080, "color": [214, 200, 178]},
+    {"left": 0, "right": 1920, "bottom": 0, "top": 168, "color": [108, 82, 60]},
+    {"left": 0, "right": 1920, "bottom": 168, "top": 182, "color": [78, 56, 40]}
+  ],
   "interactables": [
     {
       "name": "photo",
