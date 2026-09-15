@@ -1,1 +1,22 @@
-{}
+{
+  "id": "room_1",
+  "name": "Le couloir",
+  "entry_x": 220,
+  "floor_y": 168,
+  "interactables": [
+    {
+      "name": "photo",
+      "kind": "photo",
+      "hitbox": [560, 820, 168, 620],
+      "rect": [610, 770, 380, 590],
+      "dialogue_id": "photo"
+    },
+    {
+      "name": "door",
+      "kind": "door",
+      "hitbox": [1680, 1920, 168, 720],
+      "rect": [1740, 1890, 168, 680],
+      "leads_to": "room_2"
+    }
+  ]
+}

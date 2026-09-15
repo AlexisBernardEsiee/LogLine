@@ -1,0 +1,116 @@
+import arcade
+
+from src import constants
+
+
+class DialogueBox:
+    def __init__(self):
+        self.speaker = ""
+        self.full_text = ""
+        self.visible = False
+        self.thought = False
+        self.shown_chars = 0.0
+        self.chars_per_second = constants.DIALOGUE_CHARS_PER_SECOND
+        self._portraits = {}
+        self._portrait = None
+        self._name_label = arcade.Text(
+            "",
+            constants.DIALOGUE_BOX_LEFT + 28,
+            constants.DIALOGUE_BOX_TOP - 46,
+            (232, 214, 170),
+            26,
+            bold=True,
+        )
+        self._body_label = self._make_body_label(italic=False)
+        self._hint_label = arcade.Text(
+            "▼",
+            constants.DIALOGUE_BOX_RIGHT - 42,
+            constants.DIALOGUE_BOX_BOTTOM + 18,
+            (200, 190, 170),
+            16,
+        )
+
+    def _make_body_label(self, italic):
+        return arcade.Text(
+            "",
+            constants.DIALOGUE_BOX_LEFT + 28,
+            constants.DIALOGUE_BOX_TOP - 88,
+            arcade.color.WHITE,
+            22,
+            width=int(constants.DIALOGUE_BOX_RIGHT - constants.DIALOGUE_BOX_LEFT - 56),
+            multiline=True,
+            italic=italic,
+            anchor_y="top",
+        )
+
+    def show(self, line):
+        self.speaker = line.get("speaker", "")
+        self.full_text = line.get("text", "")
+        self.thought = bool(line.get("thought", False))
+        self.shown_chars = 0.0
+        self.visible = True
+        self._portrait = self._load_portrait(line.get("sprite"))
+        self._name_label.text = self.speaker
+        self._name_label.color = (210, 198, 176) if self.thought else (232, 214, 170)
+        self._body_label = self._make_body_label(italic=self.thought)
+        self._refresh_body()
+
+    def hide(self):
+        self.visible = False
+        self._portrait = None
+
+    def update(self, delta_time):
+        if not self.visible:
+            return
+        self.shown_chars = min(
+            len(self.full_text),
+            self.shown_chars + self.chars_per_second * delta_time,
+        )
+        self._refresh_body()
+
+    def is_typing(self):
+        return self.visible and self.shown_chars < len(self.full_text)
+
+    def skip_typing(self):
+        self.shown_chars = float(len(self.full_text))
+        self._refresh_body()
+
+    def _refresh_body(self):
+        self._body_label.text = self.full_text[: int(self.shown_chars)]
+
+    def _load_portrait(self, relative_path):
+        if not relative_path:
+            return None
+        if relative_path not in self._portraits:
+            full_path = constants.PROJECT_ROOT / relative_path
+            sprite = arcade.Sprite(str(full_path), scale=constants.DIALOGUE_PORTRAIT_SCALE)
+            sprite.right = constants.SCREEN_WIDTH - 10
+            sprite.bottom = 8
+            self._portraits[relative_path] = sprite
+        return self._portraits[relative_path]
+
+    def draw(self):
+        if not self.visible:
+            return
+
+        arcade.draw_lrbt_rectangle_filled(
+            constants.DIALOGUE_BOX_LEFT,
+            constants.DIALOGUE_BOX_RIGHT,
+            constants.DIALOGUE_BOX_BOTTOM,
+            constants.DIALOGUE_BOX_TOP,
+            (18, 14, 20, 230),
+        )
+        arcade.draw_lrbt_rectangle_outline(
+            constants.DIALOGUE_BOX_LEFT,
+            constants.DIALOGUE_BOX_RIGHT,
+            constants.DIALOGUE_BOX_BOTTOM,
+            constants.DIALOGUE_BOX_TOP,
+            (214, 200, 168, 255),
+            2,
+        )
+        self._name_label.draw()
+        self._body_label.draw()
+        if not self.is_typing():
+            self._hint_label.draw()
+        if self._portrait:
+            arcade.draw_sprite(self._portrait)
