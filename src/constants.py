@@ -30,24 +30,15 @@ FPS = 60
 
 PLAYER_SCALE = 0.3
 PLAYER_SPEED = 7
-<<<<<<< HEAD
-SPRITE_JAM_DIR = PROJECT_ROOT / "assets" / "sprites" / "jam" / "walk"
-SPRITE_JAM_MENU = PROJECT_ROOT / "assets" / "sprites" / "jam" / "dialogs" / "jam_smile_1.png"
-SPRITE_JAM_IDLE = str(SPRITE_JAM_DIR / "walk1.png")
-SPRITE_JAM_WALK = [
-    str(SPRITE_JAM_DIR / "walk2.png"),
-    str(SPRITE_JAM_DIR / "walk3.png"),
-    str(SPRITE_JAM_DIR / "walk4.png"),
-=======
 SPRITE_JAM_WALK_DIR = PROJECT_ROOT / "assets" / "sprites" / "jam" / "walk"
 SPRITE_JAM_DIR = PROJECT_ROOT / "assets" / "sprites" / "jam"
+SPRITE_JAM_MENU = str(SPRITE_JAM_DIR / "dialogs" / "jam_smile_1.png")
 SPRITE_JAM_IDLE = str(SPRITE_JAM_DIR / "jam_idle.png")
 SPRITE_JAM_WALK = [
     str(SPRITE_JAM_WALK_DIR / "walk1.png"),
     str(SPRITE_JAM_WALK_DIR / "walk2.png"),
     str(SPRITE_JAM_WALK_DIR / "walk3.png"),
     str(SPRITE_JAM_WALK_DIR / "walk4.png"),
->>>>>>> origin/main
 ]
 # Durées par frame : contact (3 et 5) un peu plus long, pour poser le pied.
 PLAYER_WALK_FRAME_DURATIONS = (0.15, 0.19, 0.15, 0.19)
@@ -107,4 +98,4 @@ ROOM_CORRIDOR = "room_1"
 ROOM_BAR = "room_2"
 SCENE_ROOM = "room"
 
-SCENE_MENU = "accueil"
+SCENE_MENU = "menu"

@@ -3,13 +3,13 @@
     "type": "color",
     "color": [8, 8, 10]
   },
+  "menu": {
+    "type": "image",
+    "path": "assets/sprites/rooms/jeu_1920x1080/accueil.png"
+  },
   "accueil": {
     "type": "image",
-<<<<<<< HEAD
-    "path": "assets/sprites/rooms/jeu_1920x1080/accueil.png"
-=======
     "path": "assets/sprites/rooms/jeu_1920x1080/salle1_couloir_v2.png"
->>>>>>> origin/main
   },
   "manoir": {
     "type": "image",
