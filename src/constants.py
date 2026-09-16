@@ -30,24 +30,19 @@ FPS = 60
 
 PLAYER_SCALE = 0.6
 PLAYER_SPEED = 7
-<<<<<<< HEAD
-SPRITE_JAM_IDLE = str(PROJECT_ROOT / "assets" / "sprites" / "jam" / "jam_idle.png")
-SPRITE_JAM_MENU = str(PROJECT_ROOT / "assets" / "sprites" / "jam" / "jam_smile_1.png")
-=======
 SPRITE_JAM_DIR = PROJECT_ROOT / "assets" / "sprites" / "jam" / "walk"
-SPRITE_JAM_IDLE = str(SPRITE_JAM_DIR / "idle_walk1.png")
+SPRITE_JAM_MENU = PROJECT_ROOT / "assets" / "sprites" / "jam" / "dialogs" / "jam_smile_1.png"
+SPRITE_JAM_IDLE = str(SPRITE_JAM_DIR / "walk1.png")
 SPRITE_JAM_WALK = [
     str(SPRITE_JAM_DIR / "walk2.png"),
     str(SPRITE_JAM_DIR / "walk3.png"),
     str(SPRITE_JAM_DIR / "walk4.png"),
-    str(SPRITE_JAM_DIR / "walk5.png"),
 ]
 # Durées par frame : contact (3 et 5) un peu plus long, pour poser le pied.
 PLAYER_WALK_FRAME_DURATIONS = (0.15, 0.19, 0.15, 0.19)
 PLAYER_WALK_BOB_PIXELS = 2.2
 PLAYER_IDLE_BOB_SPEED = 1.4
 PLAYER_IDLE_BOB_PIXELS = 1.6
->>>>>>> origin/main
 
 KEY_LEFT = LEFT
 KEY_RIGHT = RIGHT
