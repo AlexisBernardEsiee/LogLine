@@ -78,7 +78,14 @@ class DialogueBox:
         self.visible = True
         self._portrait = self._load_portrait(line.get("sprite"))
         self._name_label.text = self.speaker
-        self._name_label.color = (210, 198, 176) if self.thought else (232, 214, 170)
+        if self.speaker == "???":
+            self._name_label.color = (80, 220, 110)
+        else:
+            self._name_label.color = (
+                (210, 198, 176)
+                if self.thought
+                else (232, 214, 170)
+            )
         self._body_label = self._make_body_label(italic=self.thought)
         self._refresh_body()
 
