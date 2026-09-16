@@ -39,19 +39,14 @@ class GameView(arcade.View):
         self._pending_death = None
         self._pending_reveal = None
         self._pending_give = None
-<<<<<<< HEAD
-        self.audio = None
-        self.dialogue_box = DialogueBox(audio_manager=None)
-=======
         self._pending_ending = False
         self._object_search = False
         self._pending_lustre_death = None
         self._fall = None
         self._void_glitch_rects = []
         self._void_glitch_t = 0.0
-        self.audio = AudioManager()
-        self.dialogue_box = DialogueBox(audio_manager=self.audio)
->>>>>>> origin/main
+        self.audio = None
+        self.dialogue_box = DialogueBox(audio_manager=None)
 
     def setup(self, new_game=False):
         self.audio = self.window.audio
