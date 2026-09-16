@@ -10,6 +10,7 @@ from src.ui.dialogue_box import DialogueBox
 from src.ui.inspect_effect import InspectEffect
 from src.ui.prompt import InteractionPrompt
 from src.ui.tutorial_overlay import TutorialOverlay
+from src.views.pause_view import PauseView
 from src.systems.audio_manager import AudioManager
 
 
@@ -92,8 +93,8 @@ class GameView(arcade.View):
         self.prompt.set_target(self.player, nearby)
 
     def on_key_press(self, key, modifiers):
-        if key == constants.KEY_FULLSCREEN:
-            self.window.set_fullscreen(not self.window.fullscreen)
+        if key == constants.KEY_BACK:
+            self._pause()
             return
         if key == constants.KEY_GRID:
             self.debug_grid.toggle()
@@ -136,6 +137,12 @@ class GameView(arcade.View):
         target = self.room_manager.get_interactable_at(world_x, world_y)
         if target is not None:
             self._interact_with(target)
+
+    def _pause(self):
+        self.keys_held.clear()
+        if self.player is not None:
+            self.player.speed_x = 0
+        self.window.show_view(PauseView(self))
 
     def _enter_room(self, room_id, from_room_id=None):
         self.room_manager.show(room_id, from_room_id=from_room_id)
