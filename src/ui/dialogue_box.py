@@ -19,7 +19,7 @@ class DialogueBox:
             constants.DIALOGUE_BOX_LEFT + 28,
             constants.DIALOGUE_BOX_TOP - 46,
             (232, 214, 170),
-            26,
+            constants.DIALOGUE_FONT_SIZE,
             font_name=constants.FONT_TITLE,
             bold=True,
         )
@@ -39,7 +39,7 @@ class DialogueBox:
             constants.DIALOGUE_BOX_LEFT + 28,
             constants.DIALOGUE_BOX_TOP - 88,
             arcade.color.WHITE,
-            22,
+            constants.DIALOGUE_FONT_SIZE,
             font_name=constants.FONT_BODY,
             width=int(constants.DIALOGUE_BOX_RIGHT - constants.DIALOGUE_BOX_LEFT - 56),
             multiline=True,
