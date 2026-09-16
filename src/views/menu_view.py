@@ -1,3 +1,4 @@
+from importlib.resources import path
 import os
 
 import arcade
@@ -39,6 +40,8 @@ class MenuView(arcade.View):
     def _warmup_game(self, _dt):
         arcade.load_texture(constants.SPRITE_JAM_IDLE)
         for path in constants.SPRITE_JAM_WALK:
+            arcade.load_texture(path)
+        for path in constants.SPRITE_JAM_DEATH:
             arcade.load_texture(path)
         arcade.load_texture(
             str(constants.PROJECT_ROOT / "assets" / "sprites" / "rooms" / "jeu_1920x1080" / "salle1_couloir_v2.png")

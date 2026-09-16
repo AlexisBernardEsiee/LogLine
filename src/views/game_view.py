@@ -31,7 +31,7 @@ class GameView(arcade.View):
         self.tutorial = TutorialOverlay()
         self.debug_grid = DebugGrid()
         self.inspect = InspectEffect()
-        self.death = DeathEffect()
+        self.death = DeathEffect(constants.SPRITE_JAM_DEATH)
         self.state = GameState()
         self._pending_tutorial = False
         self._pending_dialogue = None

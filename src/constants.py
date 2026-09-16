@@ -45,6 +45,14 @@ SPRITE_JAM_WALK = [
     str(SPRITE_JAM_WALK_DIR / "walk3.png"),
     str(SPRITE_JAM_WALK_DIR / "walk4.png"),
 ]
+SPRITE_JAM_DEATH_DIR = SPRITE_JAM_DIR / "death"
+SPRITE_JAM_DEATH = [
+    str(SPRITE_JAM_DEATH_DIR / "death1.png"),
+    str(SPRITE_JAM_DEATH_DIR / "death2.png"),
+    str(SPRITE_JAM_DEATH_DIR / "death3.png"),
+]
+
+DEATH_FRAME_DURATION = 1.2
 
 PLAYER_WALK_FRAME_DURATIONS = (0.15, 0.19, 0.15, 0.19)
 PLAYER_WALK_BOB_PIXELS = 2.2
