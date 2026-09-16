@@ -4,6 +4,7 @@ from src import constants
 from src.entities.player import Player
 from src.systems.dialogue_manager import DialogueManager
 from src.systems.room_manager import RoomManager
+from src.ui.debug_grid import DebugGrid
 from src.ui.dialogue_box import DialogueBox
 from src.ui.prompt import InteractionPrompt
 from src.ui.tutorial_overlay import TutorialOverlay
@@ -19,6 +20,7 @@ class GameView(arcade.View):
         self.dialogue_box = DialogueBox()
         self.prompt = InteractionPrompt()
         self.tutorial = TutorialOverlay()
+        self.debug_grid = DebugGrid()
         self._pending_tutorial = False
 
     def setup(self):
@@ -37,10 +39,16 @@ class GameView(arcade.View):
             self.prompt.draw()
             self.tutorial.draw()
         self.dialogue_box.draw()
+        self.debug_grid.draw(self.room_manager, self.player)
 
     def on_update(self, delta_time):
         self.dialogue_box.update(delta_time)
-        if self.player is None or self.dialogue_manager.is_active or not self.room_manager.shows_world:
+        if self.player is None or not self.room_manager.shows_world:
+            return
+
+        if self.dialogue_manager.is_active:
+            self.player.speed_x = 0
+            self.player.update(delta_time)
             return
 
         self.player.speed_x = 0
@@ -57,6 +65,12 @@ class GameView(arcade.View):
         self.prompt.set_target(self.player, nearby)
 
     def on_key_press(self, key, modifiers):
+        if key == constants.KEY_GRID:
+            self.debug_grid.toggle()
+            return
+        if key == constants.KEY_COPY_HITBOX and self.debug_grid.visible:
+            self.debug_grid.copy_last()
+            return
         if self.dialogue_manager.is_active:
             if key in (constants.KEY_CONFIRM, constants.KEY_INTERACT, constants.KEY_SKIP):
                 self._advance_dialogue()
@@ -69,7 +83,12 @@ class GameView(arcade.View):
     def on_key_release(self, key, modifiers):
         self.keys_held.discard(key)
 
+    def on_mouse_motion(self, x, y, dx, dy):
+        self.debug_grid.on_mouse_motion(x, y)
+
     def on_mouse_press(self, x, y, button, modifiers):
+        if self.debug_grid.on_mouse_press(x, y, button):
+            return
         if self.dialogue_manager.is_active:
             self._advance_dialogue()
 
@@ -89,9 +108,7 @@ class GameView(arcade.View):
     def _spawn_player(self):
         if self.player is None:
             self.player = Player()
-        self.player.center_x = self.room_manager.entry_x
-        self.player.bottom = self.room_manager.floor_y
-        self.player.speed_x = 0
+        self.player.place_on_floor(self.room_manager.entry_x, self.room_manager.floor_y)
         self.keys_held.clear()
 
     def _start_dialogue(self, scene_id):
