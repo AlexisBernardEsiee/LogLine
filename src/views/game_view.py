@@ -318,6 +318,8 @@ class GameView(arcade.View):
         if self.dialogue_box.is_typing():
             self.dialogue_box.skip_typing()
             return
+        if self.audio:
+            self.audio.stop_all_sfx()
         ended = self.dialogue_manager.advance()
         if ended:
             self.dialogue_box.hide()

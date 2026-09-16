@@ -98,6 +98,11 @@ class AudioManager:
             player.pause()
         except Exception:
             pass
+    
+    def stop_all_sfx(self) -> None:
+        """Arrête tous les effets sonores (SFX) en cours de lecture."""
+        for name in list(self._sfx_players.keys()):
+            self.stop_sfx(name)
 
     def stop_glitch(self) -> None:
         for name in list(self._sfx_players):

@@ -39,14 +39,16 @@
     {
       "speaker": "Mr. P",
       "text": "Comment sortir d'ici. De toute façon, tout cela n'est pas réel. Alors autant tester.",
-      "sprite": "assets/sprites/shadow_man.png"
+      "sprite": "assets/sprites/shadow_man.png",
+      "sfx": "assets/sounds/radio_flashback.mp3",
+      "sfx_volume": 0.2
     },
     {
       "speaker": "???",
       "text": "Non. Pas comme ça.",
       "thought": true,
-      "sfx": "assets/sounds/tremblement.mp3",
-      "sfx_volume": 0.1
+      "sfx": "assets/sounds/radio_flashback.mp3",
+      "sfx_volume": 0.2
     }
   ],
   "death_poison_after": [
