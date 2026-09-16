@@ -15,6 +15,7 @@ class Player(arcade.Sprite):
             self.facing_right = True
         elif self.speed_x < 0:
             self.facing_right = False
+            
 
         abs_scale = abs(self.scale_x)
         self.scale_x = abs_scale if self.facing_right else -abs_scale
