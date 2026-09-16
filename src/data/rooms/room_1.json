@@ -11,6 +11,7 @@
   },
   "floor_y": 300,
   "on_enter": "corridor_intro",
+  "on_enter_flag": "seen_corridor_intro",
   "tutorial": true,
   "interactables": [
     {
@@ -18,10 +19,29 @@
       "kind": "photo",
       "hitbox": [1057, 1194, 534, 703],
       "dialogue_id": "photo",
+      "reveals": "key_revealed",
       "inspect": {
         "effect": "fade_zoom",
         "zoom": 2.6,
         "duration": 0.55
+      }
+    },
+    {
+      "name": "key",
+      "kind": "key",
+      "hitbox": [1088, 1240, 300, 430],
+      "rect": [1088, 1240, 300, 430],
+      "sprite": "assets/sprites/key.png",
+      "dialogue_id": "key",
+      "gives": "has_key",
+      "hidden_unless": "key_revealed",
+      "hide_if": "has_key",
+      "priority": 10,
+      "inspect": {
+        "effect": "sprite",
+        "sprite": "assets/sprites/key.png",
+        "zoom": 1.0,
+        "duration": 0.5
       }
     },
     {
@@ -54,8 +74,10 @@
       "name": "door",
       "kind": "door",
       "hitbox": [1727, 1884, 217, 753],
-      "leads_to": "room_2"
+      "leads_to": "room_2",
+      "requires": "has_key",
+      "locked_dialogue": "door_locked",
+      "sfx": "assets/sounds/grincement_porte.mp3"
     }
   ]
 }
-  

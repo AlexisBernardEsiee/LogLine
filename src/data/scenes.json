@@ -5,7 +5,7 @@
   },
   "menu": {
     "type": "image",
-    "path": "assets/sprites/rooms/jeu_1920x1080/accueil.png"
+    "path": "assets/sprites/homepage.png"
   },
   "accueil": {
     "type": "image",
