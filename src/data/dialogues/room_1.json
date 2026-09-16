@@ -16,14 +16,14 @@
     {
       "speaker": "Jam",
       "text": "Il y a quelque chose derrière.",
-      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png"
+      "sprite": "assets/sprites/jam/dialogs/jam_speechless_1.png"
     }
   ],
   "key": [
     {
       "speaker": "Jam",
       "text": "C'est sûrement la clé de la porte.",
-      "sprite": "assets/sprites/jam/dialogs/jam_speechless_2.png"
+      "sprite": "assets/sprites/jam/dialogs/jam_smile_1.png"
     }
   ],
   "door_locked": [
@@ -43,7 +43,7 @@
     {
       "speaker": "Jam",
       "text": "...j'ai l'impression de le connaître.",
-      "sprite": "assets/sprites/jam/dialogs/jam_stunned.png",
+      "sprite": "assets/sprites/jam/dialogs/jam_speechless_3.png",
       "sfx": "assets/sounds/erreur.mp3"
     },
     {
@@ -65,7 +65,7 @@
     {
       "speaker": "Jam",
       "text": "Personne n'a pensé à les changer depuis un moment.",
-      "sprite": "assets/sprites/jam/dialogs/jam_sad.png",
+      "sprite": "assets/sprites/jam/dialogs/jam_stunned.png",
       "thought": true
     }
   ]
