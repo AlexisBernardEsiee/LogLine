@@ -1,6 +1,7 @@
 import json
 
 import arcade
+from PIL import Image
 
 from src import constants
 from src.entities.interactable import Interactable
@@ -79,11 +80,29 @@ class RoomManager:
             return self._texture(spec["path"])
         return None
 
+    def _room_background_texture(self):
+        if not self.background:
+            return None
+        spec = self.named_scenes.get(self.background, self.background)
+        if isinstance(spec, str):
+            return self._texture(spec)
+        if isinstance(spec, dict) and spec.get("type") == "image":
+            return self._texture(spec["path"])
+        return None
+
     def get_nearby_interactable(self, player):
         if player is None or not self.shows_world:
             return None
         for item in self.interactables:
             if item.contains(player):
+                return item
+        return None
+
+    def get_interactable_at(self, x, y):
+        if not self.shows_world:
+            return None
+        for item in reversed(self.interactables):
+            if item.contains_point(x, y):
                 return item
         return None
 
@@ -94,6 +113,8 @@ class RoomManager:
                 self._fill(value)
             else:
                 self._draw_texture(value)
+                if value is self._room_background_texture():
+                    self._draw_overlays()
             return
 
         if self.background:
@@ -115,6 +136,7 @@ class RoomManager:
                 )
             for item in self.interactables:
                 self._draw_item(item)
+        self._draw_overlays()
 
     def _entry_from(self, data, from_room_id):
         default_x = data.get("entry_x", 220)
@@ -147,6 +169,43 @@ class RoomManager:
                 raise FileNotFoundError(f"Image introuvable : {full_path}")
             self._textures[relative_path] = arcade.load_texture(str(full_path))
         return self._textures[relative_path]
+
+    def _overlay_texture(self, relative_path):
+        key = f"overlay:{relative_path}"
+        if key not in self._textures:
+            full_path = constants.PROJECT_ROOT / relative_path
+            if not full_path.exists():
+                raise FileNotFoundError(f"Image introuvable : {full_path}")
+            image = Image.open(full_path).convert("RGBA")
+            bbox = image.getbbox()
+            if bbox:
+                image = image.crop(bbox)
+            self._textures[key] = arcade.Texture(image, hash=key)
+        return self._textures[key]
+
+    def _draw_overlays(self):
+        for item in self.interactables:
+            if not item.sprite:
+                continue
+            texture = self._overlay_texture(item.sprite)
+            left, right, bottom, top = self._fit_overlay_rect(item.rect, texture)
+            arcade.draw_texture_rect(texture, arcade.LRBT(left, right, bottom, top))
+
+    @staticmethod
+    def _fit_overlay_rect(rect, texture):
+        left, right, bottom, top = rect
+        box_w = max(right - left, 1)
+        box_h = max(top - bottom, 1)
+        image_aspect = texture.width / max(texture.height, 1)
+        box_aspect = box_w / box_h
+        if image_aspect > box_aspect:
+            width = box_w
+            height = box_w / image_aspect
+        else:
+            height = box_h
+            width = box_h * image_aspect
+        cx = (left + right) / 2
+        return (cx - width / 2, cx + width / 2, bottom, bottom + height)
 
     def _draw_item(self, item):
         left, right, bottom, top = item.rect

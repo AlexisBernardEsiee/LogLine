@@ -1,4 +1,5 @@
 import arcade
+from PIL import Image
 
 from src import constants
 
@@ -87,15 +88,27 @@ class DialogueBox:
             return None
         if relative_path not in self._portraits:
             full_path = constants.PROJECT_ROOT / relative_path
-            sprite = arcade.Sprite(str(full_path), scale=constants.DIALOGUE_PORTRAIT_SCALE)
-            sprite.right = constants.SCREEN_WIDTH - 10
-            sprite.bottom = 8
+            image = Image.open(full_path).convert("RGBA")
+            bbox = image.getbbox()
+            if bbox:
+                image = image.crop(bbox)
+            texture = arcade.Texture(image, hash=f"dialogue-portrait:{relative_path}")
+            sprite = arcade.Sprite(texture)
+            pad = constants.DIALOGUE_PORTRAIT_PAD
+            avail_w = constants.SCREEN_WIDTH - constants.DIALOGUE_BOX_RIGHT - pad * 2
+            avail_h = constants.SCREEN_HEIGHT * constants.DIALOGUE_PORTRAIT_HEIGHT_RATIO
+            sprite.scale = min(avail_w / sprite.width, avail_h / sprite.height)
+            sprite.center_x = (constants.DIALOGUE_BOX_RIGHT + constants.SCREEN_WIDTH) / 2
+            sprite.bottom = pad
             self._portraits[relative_path] = sprite
         return self._portraits[relative_path]
 
     def draw(self):
         if not self.visible:
             return
+
+        if self._portrait:
+            arcade.draw_sprite(self._portrait)
 
         arcade.draw_lrbt_rectangle_filled(
             constants.DIALOGUE_BOX_LEFT,
@@ -116,5 +129,3 @@ class DialogueBox:
         self._body_label.draw()
         if not self.is_typing():
             self._hint_label.draw()
-        if self._portrait:
-            arcade.draw_sprite(self._portrait)

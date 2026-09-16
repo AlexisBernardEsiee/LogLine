@@ -20,7 +20,7 @@ class DebugGrid:
             font_name=constants.FONT_BODY,
         )
         self._hint = arcade.Text(
-            "G  grille    clic  coin1 / coin2    clic droit  annuler    C  afficher JSON",
+            "G  grille    F11  plein écran    clic  coin1 / coin2    C  JSON",
             16,
             constants.SCREEN_HEIGHT - 52,
             (170, 210, 190),
@@ -133,7 +133,12 @@ class DebugGrid:
             left, right, bottom, top = self.last_hitbox
             arcade.draw_lrbt_rectangle_outline(left, right, bottom, top, (255, 210, 80, 230), 2)
 
-        self._cursor.text = f"x={round(self.mouse_x)}   y={round(self.mouse_y)}"
+        window = arcade.get_window()
+        win_w, win_h = window.width, window.height
+        self._cursor.text = (
+            f"x={round(self.mouse_x)}   y={round(self.mouse_y)}"
+            f"   fenetre={win_w}x{win_h} ({constants.ratio_label(win_w, win_h)})"
+        )
         if player is not None:
             self._cursor.text += f"   joueur_x={round(player.center_x)}"
         self._cursor.draw()
