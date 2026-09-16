@@ -55,7 +55,7 @@ class GameView(arcade.View):
             self.state = GameState.load()
         self._enter_room(self.state.room_id, from_room_id=self.state.from_room_id)
         self.audio.play_music(
-            constants.PROJECT_ROOT / "assets" / "sounds" / "ambiance.mp3",
+            constants.PROJECT_ROOT / "assets" / "sounds" / "ambiance_2.mp3",
             volume=0.4,
             loop=True,
         )
