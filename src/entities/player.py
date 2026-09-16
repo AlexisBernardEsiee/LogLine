@@ -56,14 +56,14 @@ class Player(arcade.Sprite):
             self.scale_y = constants.PLAYER_SCALE
             step = (self._walk_time / self._cycle) % 1.0
             bob = -abs(math.sin(step * math.pi * 2.0)) * constants.PLAYER_WALK_BOB_PIXELS
-            self.bottom = self.ground_y + bob
+            self.bottom = self.ground_y - 50 + bob
         else:
             self._idle_time += delta_time
             self.texture = self.idle_texture
             self.angle = 0
             self.scale_y = constants.PLAYER_SCALE
             bob = (1.0 - math.cos(self._idle_time * constants.PLAYER_IDLE_BOB_SPEED)) * 0.5 * constants.PLAYER_IDLE_BOB_PIXELS
-            self.bottom = self.ground_y + bob
+            self.bottom = self.ground_y  - 50 + bob
 
         abs_scale = abs(self.scale_x) or constants.PLAYER_SCALE
         self.scale_x = abs_scale if self.facing_right else -abs_scale

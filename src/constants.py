@@ -28,15 +28,16 @@ SCREEN_WIDTH, SCREEN_HEIGHT = get_window_size()
 SCREEN_TITLE = "LogLine"
 FPS = 60
 
-PLAYER_SCALE = 0.6
+PLAYER_SCALE = 0.3
 PLAYER_SPEED = 7
-SPRITE_JAM_DIR = PROJECT_ROOT / "assets" / "sprites" / "jam" / "walk"
-SPRITE_JAM_IDLE = str(SPRITE_JAM_DIR / "idle_walk1.png")
+SPRITE_JAM_WALK_DIR = PROJECT_ROOT / "assets" / "sprites" / "jam" / "walk"
+SPRITE_JAM_DIR = PROJECT_ROOT / "assets" / "sprites" / "jam"
+SPRITE_JAM_IDLE = str(SPRITE_JAM_DIR / "jam_idle.png")
 SPRITE_JAM_WALK = [
-    str(SPRITE_JAM_DIR / "walk2.png"),
-    str(SPRITE_JAM_DIR / "walk3.png"),
-    str(SPRITE_JAM_DIR / "walk4.png"),
-    str(SPRITE_JAM_DIR / "walk5.png"),
+    str(SPRITE_JAM_WALK_DIR / "walk1.png"),
+    str(SPRITE_JAM_WALK_DIR / "walk2.png"),
+    str(SPRITE_JAM_WALK_DIR / "walk3.png"),
+    str(SPRITE_JAM_WALK_DIR / "walk4.png"),
 ]
 # Durées par frame : contact (3 et 5) un peu plus long, pour poser le pied.
 PLAYER_WALK_FRAME_DURATIONS = (0.15, 0.19, 0.15, 0.19)
