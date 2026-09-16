@@ -2,14 +2,14 @@
   "bar_intro": [
     {
       "speaker": "Jam",
-      "text": "Un bar à whisky. Ces bouteilles doivent valoir une fortune !",
-      "sprite": "assets/sprites/jam/dialogs/jam_smile_1.png"
+      "text": "Un bar à whisky. Ces bouteilles doivent valoir une fortune...",
+      "sprite": "assets/sprites/jam/dialogs/jam_speechless_1.png"
     }
   ],
   "glass": [
     {
       "speaker": "Jam",
-      "text": "Un verre... encore à moitié plein. Comme s'il avait été interrompu en pleine soirée.",
+      "text": "Un verre de whisky encore à moitié plein. Comme si son propriétaire avait été interrompu en pleine soirée.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png",
       "sfx": "assets/sounds/verre_prendre.mp3"
     },
@@ -17,12 +17,17 @@
       "speaker": "Jam",
       "text": "Cette odeur...",
       "sprite": "assets/sprites/jam/dialogs/jam_stunned.png"
+    },
+    {
+      "speaker": "Jam",
+      "text": "Non...(perte de conscience)",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad_2.png"
     }
   ],
   "glass_after": [
     {
       "speaker": "Jam",
-      "text": "Je ne m'approcherai plus de ce verre.",
+      "text": "Je sais à quoi m'en tenir. Je ne m'approcherai plus de ce verre.",
       "sprite": "assets/sprites/jam/dialogs/jam_unhappy.png",
       "thought": true
     }
@@ -30,20 +35,38 @@
   "ashtray": [
     {
       "speaker": "Jam",
-      "text": "Des mégots entassés. Quelqu'un a beaucoup fumé, ici, avant de partir.",
+      "text": "Des mégots entassés. Quelqu'un a fumé à s'en détruire les poumons ici avant de disparaître.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
       "thought": true
     }
   ],
     "death_poison_void": [
+      {
+      "speaker": "Jam",
+      "text": "Qu... Qu'est-ce qui se passe ? Je ne sens plus mes mains. Je suis... morte ?",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad_2.png",
+      "thought": true
+    },
     {
-      "speaker": "Mr. P",
+      "speaker": "Jam",
+      "text": "Attends, c'est quoi cet endroit ? Suis-je au paradis... ou en enfer ?",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
+      "thought": true
+    },
+    {
+      "speaker": "Mr. Plènozas",
       "text": "Un verre, rien qu'un verre...",
       "sprite": "assets/sprites/shadow_man.png",
       "scene": "flashback1_1_verre_poison"
     },
     {
-      "speaker": "Mr. P",
+      "speaker": "Jam",
+      "text": "Cette personne... C'est Monsieur Plènozas ?! Il est là, mais... impossible de l'atteindre ou de lui parler.",
+      "sprite": "assets/sprites/jam/dialogs/jam_unhappy.png",
+      "scene": "flashback1_2_main_ombre"
+    },
+    {
+      "speaker": "Mr. Plènozas",
       "text": "Comment sortir d'ici. De toute façon, tout cela n'est pas réel. Alors autant tester.",
       "sprite": "assets/sprites/shadow_man.png",
       "sfx": "assets/sounds/radio_flashback.mp3",
@@ -62,8 +85,20 @@
   "death_poison_after": [
     {
       "speaker": "Jam",
-      "text": "...Qu'est-ce qu'il se passe ? Il faut que je sois plus prudente. Et puis « sortir d'ici » ? C'est son manoir, personne ne l'empêchait de partir…",
-      "sprite": "assets/sprites/jam/dialogs/jam_stunned.png",
+      "text": "...Ouf. Je respire à nouveau. Je suis revenue ici ?",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
+      "thought": true
+    },
+    {
+      "speaker": "Jam",
+      "text": "En y repensant... Je l'ai vraiment bu, ce verre, et j'en suis morte. Sauf que je suis revenue à la vie. Même si c'est vraiment étrange...mais c'est la seule explication.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+      "thought": true
+    },
+    {
+      "speaker": "Jam",
+      "text": "Ce n'était pas qu'un simple rêve. J'ai revu ses derniers instants... c'était donc la mémoire de Monsieur Plènozas. Qu'est-ce qui se trame ici ?",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
       "thought": true
     }
   ]
