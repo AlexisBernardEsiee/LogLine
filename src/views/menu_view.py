@@ -1,20 +1,19 @@
-import json
-import sys
 import os
+import sys
 
 import arcade
 
 from src import constants
 from src.ui.menu import MenuButton
+from src.ui.scenes import load_scene_texture
 from src.views.game_view import GameView
+from src.views.settings_view import SettingsView
 
 
 class MenuView(arcade.View):
     def __init__(self):                    
         super().__init__()
-        scenes = json.loads(constants.DATA_SCENES.read_text(encoding="utf-8"))
-        path = constants.PROJECT_ROOT / scenes[constants.SCENE_MENU]["path"]
-        self.background = arcade.load_texture(path)
+        self.background = load_scene_texture(constants.SCENE_MENU)
         self.scale = constants.SCREEN_HEIGHT / constants.BASE_HEIGHT
         s = self.scale
 
@@ -39,12 +38,15 @@ class MenuView(arcade.View):
 
         button_x = self.title.x + self.title.content_width / 2
         self.buttons = [
-            MenuButton("Jouer", button_x, 560 * s, 420 * s, 76 * s, self.on_play, int(26 * s)),
-            MenuButton("Quitter", button_x, 460 * s, 420 * s, 76 * s, self.on_quit, int(26 * s)),
+            MenuButton("Jouer", button_x, 600 * s, 420 * s, 76 * s, self.on_play, int(26 * s)),
+            MenuButton("Paramètres", button_x, 500 * s, 420 * s, 76 * s, self.on_settings, int(26 * s)),
+            MenuButton("Quitter", button_x, 400 * s, 420 * s, 76 * s, self.on_quit, int(26 * s)),
         ]
 
     def on_show_view(self):
         self.window.background_color = (8, 8, 10)
+        for button in self.buttons:
+            button.hovered = False
 
     def on_draw(self):
         self.clear()
@@ -83,3 +85,6 @@ class MenuView(arcade.View):
     def on_quit(self):
         self.window.close()
         os._exit(0)
+
+    def on_settings(self):
+        self.window.show_view(SettingsView(self))
