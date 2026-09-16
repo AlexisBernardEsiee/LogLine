@@ -39,8 +39,8 @@ class MenuView(arcade.View):
 
         button_x = self.title.x + self.title.content_width / 2
         self.buttons = [
-            MenuButton("Jouer", button_x, 640 * s, 420 * s, 76 * s, self.on_play, int(26 * s)),
-            MenuButton("Réinitialiser", button_x, 545 * s, 420 * s, 76 * s, self.on_reset, int(26 * s)),
+            MenuButton("Reprendre le jeu", button_x, 640 * s, 420 * s, 76 * s, self.on_play, int(26 * s)),
+            MenuButton("Recommencer le jeu", button_x, 545 * s, 420 * s, 76 * s, self.on_reset, int(26 * s)),
             MenuButton("Paramètres", button_x, 450 * s, 420 * s, 76 * s, self.on_settings, int(26 * s)),
             MenuButton("Crédits", button_x, 355 * s, 420 * s, 76 * s, self.on_credits, int(26 * s)),
             MenuButton("Quitter", button_x, 260 * s, 420 * s, 76 * s, self.on_quit, int(26 * s)),
