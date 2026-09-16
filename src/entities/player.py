@@ -44,6 +44,7 @@ class Player(arcade.Sprite):
             self.facing_right = True
         elif self.speed_x < 0:
             self.facing_right = False
+            
 
         moving = self.speed_x != 0
         if moving:
