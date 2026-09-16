@@ -1,4 +1,5 @@
 import arcade
+import random
 
 from src import constants
 from src.camera import WorldCamera
@@ -11,10 +12,10 @@ from src.ui.death_effect import DeathEffect
 from src.ui.debug_grid import DebugGrid
 from src.ui.dialogue_box import DialogueBox
 from src.ui.inspect_effect import InspectEffect
+from src.ui.lustre import LustreProp
 from src.ui.prompt import InteractionPrompt
 from src.ui.tutorial_overlay import TutorialOverlay
 from src.views.pause_view import PauseView
-from src.systems.audio_manager import AudioManager
 
 HOUSE_THOUGHT_X = 1450
 
@@ -31,13 +32,20 @@ class GameView(arcade.View):
         self.tutorial = TutorialOverlay()
         self.debug_grid = DebugGrid()
         self.inspect = InspectEffect()
-        self.death = DeathEffect(constants.SPRITE_JAM_DEATH)
+        self.lustre = LustreProp()
+        self.death = DeathEffect()
         self.state = GameState()
         self._pending_tutorial = False
         self._pending_dialogue = None
         self._pending_death = None
         self._pending_reveal = None
         self._pending_give = None
+        self._pending_ending = False
+        self._object_search = False
+        self._pending_lustre_death = None
+        self._fall = None
+        self._void_glitch_rects = []
+        self._void_glitch_t = 0.0
         self.audio = AudioManager()
         self.dialogue_box = DialogueBox(audio_manager=self.audio)
 
@@ -48,6 +56,10 @@ class GameView(arcade.View):
         self._pending_death = None
         self._pending_reveal = None
         self._pending_give = None
+        self._pending_ending = False
+        self._object_search = False
+        self._pending_lustre_death = None
+        self._fall = None
         self.inspect.active = False
         self.death.active = False
         if new_game:
@@ -56,11 +68,8 @@ class GameView(arcade.View):
         else:
             self.state = GameState.load()
         self._enter_room(self.state.room_id, from_room_id=self.state.from_room_id)
-        self.audio.play_music(
-            constants.PROJECT_ROOT / "assets" / "sounds" / "ambiance_2.mp3",
-            volume=0.4,
-            loop=True,
-        )
+        if self.state.room_id != constants.ROOM_VOID:
+            self._play_world_music()
 
     def on_show_view(self):
         self.window.background_color = constants.LETTERBOX_COLOR
@@ -72,16 +81,21 @@ class GameView(arcade.View):
     def on_draw(self):
         self.world_camera.begin_frame()
         self.room_manager.draw(self.state)
-        if self.room_manager.shows_world and self.player and not self.death.hiding_world:
-            arcade.draw_sprite(self.player)
-            if not self.death.blocking:
+        if self.room_manager.shows_world:
+            if self.player and not self.death.hide_player:
+                if not (self._fall and self._fall["phase"] == "out"):
+                    arcade.draw_sprite(self.player)
+            self._draw_lustre()
+            if not self.death.blocking and not self._fall and not self.lustre.blocking:
                 self.prompt.draw()
                 self.tutorial.draw()
         if not self.death.hiding_world:
             self.inspect.draw()
+        self._draw_void_glitch()
         self.death.draw()
+        self._draw_fall()
         self.dialogue_box.draw()
-        if not self.death.blocking:
+        if not self.death.blocking and not self._fall:
             self.debug_grid.draw(self.room_manager, self.player)
 
     def on_update(self, delta_time):
@@ -89,13 +103,27 @@ class GameView(arcade.View):
         self.dialogue_box.update(delta_time)
         self.inspect.update(delta_time)
         self.death.update(delta_time)
+        self.lustre.update(delta_time)
+        if self.lustre.just_landed and self._pending_lustre_death:
+            spec = self._pending_lustre_death
+            self._pending_lustre_death = None
+            self._begin_death(spec, skip_sfx=True)
 
         if self.death.just_void:
-            if not self._start_dialogue(self.death.spec.get("void_dialogue")):
+            scene = self.death.spec.get("void_scene")
+            if scene:
+                self.room_manager.set_scene(scene)
+            if self._start_dialogue(self.death.spec.get("void_dialogue")):
+                pass
+            elif not self.death.spec.get("void_hold"):
                 self._respawn_after_death()
                 self.death.notify_void_done()
+        if self.death.just_hold_done:
+            self._respawn_after_death()
+            self.death.notify_void_done()
         if self.death.just_returned:
-            self.audio.set_music_volume(0.4)
+            if self.room_manager.current_room_id != constants.ROOM_VOID:
+                self._play_world_music()
             aftermath = self.death.spec.get("aftermath_dialogue")
             if aftermath:
                 self._start_dialogue(aftermath)
@@ -104,11 +132,15 @@ class GameView(arcade.View):
             self._start_dialogue(self._pending_dialogue)
             self._pending_dialogue = None
 
+        if self._update_fall(delta_time):
+            return
+
         if self.player is None or not self.room_manager.shows_world:
             return
 
-        if self.death.blocking or self.dialogue_manager.is_active or self.inspect.active:
+        if self.death.blocking or self.dialogue_manager.is_active or self.inspect.active or self.lustre.blocking:
             self.player.speed_x = 0
+            self._apply_search_pose()
             self.player.update(delta_time)
             self.prompt.visible = False
             return
@@ -126,12 +158,18 @@ class GameView(arcade.View):
 
         self.player.update(delta_time)
         self._maybe_house_thought()
+        self._maybe_auto_deaths()
         nearby = self.room_manager.get_nearby_interactable(self.player, self.state)
         self.prompt.set_target(self.player, nearby)
+        self._apply_search_pose(nearby)
 
     def on_key_press(self, key, modifiers):
         if key == constants.KEY_BACK:
+            if self._fall or self.lustre.blocking or (self.death.blocking and not self.dialogue_manager.is_active):
+                return
             self._pause()
+            return
+        if self._fall or self.lustre.blocking:
             return
         if self.death.blocking and not self.dialogue_manager.is_active:
             return
@@ -163,6 +201,8 @@ class GameView(arcade.View):
 
     def on_mouse_press(self, x, y, button, modifiers):
         world_x, world_y = self.world_camera.to_world(x, y)
+        if self._fall or self.lustre.blocking:
+            return
         if self.death.blocking and not self.dialogue_manager.is_active:
             return
         if self.debug_grid.on_mouse_press(world_x, world_y, button):
@@ -193,11 +233,18 @@ class GameView(arcade.View):
         self.tutorial.visible = False
         self._pending_dialogue = None
         self._pending_death = None
+        self._pending_lustre_death = None
+        self._object_search = False
         self.inspect.active = False
         self.inspect.texture = None
+        self.lustre.configure(self.room_manager.lustre_prop)
+        if self.state.flag("died_lustre"):
+            self.lustre.hide()
         self.state.room_id = room_id
         self.state.from_room_id = from_room_id
         self.state.save()
+        if room_id == constants.ROOM_VOID:
+            self.audio.play_music(constants.SOUND_VOID, volume=0.38, loop=True)
         on_enter = self.room_manager.consume_on_enter(self.state)
         if on_enter:
             self._pending_tutorial = (
@@ -241,6 +288,10 @@ class GameView(arcade.View):
         self.dialogue_box.show(line)
         if "scene" in line:
             self.room_manager.set_scene(line["scene"])
+        if line.get("inspect_sprite"):
+            self.inspect.set_sprite(line["inspect_sprite"])
+        if line.get("ending"):
+            self._pending_ending = True
         sfx = line.get("sfx") or ""
         if "tremblement" not in sfx and "erreur" not in sfx:
             self.audio.stop_glitch()
@@ -261,6 +312,11 @@ class GameView(arcade.View):
             self.audio.stop_glitch()
             self.room_manager.set_scene(constants.SCENE_ROOM)
             self.inspect.close()
+            self._object_search = False
+            if self._pending_ending:
+                self._pending_ending = False
+                self._start_ending()
+                return
             self._finish_interaction()
             if self.death.phase == "void":
                 self._respawn_after_death()
@@ -284,15 +340,26 @@ class GameView(arcade.View):
             self._pending_death = None
             self._begin_death(spec)
 
-    def _begin_death(self, spec):
+    def _begin_death(self, spec, skip_sfx=False):
         extra = 1.0 if spec.get("effect") == "green_glitch" else 0.0
         extra += 0.35 * int(self.state.flags.get("death_count", 0))
-        self.audio.set_music_volume(0.05)
+        if spec.get("effect") == "silence":
+            extra = 0.0
+            self.audio.stop_music()
+            self.audio.stop_glitch()
+        else:
+            self.audio.set_music_volume(0.05)
         sfx = spec.get("sfx")
-        if sfx:
+        if sfx and not skip_sfx:
             modifier = float(spec.get("sfx_volume", 0.7))
             self.audio.play_sfx(sfx, constants.PROJECT_ROOT / sfx, volume_modifier=modifier)
         self.death.start(spec, extra_hold=extra)
+
+    def _play_world_music(self):
+        path = getattr(constants, "SOUND_AMBIANCE", None) or (
+            constants.PROJECT_ROOT / "assets" / "sounds" / "ambiance_2.mp3"
+        )
+        self.audio.play_music(path, volume=0.4, loop=True)
 
     def _respawn_after_death(self):
         flag = self.death.spec.get("flag")
@@ -300,9 +367,20 @@ class GameView(arcade.View):
             self.state.set_flag(flag)
         self.state.bump_death()
         room_id = self.room_manager.current_room_id
+        self.room_manager.set_scene(constants.SCENE_ROOM)
         self.room_manager.show(room_id)
+        self.lustre.configure(self.room_manager.lustre_prop)
+        if self.state.flag("died_lustre"):
+            self.lustre.hide()
         self.dialogue_manager.load_room(room_id)
         self._spawn_player()
+        respawn_x = self.death.spec.get("respawn_x")
+        if respawn_x is not None and self.player:
+            self.player.place_on_floor(
+                respawn_x,
+                self.room_manager.floor_y,
+                facing_right=True,
+            )
         self.prompt.visible = False
         self.keys_held.clear()
 
@@ -316,19 +394,25 @@ class GameView(arcade.View):
         if target.leads_to:
             if target.requires and not self.state.flag(target.requires):
                 if target.locked_dialogue:
+                    self._object_search = True
                     self._start_dialogue(target.locked_dialogue)
                 return
             if target.sfx:
                 self.audio.play_sfx(target.sfx, constants.PROJECT_ROOT / target.sfx)
+            if target.transition == "fall":
+                self._start_fall(target.leads_to)
+                return
             self._enter_room(target.leads_to, from_room_id=self.room_manager.current_room_id)
             return
 
         death = target.death
         already_died = death and self.state.flag(death.get("flag"))
-        dialogue_id = target.done_dialogue if already_died else target.dialogue_id
-        self._pending_reveal = target.reveals
+        already_seen = bool(target.reveals and self.state.flag(target.reveals) and target.done_dialogue)
+        dialogue_id = target.done_dialogue if (already_died or already_seen) else target.dialogue_id
+        self._pending_reveal = None if already_seen else target.reveals
         self._pending_give = target.gives
         self._pending_death = None if already_died else death
+        self._object_search = True
 
         if dialogue_id:
             if self._start_inspect(target):
@@ -345,7 +429,7 @@ class GameView(arcade.View):
         zoom = target.inspect.get("zoom")
         duration = target.inspect.get("duration")
         if effect == "fade_zoom":
-            texture = self.room_manager.current_background_texture()
+            texture = self.room_manager.current_background_texture(self.state)
             return self.inspect.start_from_decor(
                 texture, target.hitbox, zoom=zoom, duration=duration
             )
@@ -357,3 +441,131 @@ class GameView(arcade.View):
                 duration=duration,
             )
         return False
+
+    def _target_is_search(self, target):
+        if target is None:
+            return False
+        if target.kind in ("door", "hole"):
+            return bool(target.requires and not self.state.flag(target.requires))
+        return True
+
+    def _apply_search_pose(self, nearby=None):
+        if self.player is None:
+            return
+        searching = False
+        if not self.death.blocking and self.room_manager.current_room_id != constants.ROOM_VOID:
+            if self.inspect.active or self._object_search:
+                searching = True
+            else:
+                if nearby is None:
+                    nearby = self.room_manager.get_nearby_interactable(self.player, self.state)
+                searching = self._target_is_search(nearby)
+        self.player.searching = searching
+        if self.player.speed_x == 0:
+            self.player.apply_idle_pose()
+
+    def _maybe_auto_deaths(self):
+        if self.player is None or self.death.blocking or self.lustre.blocking:
+            return
+        for spec in self.room_manager.auto_deaths:
+            requires = spec.get("requires")
+            if requires:
+                names = requires if isinstance(requires, (list, tuple)) else [requires]
+                if any(not self.state.flag(name) for name in names):
+                    continue
+            if spec.get("unless") and self.state.flag(spec["unless"]):
+                continue
+            zone = spec.get("x", [0, 0])
+            if len(zone) < 2:
+                continue
+            if zone[0] <= self.player.center_x <= zone[1]:
+                death = spec.get("death") or {}
+                if death.get("id") == "lustre" and self.lustre.texture:
+                    self._start_lustre_fall(death)
+                else:
+                    self._begin_death(death)
+                return
+
+    def _start_lustre_fall(self, spec):
+        self.keys_held.clear()
+        if self.player is not None:
+            self.player.speed_x = 0
+        self._pending_lustre_death = spec
+        self.audio.stop_music()
+        sfx = spec.get("sfx")
+        if sfx:
+            self.audio.play_sfx(
+                sfx,
+                constants.PROJECT_ROOT / sfx,
+                volume_modifier=float(spec.get("sfx_volume", 0.85)),
+            )
+        self.lustre.start_fall()
+
+    def _draw_lustre(self):
+        if self.room_manager.current_room_id != constants.ROOM_OFFICE:
+            return
+        if self.state.flag("died_lustre") and self.lustre.phase not in ("falling", "landed"):
+            return
+        self.lustre.draw()
+
+    def _start_fall(self, room_id):
+        self.keys_held.clear()
+        if self.player is not None:
+            self.player.speed_x = 0
+        self.audio.stop_music()
+        self._fall = {"t": 0.0, "room": room_id, "phase": "out"}
+
+    def _update_fall(self, delta_time):
+        if not self._fall:
+            return False
+        self._fall["t"] += delta_time
+        if self._fall["phase"] == "out" and self._fall["t"] >= 1.15:
+            self._enter_room(self._fall["room"], from_room_id=self.room_manager.current_room_id)
+            self._fall = {"t": 0.0, "room": self._fall["room"], "phase": "in"}
+        elif self._fall["phase"] == "in" and self._fall["t"] >= 0.9:
+            self._fall = None
+            return False
+        return True
+
+    def _draw_fall(self):
+        if not self._fall:
+            return
+        if self._fall["phase"] == "out":
+            alpha = min(1.0, self._fall["t"] / 0.85)
+        else:
+            alpha = max(0.0, 1.0 - self._fall["t"] / 0.9)
+        if alpha <= 0.02:
+            return
+        arcade.draw_lrbt_rectangle_filled(
+            0,
+            constants.SCREEN_WIDTH,
+            0,
+            constants.SCREEN_HEIGHT,
+            (4, 2, 6, int(255 * alpha)),
+        )
+
+    def _draw_void_glitch(self):
+        if self.room_manager.current_room_id != constants.ROOM_VOID:
+            return
+        if self.death.blocking:
+            return
+        self._void_glitch_t += 1
+        if self._void_glitch_t % 8 == 1:
+            self._void_glitch_rects = []
+            for _ in range(16):
+                width = random.randint(6, 70)
+                height = random.randint(3, 16)
+                left = random.randint(0, max(1, constants.SCREEN_WIDTH - width))
+                bottom = random.randint(0, max(1, constants.SCREEN_HEIGHT - height))
+                self._void_glitch_rects.append((left, bottom, width, height))
+        for left, bottom, width, height in self._void_glitch_rects:
+            arcade.draw_lbwh_rectangle_filled(
+                left, bottom, width, height, (48, 255, 92, 28)
+            )
+
+    def _start_ending(self):
+        self.audio.stop_music()
+        self.audio.stop_glitch()
+        from src.views.fin_view import FinView
+
+        self.window.show_view(FinView())

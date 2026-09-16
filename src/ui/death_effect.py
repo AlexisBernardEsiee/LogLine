@@ -6,7 +6,7 @@ from src import constants
 
 
 class DeathEffect:
-    """Séquence de mort : animation → flash/glitch → noir → dialogues → retour."""
+    """Séquence de mort : flash / glitch → noir → dialogues / flashback → retour."""
 
     def __init__(self, frames):
         self.active = False
@@ -15,6 +15,7 @@ class DeathEffect:
         self.spec = {}
 
         self.just_void = False
+        self.just_hold_done = False
         self.just_returned = False
 
         self.cover = 0.0
@@ -23,6 +24,7 @@ class DeathEffect:
         self.extra_hold = 0.0
 
         self._rects = []
+        self._hold_fired = False
 
         # Animation de mort
         self.frames = [arcade.load_texture(path) for path in frames]
@@ -35,7 +37,19 @@ class DeathEffect:
 
     @property
     def hiding_world(self):
-        return self.active and self.phase in ("void", "return") and self.cover > 0.55
+        if not self.active:
+            return False
+        if self.spec.get("void_scene") and self.phase == "void":
+            return False
+        return self.phase in ("void", "return", "hold") and self.cover > 0.55
+
+    @property
+    def hide_player(self):
+        if not self.active:
+            return False
+        if self.spec.get("void_scene") and self.phase == "void":
+            return True
+        return self.hiding_world
 
     def start(self, spec, extra_hold=0.0):
         self.spec = spec or {}
@@ -45,6 +59,7 @@ class DeathEffect:
         self.timer = 0.0
 
         self.just_void = False
+        self.just_hold_done = False
         self.just_returned = False
 
         self.cover = 0.0
@@ -52,6 +67,7 @@ class DeathEffect:
         self.glitch = 0.0
 
         self.extra_hold = extra_hold
+        self._hold_fired = False
         self._roll_rects()
 
         # Recommence toujours à death1
@@ -65,6 +81,7 @@ class DeathEffect:
 
     def update(self, delta_time):
         self.just_void = False
+        self.just_hold_done = False
         self.just_returned = False
 
         if not self.active:
@@ -72,6 +89,7 @@ class DeathEffect:
 
         self.timer += delta_time
         effect = self.spec.get("effect", "white_flash")
+        silent = effect == "silence"
 
         # Animation de mort : death1 → death2 → death3
         if self.phase == "animation":
@@ -124,17 +142,36 @@ class DeathEffect:
             self.cover = 0.2 + 0.8 * t
 
             if self.timer >= duration:
-                self.phase = "void"
-                self.timer = 0.0
-                self.flash = 0.0
-                self.cover = 1.0
-                self.just_void = True
+                if silent:
+                    self.phase = "hold"
+                    self.timer = 0.0
+                    self.flash = 0.0
+                    self.cover = 1.0
+                    self.glitch = 0.0
+                else:
+                    self._enter_void()
 
-        # Noir
-        elif self.phase == "void":
+        elif self.phase == "hold":
             self.cover = 1.0
             self.flash = 0.0
-            self.glitch = 0.08 if effect == "green_glitch" else 0.0
+            self.glitch = 0.0
+            if self.timer >= float(self.spec.get("silence_hold", 1.0)):
+                self._enter_void()
+
+        elif self.phase == "void":
+            if self.spec.get("void_scene"):
+                t = min(1.0, self.timer / 0.45)
+                self.cover = 1.0 - 0.88 * t
+                self.flash = 0.0
+                self.glitch = 0.0
+                hold = float(self.spec.get("void_hold", 3.2))
+                if not self.spec.get("void_dialogue") and self.timer >= hold and not self._hold_fired:
+                    self._hold_fired = True
+                    self.just_hold_done = True
+            else:
+                self.cover = 1.0
+                self.flash = 0.0
+                self.glitch = 0.08 if effect == "green_glitch" else 0.0
 
         # Retour
         elif self.phase == "return":
@@ -144,8 +181,10 @@ class DeathEffect:
             self.cover = 1.0 - t
 
             residual = 1.0 - min(1.0, self.timer / max(0.35, self.extra_hold + 0.35))
-            self.glitch = residual * (0.85 if effect == "green_glitch" else 0.15)
-
+            if silent:
+                self.glitch = 0.0
+            else:
+                self.glitch = residual * (0.85 if effect == "green_glitch" else 0.15)
             if int(self.timer * 14) != int((self.timer - delta_time) * 14):
                 self._roll_rects()
 
@@ -155,6 +194,13 @@ class DeathEffect:
                 self.cover = 0.0
                 self.glitch = 0.0
                 self.just_returned = True
+
+    def _enter_void(self):
+        self.phase = "void"
+        self.timer = 0.0
+        self.flash = 0.0
+        self.cover = 1.0
+        self.just_void = True
 
     def draw(self):
         if not self.active and self.cover <= 0:

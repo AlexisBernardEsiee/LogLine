@@ -154,6 +154,7 @@ class MenuView(arcade.View):
 
     def _warmup_game(self, _dt):
         arcade.load_texture(constants.SPRITE_JAM_IDLE)
+        arcade.load_texture(constants.SPRITE_JAM_SEARCH)
         for path in constants.SPRITE_JAM_WALK:
             arcade.load_texture(path)
         arcade.load_texture(

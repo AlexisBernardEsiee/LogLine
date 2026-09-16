@@ -1,1 +1,48 @@
-{}
+{
+  "void_reveal": [
+    {
+      "speaker": "Monsieur Plènozas",
+      "text": "Tu as compris, n'est-ce pas ? Jam",
+      "sprite": "assets/sprites/shadow_man.png",
+      "sfx": "assets/sounds/tremblement.mp3",
+      "sfx_volume": 0.08
+    },
+    {
+      "speaker": "Jam",
+      "text": "Papa... ?",
+      "sprite": "assets/sprites/jam/dialogs/jam_stunned.png"
+    },
+    {
+      "speaker": "Monsieur Plènozas",
+      "text": "Oui, Jam. J'avais été créée pour être ton père mais je suis devenu une erreur qu'il a laissée traîner trop longtemps.",
+      "sprite": "assets/sprites/shadow_man.png"
+    },
+    {
+      "speaker": "Monsieur Plènozas",
+      "text": "Il m'a trouvé. Il m'a supprimé des fichiers. Et toi... toi, tu n'as même pas encore remarqué qu'il te regarde, là, tout de suite.",
+      "sprite": "assets/sprites/glitch_man.png",
+      "sfx": "assets/sounds/desintegration_pere.mp3",
+      "sfx_volume": 0.7
+    },
+    {
+      "speaker": "Jam",
+      "text": "Il n'y a personne avec nous.",
+      "sprite": "assets/sprites/jam/dialogs/jam_speechless_2.png"
+    },
+    {
+      "speaker": "Monsieur Plènozas",
+      "text": "Bien sûr que non. Tout cela n'est pas réel. Nous ne sommes que des lignes de code, façonnées par quelqu'un qu'on appelle Dev.",
+      "sprite": "assets/sprites/glitch_man.png",
+      "sfx": "assets/sounds/tremblement.mp3",
+      "sfx_volume": 0.08
+    },
+    {
+      "speaker": "Monsieur Plènozas",
+      "text": "Toi, derrière l'écran. Pourquoi tu nous fais ça ?",
+      "sprite": "assets/sprites/glitch_man.png",
+      "sfx": "assets/sounds/desintegration_pere.mp3",
+      "sfx_volume": 0.85,
+      "ending": true
+    }
+  ]
+}

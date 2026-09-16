@@ -11,6 +11,11 @@ DEFAULT_FLAGS = {
     "seen_bedroom_intro": False,
     "died_poison": False,
     "died_glass": False,
+    "died_lustre": False,
+    "seen_bookmark": False,
+    "seen_letters": False,
+    "seen_office_intro": False,
+    "seen_void_reveal": False,
     "tutorial_done": False,
     "death_count": 0,
 }
