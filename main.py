@@ -1,7 +1,7 @@
 import arcade
 
 from src import constants
-from src.views.game_view import GameView
+from src.views.menu_view import MenuView
 
 
 def main():
@@ -12,9 +12,7 @@ def main():
         constants.SCREEN_TITLE,
     )
     window.set_update_rate(1 / constants.FPS)
-    view = GameView()
-    view.setup()
-    window.show_view(view)
+    window.show_view(MenuView())
     arcade.run()
 
 

@@ -13,6 +13,7 @@ FPS = 60
 PLAYER_SCALE = 0.32
 PLAYER_SPEED = 7
 SPRITE_JAM_IDLE = str(PROJECT_ROOT / "assets" / "sprites" / "jam" / "jam_idle.png")
+SPRITE_JAM_MENU = str(PROJECT_ROOT / "assets" / "sprites" / "jam" / "jam_smile_1.png")
 
 KEY_LEFT = LEFT
 KEY_RIGHT = RIGHT
@@ -51,3 +52,5 @@ DIALOGUE_BOX_TOP = 290
 ROOM_CORRIDOR = "room_1"
 ROOM_BAR = "room_2"
 SCENE_ROOM = "room"
+
+SCENE_MENU = "accueil"

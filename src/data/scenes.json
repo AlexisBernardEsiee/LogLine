@@ -5,7 +5,7 @@
   },
   "accueil": {
     "type": "image",
-    "path": "assets/sprites/rooms/jeu_1920x1080/salle1_couloir.png"
+    "path": "assets/sprites/rooms/jeu_1920x1080/accueil.png"
   },
   "manoir": {
     "type": "image",
