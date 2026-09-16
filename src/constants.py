@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import arcade
-from arcade.key import C, E, ENTER, G, LEFT, RIGHT, SPACE
+from arcade.key import C, E, ENTER, ESCAPE, G, LEFT, RIGHT, SPACE
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
@@ -10,8 +10,8 @@ BASE_HEIGHT = 1080
 
 def get_window_size():
     screen_width, screen_height = arcade.get_display_size()
-    max_width = int(screen_width)
-    max_height = int(screen_height)
+    max_width = int(screen_width *0.7)
+    max_height = int(screen_height *0.7)
     aspect_ratio = BASE_WIDTH / BASE_HEIGHT
 
     width = max_width
@@ -27,6 +27,10 @@ def get_window_size():
 SCREEN_WIDTH, SCREEN_HEIGHT = get_window_size()
 SCREEN_TITLE = "LogLine"
 FPS = 60
+
+# Convertit une mesure en 1080p vers la hauteur reelle de la fenetre.
+def scale_h(value):
+    return value * SCREEN_HEIGHT / BASE_HEIGHT
 
 PLAYER_SCALE = 0.3
 PLAYER_SPEED = 7
@@ -52,6 +56,7 @@ KEY_CONFIRM = ENTER
 KEY_SKIP = SPACE
 KEY_GRID = G
 KEY_COPY_HITBOX = C
+KEY_BACK = ESCAPE
 
 DEBUG_GRID_STEP = 50
 DEBUG_GRID_MAJOR = 100
@@ -96,3 +101,15 @@ INSPECT_FADE_ALPHA = 175
 ROOM_CORRIDOR = "room_1"
 ROOM_BAR = "room_2"
 SCENE_ROOM = "room"
+
+
+# Credits
+CREDITS_BACKGROUND = (
+    PROJECT_ROOT / "assets" / "sprites" / "rooms" / "jeu_1920x1080" / "neant.png"
+)
+CREDITS_VEIL_COLOR = (8, 5, 10, 70)
+CREDITS_SCROLL_SPEED = scale_h(80)
+CREDITS_START_OFFSET = scale_h(30)
+CREDITS_FADE_MARGIN = scale_h(130)
+CREDITS_LOOP_GAP = scale_h(220)
+CREDITS_TEXT_WIDTH = int(SCREEN_WIDTH * 0.8)
