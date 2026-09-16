@@ -14,7 +14,7 @@
     },
     {
       "speaker": "Jam",
-      "text": "Me voilà donc dans ce manoir. Je vais devoir fouiller les lieux pour trouver des indices...",
+      "text": "Me voilà donc dans ce manoir. Je vais devoir fouiller les lieux pour trouver des indices et comprendre ce qui s'est passé...",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
       "thought": true
     }
@@ -69,7 +69,7 @@
   "house_thought": [
     {
       "speaker": "Jam",
-      "text": "Cette maison dégage une atmosphère étrange. Comme si elle retenait son souffle. Et pourtant... je m'y sens bizarrement à l'aise",
+      "text": "Cette maison dégage une atmosphère étrange. Comme si elle retenait son souffle. Et pourtant... je m'y sens bizarrement à l'aise.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
       "thought": true
     }

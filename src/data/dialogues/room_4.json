@@ -7,7 +7,7 @@
     },
     {
       "speaker": "Jam",
-      "text": "...Jam.",
+      "text": "(Tourne le marque-page) ...Jam.",
       "sprite": "assets/sprites/jam/dialogs/jam_stunned.png",
       "inspect_sprite": "assets/sprites/bookmark/back_bookmark.png"
     },
@@ -44,19 +44,19 @@
   ],
     "death_lustre_void": [
     {
-      "speaker": "???",
+      "speaker": "Dév",
       "text": "Ce personnage se souvient de choses qu'il ne devrait pas savoir.",
       "thought": true,
       "scene": "flashback3_1_confirmation"
     },
     {
-      "speaker": "???",
+      "speaker": "Dév",
       "text": "Un bug. Rien de plus.",
       "thought": true,
       "scene": "flashback3_2_main_souris"
     },
     {
-      "speaker": "???",
+      "speaker": "Dév",
       "text": "...",
       "thought": true,
       "sfx": "assets/sounds/tremblement.mp3",

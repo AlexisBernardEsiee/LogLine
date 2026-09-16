@@ -31,7 +31,7 @@
     },
     {
       "speaker": "Monsieur Plènozas",
-      "text": "Bien sûr que non. Tout cela n'est pas réel. Nous ne sommes que des lignes de code, façonnées par quelqu'un qu'on appelle Dev.",
+      "text": "Bien sûr que non. Tout cela n'est pas réel. Nous ne sommes que des lignes de code, façonnées par quelqu'un qu'on appelle Dév.",
       "sprite": "assets/sprites/glitch_man.png",
       "sfx": "assets/sounds/tremblement.mp3",
       "sfx_volume": 0.08

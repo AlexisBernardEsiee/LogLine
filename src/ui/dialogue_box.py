@@ -37,6 +37,7 @@ class DialogueBox:
         self.chars_per_second = constants.DIALOGUE_CHARS_PER_SECOND
         self._portraits = {}
         self._portrait = None
+        self._palette = constants.DIALOGUE_PALETTE_DEFAULT
         self._name_label = arcade.Text(
             "",
             constants.DIALOGUE_BOX_LEFT + 28,
@@ -78,7 +79,10 @@ class DialogueBox:
         self.visible = True
         self._portrait = self._load_portrait(line.get("sprite"))
         self._name_label.text = self.speaker
-        self._name_label.color = (210, 198, 176) if self.thought else (232, 214, 170)
+        self._palette = constants.DIALOGUE_PALETTE_BY_SPEAKER.get(
+            self.speaker, constants.DIALOGUE_PALETTE_DEFAULT
+        )
+        self._name_label.color = self._palette["name_thought" if self.thought else "name"]
         self._body_label = self._make_body_label(italic=self.thought)
         self._refresh_body()
 
@@ -141,14 +145,14 @@ class DialogueBox:
             constants.DIALOGUE_BOX_RIGHT,
             constants.DIALOGUE_BOX_BOTTOM,
             constants.DIALOGUE_BOX_TOP,
-            (18, 14, 20, 230),
+            self._palette["box"],
         )
         arcade.draw_lrbt_rectangle_outline(
             constants.DIALOGUE_BOX_LEFT,
             constants.DIALOGUE_BOX_RIGHT,
             constants.DIALOGUE_BOX_BOTTOM,
             constants.DIALOGUE_BOX_TOP,
-            (214, 200, 168, 255),
+            self._palette["border"],
             2,
         )
         self._name_label.draw()

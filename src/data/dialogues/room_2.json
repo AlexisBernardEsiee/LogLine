@@ -9,7 +9,7 @@
   "glass": [
     {
       "speaker": "Jam",
-      "text": "Un verre... encore à moitié plein. Comme s'il avait été interrompu en pleine soirée.",
+      "text": "Un verre... encore à moitié plein. Comme s'il avait été interrompu en pleine soirée. (porte le verre à son nez)",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png",
       "sfx": "assets/sounds/verre_prendre.mp3"
     },
@@ -17,6 +17,12 @@
       "speaker": "Jam",
       "text": "Cette odeur...",
       "sprite": "assets/sprites/jam/dialogs/jam_stunned.png"
+    },
+    {
+      "speaker": "Jam",
+      "text": "Ça ne sent pas le whisky. Ça sent... les amandes ?",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+      "thought": true
     }
   ],
   "glass_after": [
@@ -35,15 +41,32 @@
       "thought": true
     }
   ],
-    "death_poison_void": [
+  "death_poison_void": [
     {
-      "speaker": "Mr. P",
+      "speaker": "Jam",
+      "text": "...Où suis-je ?",
+      "sprite": "assets/sprites/jam/dialogs/jam_stunned.png"
+    },
+    {
+      "speaker": "Jam",
+      "text": "Est-ce que je suis morte ? Je suis au paradis ? Non... non, ça n'y ressemble pas du tout.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+      "thought": true
+    },
+    {
+      "speaker": "Jam",
+      "text": "Ces images... ces souvenirs qui ne sont pas les miens... pourquoi je les vois, moi ?",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+      "thought": true
+    },
+    {
+      "speaker": "Mr. Plènozas",
       "text": "Un verre, rien qu'un verre...",
       "sprite": "assets/sprites/shadow_man.png",
       "scene": "flashback1_1_verre_poison"
     },
     {
-      "speaker": "Mr. P",
+      "speaker": "Mr. Plènozas",
       "text": "Comment sortir d'ici. De toute façon, tout cela n'est pas réel. Alors autant tester.",
       "sprite": "assets/sprites/shadow_man.png",
       "sfx": "assets/sounds/radio_flashback.mp3",
@@ -52,7 +75,7 @@
     },
     {
       "speaker": "???",
-      "text": "Non. Pas comme ça.",
+      "text": "Non. Tu ne peux pas partir. Pas comme ça.",
       "thought": true,
       "sfx": "assets/sounds/radio_flashback.mp3",
       "sfx_volume": 0.2,
@@ -60,11 +83,22 @@
     }
   ],
   "death_poison_after": [
-    {
-      "speaker": "Jam",
-      "text": "...Qu'est-ce qu'il se passe ? Il faut que je sois plus prudente. Et puis « sortir d'ici » ? C'est son manoir, personne ne l'empêchait de partir…",
-      "sprite": "assets/sprites/jam/dialogs/jam_stunned.png",
-      "thought": true
-    }
+  {
+    "speaker": "Jam",
+    "text": "Je suis... revenue ?",
+    "sprite": "assets/sprites/jam/dialogs/jam_stunned.png"
+  },
+  {
+    "speaker": "Jam",
+    "text": "...Qu'est-ce qu'il se passe ? C'est comme si mourir me donnait accès aux souvenirs de quelqu'un d'autre.",
+    "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png",
+    "thought": true
+  },
+  {
+    "speaker": "Jam",
+    "text": "Et puis « sortir d'ici » ? C'est son manoir, personne ne l'empêchait de partir…",
+    "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+    "thought": true
+  }
   ]
 }

@@ -108,6 +108,27 @@ DIALOGUE_FONT_SIZE = 25
 DIALOGUE_PORTRAIT_PAD = -20
 DIALOGUE_PORTRAIT_HEIGHT_RATIO = 0.6
 
+# Couleurs de la boite de dialogue. "name_thought" sert aux repliques pensees.
+DIALOGUE_PALETTE_DEFAULT = {
+    "box": (18, 14, 20, 230),
+    "border": (214, 200, 168, 255),
+    "name": (232, 214, 170),
+    "name_thought": (210, 198, 176),
+}
+# Palette de la voix qui casse le quatrieme mur : le vert des pixels du Neant.
+DIALOGUE_PALETTE_GLITCH = {
+    "box": (8, 22, 12, 232),
+    "border": (108, 226, 138, 255),
+    "name": (150, 255, 180),
+    "name_thought": (132, 216, 158),
+}
+# Palette par interlocuteur : tout speaker absent d'ici prend celle par defaut.
+# La cle est la chaine "speaker" exacte des fichiers de dialogue.
+DIALOGUE_PALETTE_BY_SPEAKER = {
+    "???": DIALOGUE_PALETTE_GLITCH,
+    "Dév": DIALOGUE_PALETTE_GLITCH,
+}
+
 INSPECT_DURATION = 0.55
 INSPECT_ZOOM = 2.5
 INSPECT_FADE_ALPHA = 175

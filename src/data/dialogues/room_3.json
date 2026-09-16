@@ -16,17 +16,17 @@
   "broken_frame": [
     {
       "speaker": "Jam",
-      "text": "Cette photo... elle est déchirée en deux. Comme s'il avait voulu effacer quelqu'un.",
+      "text": "Ce cadre... Pourquoi est-il brisé ?",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png"
     },
     {
       "speaker": "Jam",
-      "text": "...Pourquoi j'ai l'impression que ce n'est pas mon visage ? Quelque chose cloche.",
+      "text": "Mon reflet... Pourquoi ai-je l'impression que ce n'est pas mon visage ? Quelque chose cloche.",
       "sprite": "assets/sprites/jam/dialogs/jam_stunned.png"
     },
     {
       "speaker": "Jam",
-      "text": "Je... je ne sens rien.",
+      "text": "(Serre l'éclat de verre) Je... je ne sens rien.",
       "sprite": "assets/sprites/jam/dialogs/jam_unhappy.png"
     }
   ],
@@ -41,26 +41,26 @@
   "horse": [
     {
       "speaker": "Jam",
-      "text": "Un petit cheval à bascule miniature. Ça ne colle pas vraiment avec le reste de la pièce.",
+      "text": "Un petit cheval à bascule. Ça ne colle pas vraiment avec le reste de la pièce.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
       "thought": true
     }
   ],
     "death_glass_void": [
     {
-      "speaker": "Mr. P",
-      "text": "Ce visage... je le connais. Je l'ai toujours connu.",
+      "speaker": "Mr. Plènozas",
+      "text": "Elle...",
       "sprite": "assets/sprites/shadow_man.png",
       "scene": "flashback2_1_cadre"
     },
     {
-      "speaker": "Mr. P",
-      "text": "Ils disent qu'elle n'a jamais existé.",
+      "speaker": "Mr. Plènozas",
+      "text": "Ils disent qu'elle n'a jamais existé. C'est FAUX.",
       "sprite": "assets/sprites/shadow_man.png",
       "scene": "flashback2_2_cadre_brise"
     },
     {
-      "speaker": "Mr. P",
+      "speaker": "Mr. Plènozas",
       "text": "Elle me manque. Laisse-moi la retrouver. ARGHHHH",
       "sprite": "assets/sprites/glitch_man.png",
       "sfx": "assets/sounds/radio_flashback.mp3",
