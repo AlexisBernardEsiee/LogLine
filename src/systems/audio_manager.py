@@ -62,3 +62,8 @@ class AudioManager:
                 self.sounds_cache[name].play(volume=vol)
             except Exception as e:
                 print(f"[AudioManager] Erreur lors de la lecture du SFX '{name}' : {e}")
+    
+    def play_typewriter_sound(self) -> None:
+        """Joue un son léger de touche de clavier pour le défilement du texte."""
+        sound_path = Path("assets/sounds/clic.mp3")
+        self.play_sfx("typing", sound_path, volume_modifier=0.3)

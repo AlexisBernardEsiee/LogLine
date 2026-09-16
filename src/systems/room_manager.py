@@ -15,6 +15,7 @@ class RoomManager:
         self.current_room_id = None
         self.name = ""
         self.entry_x = 220
+        self.entry_facing_right = True
         self.floor_y = 168
         self.on_enter = None
         self.tutorial = False
@@ -29,12 +30,12 @@ class RoomManager:
     def shows_world(self):
         return self._override is None
 
-    def show(self, room_id):
+    def show(self, room_id, from_room_id=None):
         path = constants.DATA_ROOMS / f"{room_id}.json"
         data = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
         self.current_room_id = room_id
         self.name = data.get("name", room_id)
-        self.entry_x = data.get("entry_x", 220)
+        self.entry_x, self.entry_facing_right = self._entry_from(data, from_room_id)
         self.floor_y = data.get("floor_y", 168)
         self.on_enter = data.get("on_enter")
         self.tutorial = bool(data.get("tutorial", False))
@@ -64,6 +65,19 @@ class RoomManager:
             self._override = ("color", tuple(spec["color"]))
         else:
             self._override = ("image", self._texture(spec["path"]))
+
+    def current_background_texture(self):
+        if self._override is not None:
+            kind, value = self._override
+            return value if kind == "image" else None
+        if not self.background:
+            return None
+        spec = self.named_scenes.get(self.background, self.background)
+        if isinstance(spec, str):
+            return self._texture(spec)
+        if isinstance(spec, dict) and spec.get("type") == "image":
+            return self._texture(spec["path"])
+        return None
 
     def get_nearby_interactable(self, player):
         if player is None or not self.shows_world:
@@ -101,6 +115,19 @@ class RoomManager:
                 )
             for item in self.interactables:
                 self._draw_item(item)
+
+    def _entry_from(self, data, from_room_id):
+        default_x = data.get("entry_x", 220)
+        entry = data.get("entries", {}).get(from_room_id) if from_room_id else None
+        if isinstance(entry, dict):
+            x = entry.get("x", default_x)
+            facing = entry.get("facing")
+            facing_right = facing != "left" if facing else x < constants.BASE_WIDTH / 2
+            return x, facing_right
+        if entry is not None:
+            x = entry
+            return x, x < constants.BASE_WIDTH / 2
+        return default_x, True
 
     def _fill(self, color):
         arcade.draw_lrbt_rectangle_filled(

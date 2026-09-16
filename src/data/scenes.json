@@ -5,15 +5,15 @@
   },
   "accueil": {
     "type": "image",
-    "path": "assets/sprites/rooms/jeu_1920x1080/salle1_couloir.png"
+    "path": "assets/sprites/rooms/jeu_1920x1080/salle1_couloir_v2.png"
   },
   "manoir": {
     "type": "image",
-    "path": "assets/sprites/rooms/jeu_1920x1080/salle1_couloir.png"
+    "path": "assets/sprites/rooms/jeu_1920x1080/salle1_couloir_v2.png"
     },
   "couloir": {
     "type": "image",
-    "path": "assets/sprites/rooms/jeu_1920x1080/salle1_couloir.png"
+    "path": "assets/sprites/rooms/jeu_1920x1080/salle1_couloir_v2.png"
   },
   "bar": {
     "type": "image",

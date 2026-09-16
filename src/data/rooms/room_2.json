@@ -4,5 +4,12 @@
   "background": "bar",
   "entry_x": 280,
   "floor_y": 220,
-  "interactables": []
+  "interactables": [
+  {
+    "name": "door",
+    "kind": "door",
+    "hitbox": [59, 173, 196, 806],
+    "leads_to": "room_1"
+  }
+]
 }
