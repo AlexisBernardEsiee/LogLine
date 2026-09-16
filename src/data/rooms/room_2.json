@@ -26,8 +26,8 @@
     {
       "name": "glass",
       "kind": "glass",
-      "hitbox": [603, 705, 465, 542],
-      "rect": [603, 705, 465, 542],
+      "hitbox": [603, 705, 470, 500],
+      "rect": [603, 705, 470, 500],
       "sprite": "assets/sprites/poison.png",
       "dialogue_id": "glass",
       "done_dialogue": "glass_after",
@@ -50,8 +50,8 @@
     {
       "name": "ashtray",
       "kind": "ashtray",
-      "hitbox": [960, 1059, 473, 532],
-      "rect": [960, 1059, 473, 532],
+      "hitbox": [960, 1059, 473, 500],
+      "rect": [960, 1059, 473, 500],
       "sprite": "assets/sprites/ashtray.png",
       "dialogue_id": "ashtray",
       "inspect": {

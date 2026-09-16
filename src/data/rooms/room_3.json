@@ -24,8 +24,8 @@
     {
       "name": "journal",
       "kind": "journal",
-      "hitbox": [1208, 1360, 407, 540],
-      "rect": [1208, 1360, 407, 540],
+      "hitbox": [911, 1009, 392, 552],
+      "rect": [911, 1009, 392, 552],
       "sprite": "assets/sprites/diaries.png",
       "dialogue_id": "journal",
       "sfx": "assets/sounds/tourner_page.mp3",
@@ -39,8 +39,8 @@
     {
       "name": "broken_frame",
       "kind": "frame",
-      "hitbox": [1435, 1604, 202, 327],
-      "rect": [1435, 1604, 202, 327],
+      "hitbox": [1435, 1604, 187, 312],
+      "rect": [1435, 1604, 187, 312],
       "sprite": "assets/sprites/broken_frame.png",
       "dialogue_id": "broken_frame",
       "done_dialogue": "broken_frame_after",
@@ -63,8 +63,8 @@
     {
       "name": "horse",
       "kind": "toy",
-      "hitbox": [358, 547, 265, 418],
-      "rect": [358, 547, 265, 418],
+      "hitbox": [358, 547, 265, 430],
+      "rect": [358, 547, 265, 430],
       "sprite": "assets/sprites/horse.png",
       "dialogue_id": "horse",
       "inspect": {
