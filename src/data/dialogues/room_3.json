@@ -44,13 +44,26 @@
       "thought": true
     }
   ],
-  "death_glass_void": [
+    "death_glass_void": [
+    {
+      "speaker": "Mr. P",
+      "text": "Ce visage... je le connais. Je l'ai toujours connu.",
+      "sprite": "assets/sprites/shadow_man.png",
+      "scene": "flashback2_1_cadre"
+    },
+    {
+      "speaker": "Mr. P",
+      "text": "Ils disent qu'elle n'a jamais existé.",
+      "sprite": "assets/sprites/shadow_man.png",
+      "scene": "flashback2_2_cadre_brise"
+    },
     {
       "speaker": "Mr. P",
       "text": "Elle me manque. Laisse-moi la retrouver. ARGHHHH",
       "sprite": "assets/sprites/glitch_man.png",
       "sfx": "assets/sounds/tremblement.mp3",
-      "sfx_volume": 0.1
+      "sfx_volume": 0.1,
+      "scene": "flashback2_3_fragmentation"
     }
   ],
   "death_glass_after": [

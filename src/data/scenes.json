@@ -43,6 +43,42 @@
     "type": "image",
     "path": "assets/sprites/rooms/jeu_1920x1080/flashback.png"
   },
+  "flashback1_1_verre_poison": { 
+    "type": "image", 
+    "path": "assets/sprites/flashback/flashback1_1_verre_poison.png" 
+  },
+  "flashback1_2_main_ombre":   { 
+    "type": "image", 
+    "path": "assets/sprites/flashback/flashback1_2_main_ombre.png" 
+  },
+  "flashback1_3_chute":        { 
+    "type": "image", 
+    "path": "assets/sprites/flashback/flashback1_3_chute.png" 
+  },
+  "flashback2_1_cadre":        { 
+    "type": "image", 
+    "path": "assets/sprites/flashback/flashback2_1_cadre.png" 
+  },
+  "flashback2_2_cadre_brise":  { 
+    "type": "image", 
+    "path": "assets/sprites/flashback/flashback2_2_cadre_brise.png" 
+  },
+  "flashback2_3_fragmentation":{ 
+    "type": "image", 
+    "path": "assets/sprites/flashback/flashback2_3_fragmentation.png" 
+  },
+  "flashback3_1_confirmation": { 
+    "type": "image", 
+    "path": "assets/sprites/flashback/flashback3_1_confirmation.png" 
+  },
+  "flashback3_2_main_souris":  { 
+    "type": "image", 
+    "path": "assets/sprites/flashback/flashback3_2_main_souris.png" 
+  },
+  "flashback3_3_suppression":  { 
+    "type": "image", 
+    "path": "assets/sprites/flashback/flashback3_3_suppression.png" 
+  },
   "room": {
     "type": "room"
   }

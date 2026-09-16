@@ -41,5 +41,27 @@
       "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
       "thought": true
     }
+  ],
+    "death_lustre_void": [
+    {
+      "speaker": "???",
+      "text": "Ce personnage se souvient de choses qu'il ne devrait pas savoir.",
+      "thought": true,
+      "scene": "flashback3_1_confirmation"
+    },
+    {
+      "speaker": "???",
+      "text": "Un bug. Rien de plus.",
+      "thought": true,
+      "scene": "flashback3_2_main_souris"
+    },
+    {
+      "speaker": "???",
+      "text": "...",
+      "thought": true,
+      "sfx": "assets/sounds/tremblement.mp3",
+      "sfx_volume": 0.1,
+      "scene": "flashback3_3_suppression"
+    }
   ]
 }
