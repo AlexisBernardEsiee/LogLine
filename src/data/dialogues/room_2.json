@@ -10,7 +10,8 @@
     {
       "speaker": "Jam",
       "text": "Un verre... encore à moitié plein. Comme s'il avait été interrompu en pleine soirée.",
-      "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png"
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png",
+      "sfx": "assets/sounds/verre_prendre.mp3"
     },
     {
       "speaker": "Jam",

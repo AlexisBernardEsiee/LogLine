@@ -1,6 +1,8 @@
 {
   "journal": [
     {
+      "sfx": "assets/sounds/tourner_page.mp3",
+      "sfx_volume": 2,
       "speaker": "Jam",
       "text": "« J'ai une fille. Je le sais. Mais tout le monde me dit que ce n'est pas vrai. Que je n'ai jamais eu d'enfant. Pourquoi est-ce que je suis le seul à m'en souvenir ? C'est lui qui a fait ça. »",
       "sprite": "assets/sprites/jam/dialogs/jam_speechless_2.png"
