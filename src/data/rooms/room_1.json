@@ -10,14 +10,15 @@
     {
       "name": "photo",
       "kind": "photo",
-      "hitbox": [720, 1180, 220, 720],
+      "hitbox": [1062, 1187, 543, 695],
       "dialogue_id": "photo"
     },
     {
       "name": "door",
       "kind": "door",
-      "hitbox": [1680, 1920, 220, 720],
+      "hitbox": [1727, 1884, 217, 753],
       "leads_to": "room_2"
     }
   ]
 }
+  
