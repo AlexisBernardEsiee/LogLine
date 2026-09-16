@@ -36,6 +36,10 @@ class MenuView(arcade.View):
         for button in self.buttons:
             button.hovered = False
         arcade.schedule_once(self._warmup_game, 0.05)
+        
+        # Stop la musique actuelle avant de lancer celle du menu
+        self.window.audio.stop_music()
+        self.window.audio.play_music(constants.SOUND_MENU, volume=0.4, loop=True)
 
     def _warmup_game(self, _dt):
         arcade.load_texture(constants.SPRITE_JAM_IDLE)
@@ -73,11 +77,13 @@ class MenuView(arcade.View):
                 menu_button.on_click()
 
     def on_play(self):
+        self.window.audio.stop_music()
         game = GameView()
         game.setup()
         self.window.show_view(game)
 
     def on_reset(self):
+        self.window.audio.stop_music()
         GameState.clear()
         game = GameView()
         game.setup(new_game=True)
@@ -94,7 +100,7 @@ class MenuView(arcade.View):
         self.window.show_view(CreditsView(self))
 
     def on_resize(self, width, height):
-        self.world_camera.fit_to_window()   
+        self.world_camera.fit_to_window()
         
 """
 import os

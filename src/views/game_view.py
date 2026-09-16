@@ -4,7 +4,6 @@ import random
 from src import constants
 from src.camera import WorldCamera
 from src.entities.player import Player
-from src.systems.audio_manager import AudioManager
 from src.systems.dialogue_manager import DialogueManager
 from src.systems.game_state import GameState
 from src.systems.room_manager import RoomManager
@@ -46,10 +45,12 @@ class GameView(arcade.View):
         self._fall = None
         self._void_glitch_rects = []
         self._void_glitch_t = 0.0
-        self.audio = AudioManager()
-        self.dialogue_box = DialogueBox(audio_manager=self.audio)
+        self.audio = None
+        self.dialogue_box = DialogueBox(audio_manager=None)
 
     def setup(self, new_game=False):
+        self.audio = self.window.audio
+        self.dialogue_box.audio = self.window.audio
         self.keys_held.clear()
         self._pending_tutorial = False
         self._pending_dialogue = None
@@ -74,6 +75,16 @@ class GameView(arcade.View):
     def on_show_view(self):
         self.window.background_color = constants.LETTERBOX_COLOR
         self.world_camera.fit_to_window()
+        self.audio = self.window.audio
+        self.dialogue_box.audio = self.window.audio
+        
+        # Stop la musique du menu avant de lancer le son d'ambiance
+        self.audio.stop_music()
+        self.audio.play_music(
+            constants.PROJECT_ROOT / "assets" / "sounds" / "ambiance1.mp3",
+            volume=0.4,
+            loop=True,
+        )
 
     def on_resize(self, width, height):
         self.world_camera.fit_to_window()
@@ -99,7 +110,8 @@ class GameView(arcade.View):
             self.debug_grid.draw(self.room_manager, self.player)
 
     def on_update(self, delta_time):
-        self.audio.update()
+        if self.audio:
+            self.audio.update()
         self.dialogue_box.update(delta_time)
         self.inspect.update(delta_time)
         self.death.update(delta_time)
@@ -306,6 +318,8 @@ class GameView(arcade.View):
         if self.dialogue_box.is_typing():
             self.dialogue_box.skip_typing()
             return
+        if self.audio:
+            self.audio.stop_all_sfx()
         ended = self.dialogue_manager.advance()
         if ended:
             self.dialogue_box.hide()

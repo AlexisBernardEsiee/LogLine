@@ -4,6 +4,8 @@ import arcade
 
 from src import constants
 from src.views.menu_view import MenuView
+from src.systems.audio_manager import AudioManager
+
 
 
 def _parse_size(value):
@@ -19,9 +21,16 @@ def _parse_size(value):
 
 class GameWindow(arcade.Window):
 
+    def __init__(self, width, height, title, **kwargs):
+        super().__init__(width, height, title, **kwargs)
+        self.audio = AudioManager()
+        
     def on_key_press(self, symbol, modifiers):
         if symbol == constants.KEY_FULLSCREEN:
             self.set_fullscreen(not self.fullscreen)
+    
+    def on_update(self, delta_time):
+        self.audio.update()
 
 
 def main():

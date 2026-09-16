@@ -50,9 +50,9 @@ class AudioManager:
         self._music_was_playing = False
         if self.music_player:
             try:
-                self.music_player.stop()
-            except Exception:
-                pass
+                self.music_player.pause()
+            except Exception as e:
+                print(f"[AudioManager] Erreur lors de l'arrêt de la musique : {e}")
             self.music_player = None
             self.current_music_sound = None
 
@@ -98,6 +98,11 @@ class AudioManager:
             player.pause()
         except Exception:
             pass
+    
+    def stop_all_sfx(self) -> None:
+        """Arrête tous les effets sonores (SFX) en cours de lecture."""
+        for name in list(self._sfx_players.keys()):
+            self.stop_sfx(name)
 
     def stop_glitch(self) -> None:
         for name in list(self._sfx_players):

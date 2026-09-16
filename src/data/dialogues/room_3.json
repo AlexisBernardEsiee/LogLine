@@ -1,6 +1,8 @@
 {
   "journal": [
     {
+      "sfx": "assets/sounds/tourner_page.mp3",
+      "sfx_volume": 2,
       "speaker": "Jam",
       "text": "« J'ai une fille. Je le sais. Mais tout le monde me dit que ce n'est pas vrai. Que je n'ai jamais eu d'enfant. Pourquoi est-ce que je suis le seul à m'en souvenir ? C'est lui qui a fait ça. »",
       "sprite": "assets/sprites/jam/dialogs/jam_speechless_2.png"
@@ -61,8 +63,8 @@
       "speaker": "Mr. P",
       "text": "Elle me manque. Laisse-moi la retrouver. ARGHHHH",
       "sprite": "assets/sprites/glitch_man.png",
-      "sfx": "assets/sounds/tremblement.mp3",
-      "sfx_volume": 0.1,
+      "sfx": "assets/sounds/radio_flashback.mp3",
+      "sfx_volume": 0.2,
       "scene": "flashback2_3_fragmentation"
     }
   ],
