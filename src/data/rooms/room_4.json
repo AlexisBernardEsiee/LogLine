@@ -36,6 +36,8 @@
         "sfx": "assets/sounds/lustre.mp3",
         "sfx_volume": 0.85,
         "respawn_x": 280,
+        "void_scene": "flashback3_1_confirmation",
+        "void_dialogue": "death_lustre_void",
         "aftermath_dialogue": "chandelier_after"
       }
     }

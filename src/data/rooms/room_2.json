@@ -44,6 +44,7 @@
         "sfx": "assets/sounds/respiration_poison.mp3",
         "sfx_volume": 0.7,
         "void_dialogue": "death_poison_void",
+        "void_scene": "flashback1_1_verre_poison",
         "aftermath_dialogue": "death_poison_after"
       }
     },
