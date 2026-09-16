@@ -21,7 +21,7 @@
     {
       "speaker": "Jam",
       "text": "Jam. Écrit à la main. Par un enfant.",
-      "sprite": "assets/sprites/jam/dialogs/jam_sad.png",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
       "thought": true,
       "inspect_sprite": "assets/sprites/bookmark/back_bookmark.png"
     }
@@ -38,7 +38,7 @@
     {
       "speaker": "Jam",
       "text": "Il n'y a plus qu'une direction.",
-      "sprite": "assets/sprites/jam/dialogs/jam_sad.png",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
       "thought": true
     }
   ]
