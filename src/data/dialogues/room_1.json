@@ -2,34 +2,46 @@
   "corridor_intro": [
     {
       "speaker": "Jam",
-      "text": "Si je récapitule bien, monsieur Plènozas a disparu il y a trois semaines. Personne ne l'a revu depuis le soir de son anniversaire.",
+      "text": "Je m'appelle Jam, détective privée. Je suis sur l'affaire de la disparition de Monsieur Plènozas, un homme d'affaires très riche, mais aussi très mystérieux.",
+      "sprite": "assets/sprites/jam/dialogs/jam_smile_1.png",
+      "thought": true
+    },
+    {
+      "speaker": "Jam",
+      "text": "Il vit seul dans ce manoir depuis des années. Introuvable depuis trois semaines, volatiliser dans son propre manoir... C'est à n'y rien comprendre.",
       "sprite": "assets/sprites/jam/dialogs/jam_speechless_1.png",
+      "thought": true
+    },
+    {
+      "speaker": "Jam",
+      "text": "Me voilà donc dans ce manoir. Je vais devoir fouiller les lieux pour trouver des indices...",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
       "thought": true
     }
   ],
   "photo": [
     {
       "speaker": "Jam",
-      "text": "Un tableau classique. Quelqu'un l'a un peu déplacé…",
-      "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png"
+      "text": "Un tableau classique. Attends, il est légèrement penché...",
+      "sprite": "assets/sprites/jam/dialogs/jam_speechless_1.png"
     },
     {
       "speaker": "Jam",
-      "text": "Il y a quelque chose derrière.",
-      "sprite": "assets/sprites/jam/dialogs/jam_speechless_1.png"
+      "text": "! Il y a un espace creux derrière.",
+      "sprite": "assets/sprites/jam/dialogs/jam_speechless_3.png"
     }
   ],
   "key": [
     {
       "speaker": "Jam",
-      "text": "C'est sûrement la clé de la porte.",
+      "text": "Une clé! Quelle porte ouvrirait-elle?",
       "sprite": "assets/sprites/jam/dialogs/jam_smile_1.png"
     }
   ],
   "door_locked": [
     {
       "speaker": "Jam",
-      "text": "Fermée à clé. Il doit bien y avoir un moyen de l'ouvrir.",
+      "text": "Fermé à double tour. Il doit bien y avoir un moyen d'ouvrir cette porte, je ferais mieux de fouiller les environs.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png",
       "thought": true
     }
@@ -37,19 +49,19 @@
   "photo_plenoza": [
     {
       "speaker": "Jam",
-      "text": "Monsieur Plènozas...",
+      "text": "C'est donc lui..Monsieur Plènozas.",
       "sprite": "assets/sprites/jam/dialogs/jam_speechless_1.png"
     },
     {
       "speaker": "Jam",
-      "text": "...j'ai l'impression de le connaître.",
+      "text": "C'est bizarre...j'ai l'impression de le connaître.",
       "sprite": "assets/sprites/jam/dialogs/jam_speechless_3.png",
       "sfx": "assets/sounds/erreur.mp3",
       "sfx_volume": 0.35
     },
     {
       "speaker": "Jam",
-      "text": "Non. C'est absurde. Je n'ai jamais mis les pieds ici avant aujourd'hui.",
+      "text": "Pourtant, c'est la première fois de ma vie que je mets les pieds dans ce manoir.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
       "thought": true
     }
@@ -57,15 +69,15 @@
   "house_thought": [
     {
       "speaker": "Jam",
-      "text": "Étrange, cette maison. On dirait qu'elle retient son souffle. Pourtant, je m'y sens bien.",
-      "sprite": "assets/sprites/jam/dialogs/jam_speechless_3.png",
+      "text": "Cette maison dégage une atmosphère étrange. Comme si elle retenait son souffle. Et pourtant... je m'y sens bizarrement à l'aise",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
       "thought": true
     }
   ],
   "vase": [
     {
       "speaker": "Jam",
-      "text": "Personne n'a pensé à les changer depuis un moment.",
+      "text": "Des fleurs totalement desséchées. Personne n'a pensé à les changer depuis un moment.",
       "sprite": "assets/sprites/jam/dialogs/jam_stunned.png",
       "thought": true
     }
