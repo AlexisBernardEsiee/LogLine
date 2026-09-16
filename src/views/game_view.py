@@ -460,7 +460,9 @@ class GameView(arcade.View):
                 if nearby is None:
                     nearby = self.room_manager.get_nearby_interactable(self.player, self.state)
                 searching = self._target_is_search(nearby)
+
         self.player.searching = searching
+
         if self.player.speed_x == 0:
             self.player.apply_idle_pose()
 
