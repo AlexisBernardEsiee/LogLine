@@ -19,9 +19,7 @@ class MenuView(arcade.View):
         self.background = load_scene_texture(constants.SCENE_MENU)
         self.scale = constants.SCREEN_HEIGHT / constants.BASE_HEIGHT
         s = self.scale
-
-        self.jam = arcade.load_texture(constants.SPRITE_JAM_MENU)
-
+        
         self.title = arcade.Text(
             constants.SCREEN_TITLE,      
             140 * s, 800 * s,                    
@@ -75,10 +73,6 @@ class MenuView(arcade.View):
         )
         s = self.scale
         arcade.draw_lbwh_rectangle_filled(0, 0, 900 * s, constants.SCREEN_HEIGHT, (8, 6, 10, 160))
-
-        height = 650 * s
-        width = self.jam.width * height / self.jam.height
-        arcade.draw_texture_rect(self.jam, arcade.LBWH(1330 * s, -30 * s, width, height))
 
         self.title.draw()
         self.subtitle.draw()
