@@ -1,5 +1,4 @@
 import os
-import sys
 
 import arcade
 
@@ -7,6 +6,7 @@ from src import constants
 from src.camera import WorldCamera
 from src.ui.menu import MenuButton
 from src.ui.scenes import load_scene_texture
+from src.views.credits_view import CreditsView
 from src.views.game_view import GameView
 from src.views.settings_view import SettingsView
 
@@ -40,9 +40,10 @@ class MenuView(arcade.View):
 
         button_x = self.title.x + self.title.content_width / 2
         self.buttons = [
-            MenuButton("Jouer", button_x, 600 * s, 420 * s, 76 * s, self.on_play, int(26 * s)),
-            MenuButton("Paramètres", button_x, 500 * s, 420 * s, 76 * s, self.on_settings, int(26 * s)),
-            MenuButton("Quitter", button_x, 400 * s, 420 * s, 76 * s, self.on_quit, int(26 * s)),
+            MenuButton("Jouer", button_x, 620 * s, 420 * s, 76 * s, self.on_play, int(26 * s)),
+            MenuButton("Paramètres", button_x, 520 * s, 420 * s, 76 * s, self.on_settings, int(26 * s)),
+            MenuButton("Crédits", button_x, 420 * s, 420 * s, 76 * s, self.on_credits, int(26 * s)),
+            MenuButton("Quitter", button_x, 320 * s, 420 * s, 76 * s, self.on_quit, int(26 * s)),
         ]
 
     def on_show_view(self):
@@ -93,6 +94,9 @@ class MenuView(arcade.View):
 
     def on_settings(self):
         self.window.show_view(SettingsView(self))
+
+    def on_credits(self):
+        self.window.show_view(CreditsView(self))
 
     def on_resize(self, width, height):
         self.world_camera.fit_to_window()

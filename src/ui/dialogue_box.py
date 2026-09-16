@@ -2,8 +2,6 @@ import arcade
 from PIL import Image
 
 from src import constants
-from src.systems.audio_manager import AudioManager
-from pathlib import Path
 
 
 class DialogueBox:

@@ -11,7 +11,6 @@ from src.ui.inspect_effect import InspectEffect
 from src.ui.prompt import InteractionPrompt
 from src.ui.tutorial_overlay import TutorialOverlay
 from src.systems.audio_manager import AudioManager
-from pathlib import Path
 
 
 class GameView(arcade.View):
@@ -38,8 +37,11 @@ class GameView(arcade.View):
         self._pending_dialogue = None
         self.inspect.active = False
         self._enter_room(constants.ROOM_CORRIDOR)
-        music_path = Path("assets/sounds/ambiance.mp3")
-        self.audio.play_music(music_path, volume=0.4, loop=True)
+        self.audio.play_music(
+            constants.PROJECT_ROOT / "assets" / "sounds" / "ambiance.mp3",
+            volume=0.4,
+            loop=True,
+        )
 
     def on_show_view(self):
         self.window.background_color = constants.LETTERBOX_COLOR

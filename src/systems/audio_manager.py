@@ -65,5 +65,5 @@ class AudioManager:
     
     def play_typewriter_sound(self) -> None:
         """Joue un son léger de touche de clavier pour le défilement du texte."""
-        sound_path = Path("assets/sounds/clic.mp3")
+        sound_path = constants.PROJECT_ROOT / "assets" / "sounds" / "clic.mp3"
         self.play_sfx("typing", sound_path, volume_modifier=0.3)

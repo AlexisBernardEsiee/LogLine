@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import arcade
-from arcade.key import C, E, ENTER, F11, G, LEFT, RIGHT, SPACE
+from arcade.key import C, E, ENTER, ESCAPE, F11, G, LEFT, RIGHT, SPACE
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
@@ -25,6 +25,10 @@ def ratio_label(width, height):
         a, b = b, a % b
     gcd = max(a, 1)
     return f"{int(width) // gcd}:{int(height) // gcd}"
+
+
+def scale_h(value):
+    return value * SCREEN_HEIGHT / BASE_HEIGHT
 
 PLAYER_SCALE = 0.5
 PLAYER_SPEED = 7
@@ -52,6 +56,7 @@ KEY_SKIP = SPACE
 KEY_GRID = G
 KEY_COPY_HITBOX = C
 KEY_FULLSCREEN = F11
+KEY_BACK = ESCAPE
 
 DEBUG_GRID_STEP = 50
 DEBUG_GRID_MAJOR = 100
@@ -94,5 +99,14 @@ INSPECT_FADE_ALPHA = 175
 ROOM_CORRIDOR = "room_1"
 ROOM_BAR = "room_2"
 SCENE_ROOM = "room"
-
 SCENE_MENU = "menu"
+
+CREDITS_BACKGROUND = (
+    PROJECT_ROOT / "assets" / "sprites" / "rooms" / "jeu_1920x1080" / "neant.png"
+)
+CREDITS_VEIL_COLOR = (8, 5, 10, 70)
+CREDITS_SCROLL_SPEED = scale_h(80)
+CREDITS_START_OFFSET = scale_h(30)
+CREDITS_FADE_MARGIN = scale_h(130)
+CREDITS_LOOP_GAP = scale_h(220)
+CREDITS_TEXT_WIDTH = int(SCREEN_WIDTH * 0.8)
