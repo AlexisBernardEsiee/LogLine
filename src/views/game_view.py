@@ -8,6 +8,8 @@ from src.ui.debug_grid import DebugGrid
 from src.ui.dialogue_box import DialogueBox
 from src.ui.prompt import InteractionPrompt
 from src.ui.tutorial_overlay import TutorialOverlay
+from src.systems.audio_manager import AudioManager
+from pathlib import Path
 
 
 class GameView(arcade.View):
@@ -22,11 +24,14 @@ class GameView(arcade.View):
         self.tutorial = TutorialOverlay()
         self.debug_grid = DebugGrid()
         self._pending_tutorial = False
+        self.audio = AudioManager()
 
     def setup(self):
         self.keys_held.clear()
         self._pending_tutorial = False
         self._enter_room(constants.ROOM_CORRIDOR)
+        music_path = Path("assets/sounds/ambiance.mp3")
+        self.audio.play_music(music_path, volume=0.4, loop=True)
 
     def on_show_view(self):
         self.window.background_color = (8, 8, 10)
