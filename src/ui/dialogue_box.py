@@ -2,14 +2,17 @@ import arcade
 from PIL import Image
 
 from src import constants
+from src.systems.audio_manager import AudioManager
+from pathlib import Path
 
 
 class DialogueBox:
-    def __init__(self):
+    def __init__(self, audio_manager=None):
         constants.load_fonts()
         self.speaker = ""
         self.full_text = ""
         self.visible = False
+        self.audio = audio_manager
         self.thought = False
         self.shown_chars = 0.0
         self.chars_per_second = constants.DIALOGUE_CHARS_PER_SECOND
@@ -67,10 +70,19 @@ class DialogueBox:
     def update(self, delta_time):
         if not self.visible:
             return
+        old_chars = int(self.shown_chars)
         self.shown_chars = min(
             len(self.full_text),
             self.shown_chars + self.chars_per_second * delta_time,
         )
+        new_chars = int(self.shown_chars)
+
+        # Déclenche un son si une nouvelle lettre (non vide) vient d'apparaître
+        if new_chars > old_chars and self.audio:
+            added_text = self.full_text[old_chars:new_chars]
+            if added_text.strip():
+                self.audio.play_typewriter_sound()
+
         self._refresh_body()
 
     def is_typing(self):

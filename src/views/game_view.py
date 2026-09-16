@@ -10,6 +10,8 @@ from src.ui.dialogue_box import DialogueBox
 from src.ui.inspect_effect import InspectEffect
 from src.ui.prompt import InteractionPrompt
 from src.ui.tutorial_overlay import TutorialOverlay
+from src.systems.audio_manager import AudioManager
+from pathlib import Path
 
 
 class GameView(arcade.View):
@@ -20,13 +22,15 @@ class GameView(arcade.View):
         self.world_camera = WorldCamera(self.window)
         self.room_manager = RoomManager()
         self.dialogue_manager = DialogueManager()
-        self.dialogue_box = DialogueBox()
         self.prompt = InteractionPrompt()
         self.tutorial = TutorialOverlay()
         self.debug_grid = DebugGrid()
         self.inspect = InspectEffect()
         self._pending_tutorial = False
         self._pending_dialogue = None
+        self.audio = AudioManager()
+        self.dialogue_box = DialogueBox(audio_manager=self.audio)
+
 
     def setup(self):
         self.keys_held.clear()
@@ -34,6 +38,8 @@ class GameView(arcade.View):
         self._pending_dialogue = None
         self.inspect.active = False
         self._enter_room(constants.ROOM_CORRIDOR)
+        music_path = Path("assets/sounds/ambiance.mp3")
+        self.audio.play_music(music_path, volume=0.4, loop=True)
 
     def on_show_view(self):
         self.window.background_color = constants.LETTERBOX_COLOR
