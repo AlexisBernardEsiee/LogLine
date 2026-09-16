@@ -50,9 +50,9 @@ class AudioManager:
         self._music_was_playing = False
         if self.music_player:
             try:
-                self.music_player.stop()
-            except Exception:
-                pass
+                self.music_player.pause()
+            except Exception as e:
+                print(f"[AudioManager] Erreur lors de l'arrêt de la musique : {e}")
             self.music_player = None
             self.current_music_sound = None
 

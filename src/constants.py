@@ -127,6 +127,7 @@ SOUND_GLASS_BREAK = PROJECT_ROOT / "assets" / "sounds" / "verre_casser.mp3"
 SOUND_DOOR = PROJECT_ROOT / "assets" / "sounds" / "grincement_porte.mp3"
 SOUND_PAGE = PROJECT_ROOT / "assets" / "sounds" / "tourner_page.mp3"
 SOUND_STATIC = PROJECT_ROOT / "assets" / "sounds" / "tremblement.mp3"
+SOUND_MENU = PROJECT_ROOT / "assets" / "sounds" / "accueil.mp3"
 
 CREDITS_BACKGROUND = (
     PROJECT_ROOT / "assets" / "sprites" / "rooms" / "jeu_1920x1080" / "neant.png"

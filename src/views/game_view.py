@@ -3,7 +3,6 @@ import arcade
 from src import constants
 from src.camera import WorldCamera
 from src.entities.player import Player
-from src.systems.audio_manager import AudioManager
 from src.systems.dialogue_manager import DialogueManager
 from src.systems.game_state import GameState
 from src.systems.room_manager import RoomManager
@@ -14,7 +13,6 @@ from src.ui.inspect_effect import InspectEffect
 from src.ui.prompt import InteractionPrompt
 from src.ui.tutorial_overlay import TutorialOverlay
 from src.views.pause_view import PauseView
-from src.systems.audio_manager import AudioManager
 
 HOUSE_THOUGHT_X = 1450
 
@@ -38,10 +36,12 @@ class GameView(arcade.View):
         self._pending_death = None
         self._pending_reveal = None
         self._pending_give = None
-        self.audio = AudioManager()
-        self.dialogue_box = DialogueBox(audio_manager=self.audio)
+        self.audio = None
+        self.dialogue_box = DialogueBox(audio_manager=None)
 
     def setup(self, new_game=False):
+        self.audio = self.window.audio
+        self.dialogue_box.audio = self.window.audio
         self.keys_held.clear()
         self._pending_tutorial = False
         self._pending_dialogue = None
@@ -56,15 +56,20 @@ class GameView(arcade.View):
         else:
             self.state = GameState.load()
         self._enter_room(self.state.room_id, from_room_id=self.state.from_room_id)
-        self.audio.play_music(
-            constants.PROJECT_ROOT / "assets" / "sounds" / "ambiance_2.mp3",
-            volume=0.4,
-            loop=True,
-        )
 
     def on_show_view(self):
         self.window.background_color = constants.LETTERBOX_COLOR
         self.world_camera.fit_to_window()
+        self.audio = self.window.audio
+        self.dialogue_box.audio = self.window.audio
+        
+        # Stop la musique du menu avant de lancer le son d'ambiance
+        self.audio.stop_music()
+        self.audio.play_music(
+            constants.PROJECT_ROOT / "assets" / "sounds" / "ambiance1.mp3",
+            volume=0.4,
+            loop=True,
+        )
 
     def on_resize(self, width, height):
         self.world_camera.fit_to_window()
@@ -85,7 +90,8 @@ class GameView(arcade.View):
             self.debug_grid.draw(self.room_manager, self.player)
 
     def on_update(self, delta_time):
-        self.audio.update()
+        if self.audio:
+            self.audio.update()
         self.dialogue_box.update(delta_time)
         self.inspect.update(delta_time)
         self.death.update(delta_time)
