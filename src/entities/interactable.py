@@ -6,6 +6,7 @@ class Interactable:
         self.rect = tuple(data.get("rect", self.hitbox))
         self.dialogue_id = data.get("dialogue_id")
         self.leads_to = data.get("leads_to")
+        self.inspect = data.get("inspect")
 
     def contains(self, sprite):
         left, right, _bottom, _top = self.hitbox

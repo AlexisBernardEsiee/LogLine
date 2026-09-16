@@ -3,6 +3,12 @@
   "name": "Le couloir",
   "background": "couloir",
   "entry_x": 280,
+  "entries": {
+    "room_2": {
+      "x": 1640,
+      "facing": "left"
+    }
+  },
   "floor_y": 220,
   "on_enter": "corridor_intro",
   "tutorial": true,
@@ -10,8 +16,25 @@
     {
       "name": "photo",
       "kind": "photo",
-      "hitbox": [1062, 1187, 543, 695],
-      "dialogue_id": "photo"
+      "hitbox": [1057, 1194, 534, 703],
+      "dialogue_id": "photo",
+      "inspect": {
+        "effect": "fade_zoom",
+        "zoom": 2.6,
+        "duration": 0.55
+      }
+    },
+    {
+      "name": "photo_plenoza",
+      "kind": "photo",
+      "hitbox": [737, 862, 541, 703],
+      "dialogue_id": "photo_plenoza",
+      "inspect": {
+        "effect": "sprite",
+        "sprite": "assets/sprites/picture.png",
+        "zoom": 1.0,
+        "duration": 0.55
+      }
     },
     {
       "name": "door",

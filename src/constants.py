@@ -10,8 +10,8 @@ BASE_HEIGHT = 1080
 
 def get_window_size():
     screen_width, screen_height = arcade.get_display_size()
-    max_width = int(screen_width * 0.7)
-    max_height = int(screen_height * 0.7)
+    max_width = int(screen_width)
+    max_height = int(screen_height)
     aspect_ratio = BASE_WIDTH / BASE_HEIGHT
 
     width = max_width
@@ -88,6 +88,10 @@ BASE_DIALOGUE_FONT_SIZE = 25
 DIALOGUE_FONT_SIZE = int(
     BASE_DIALOGUE_FONT_SIZE * SCREEN_HEIGHT / BASE_HEIGHT
 )
+
+INSPECT_DURATION = 0.55
+INSPECT_ZOOM = 2.5
+INSPECT_FADE_ALPHA = 175
 
 ROOM_CORRIDOR = "room_1"
 ROOM_BAR = "room_2"
