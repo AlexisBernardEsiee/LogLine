@@ -4,6 +4,7 @@ import arcade
 
 from src import constants
 from src.camera import WorldCamera
+from src.systems.game_state import GameState
 from src.ui.menu import MenuButton
 from src.ui.scenes import load_scene_texture
 from src.views.credits_view import CreditsView
@@ -40,10 +41,11 @@ class MenuView(arcade.View):
 
         button_x = self.title.x + self.title.content_width / 2
         self.buttons = [
-            MenuButton("Jouer", button_x, 620 * s, 420 * s, 76 * s, self.on_play, int(26 * s)),
-            MenuButton("Paramètres", button_x, 520 * s, 420 * s, 76 * s, self.on_settings, int(26 * s)),
-            MenuButton("Crédits", button_x, 420 * s, 420 * s, 76 * s, self.on_credits, int(26 * s)),
-            MenuButton("Quitter", button_x, 320 * s, 420 * s, 76 * s, self.on_quit, int(26 * s)),
+            MenuButton("Jouer", button_x, 640 * s, 420 * s, 76 * s, self.on_play, int(26 * s)),
+            MenuButton("Réinitialiser", button_x, 545 * s, 420 * s, 76 * s, self.on_reset, int(26 * s)),
+            MenuButton("Paramètres", button_x, 450 * s, 420 * s, 76 * s, self.on_settings, int(26 * s)),
+            MenuButton("Crédits", button_x, 355 * s, 420 * s, 76 * s, self.on_credits, int(26 * s)),
+            MenuButton("Quitter", button_x, 260 * s, 420 * s, 76 * s, self.on_quit, int(26 * s)),
         ]
 
     def on_show_view(self):
@@ -98,6 +100,12 @@ class MenuView(arcade.View):
     def on_play(self):
         game = GameView()
         game.setup()
+        self.window.show_view(game)
+
+    def on_reset(self):
+        GameState.clear()
+        game = GameView()
+        game.setup(new_game=True)
         self.window.show_view(game)
 
     def on_quit(self):

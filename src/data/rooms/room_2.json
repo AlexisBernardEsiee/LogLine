@@ -3,13 +3,68 @@
   "name": "Le bar à whisky",
   "background": "bar",
   "entry_x": 280,
+  "entries": {
+    "room_1": {
+      "x": 280,
+      "facing": "right"
+    },
+    "room_3": {
+      "x": 1640,
+      "facing": "left"
+    }
+  },
   "floor_y": 280,
+  "on_enter": "bar_intro",
+  "on_enter_flag": "seen_bar_intro",
   "interactables": [
-  {
-    "name": "door",
-    "kind": "door",
-    "hitbox": [59, 173, 196, 806],
-    "leads_to": "room_1"
-  }
-]
+    {
+      "name": "door_corridor",
+      "kind": "door",
+      "hitbox": [59, 173, 196, 806],
+      "leads_to": "room_1"
+    },
+    {
+      "name": "glass",
+      "kind": "glass",
+      "hitbox": [603, 705, 465, 542],
+      "rect": [603, 705, 465, 542],
+      "sprite": "assets/sprites/poison.png",
+      "dialogue_id": "glass",
+      "done_dialogue": "glass_after",
+      "inspect": {
+        "effect": "sprite",
+        "sprite": "assets/sprites/poison.png",
+        "zoom": 1.0,
+        "duration": 0.5
+      },
+      "death": {
+        "id": "poison",
+        "flag": "died_poison",
+        "effect": "white_flash",
+        "sfx": "assets/sounds/respiration_poison.mp3",
+        "void_dialogue": "death_poison_void",
+        "aftermath_dialogue": "death_poison_after"
+      }
+    },
+    {
+      "name": "ashtray",
+      "kind": "ashtray",
+      "hitbox": [960, 1059, 473, 532],
+      "rect": [960, 1059, 473, 532],
+      "sprite": "assets/sprites/ashtray.png",
+      "dialogue_id": "ashtray",
+      "inspect": {
+        "effect": "sprite",
+        "sprite": "assets/sprites/ashtray.png",
+        "zoom": 1.0,
+        "duration": 0.4
+      }
+    },
+    {
+      "name": "door_bedroom",
+      "kind": "door",
+      "hitbox": [1688, 1888, 210, 780],
+      "leads_to": "room_3"
+    }
+  ]
 }

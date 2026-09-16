@@ -98,8 +98,29 @@ INSPECT_FADE_ALPHA = 175
 
 ROOM_CORRIDOR = "room_1"
 ROOM_BAR = "room_2"
+ROOM_BEDROOM = "room_3"
+ROOM_OFFICE = "room_4"
 SCENE_ROOM = "room"
 SCENE_MENU = "menu"
+
+SAVE_PATH = PROJECT_ROOT / "saves" / "autosave.json"
+
+SPRITE_KEY = "assets/sprites/key.png"
+SPRITE_POISON = "assets/sprites/poison.png"
+SPRITE_ASHTRAY = "assets/sprites/ashtray.png"
+SPRITE_DIARY = "assets/sprites/diaries.png"
+SPRITE_FRAME = "assets/sprites/broken_frame.png"
+SPRITE_HORSE = "assets/sprites/horse.png"
+SPRITE_MR_P = "assets/sprites/shadow_man.png"
+SPRITE_MR_P_GLITCH = "assets/sprites/glitch_man.png"
+
+SOUND_DISCORD = PROJECT_ROOT / "assets" / "sounds" / "erreur.mp3"
+SOUND_POISON = PROJECT_ROOT / "assets" / "sounds" / "respiration_poison.mp3"
+SOUND_GLASS = PROJECT_ROOT / "assets" / "sounds" / "verre_coupure.mp3"
+SOUND_GLASS_BREAK = PROJECT_ROOT / "assets" / "sounds" / "verre_casser.mp3"
+SOUND_DOOR = PROJECT_ROOT / "assets" / "sounds" / "grincement_porte.mp3"
+SOUND_PAGE = PROJECT_ROOT / "assets" / "sounds" / "tourner_page.mp3"
+SOUND_STATIC = PROJECT_ROOT / "assets" / "sounds" / "tremblement.mp3"
 
 CREDITS_BACKGROUND = (
     PROJECT_ROOT / "assets" / "sprites" / "rooms" / "jeu_1920x1080" / "neant.png"

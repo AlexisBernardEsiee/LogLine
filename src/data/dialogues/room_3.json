@@ -1,1 +1,69 @@
-{}
+{
+  "journal": [
+    {
+      "speaker": "Jam",
+      "text": "« J'ai une fille. Je le sais. Mais tout le monde me dit que ce n'est pas vrai. Que je n'ai jamais eu d'enfant. Pourquoi est-ce que je suis le seul à m'en souvenir ? C'est lui qui a fait ça. »",
+      "sprite": "assets/sprites/jam/dialogs/jam_speechless_2.png"
+    },
+    {
+      "speaker": "Jam",
+      "text": "...Une fille.",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad.png"
+    }
+  ],
+  "broken_frame": [
+    {
+      "speaker": "Jam",
+      "text": "Cette photo... elle est déchirée en deux. Comme s'il avait voulu effacer quelqu'un.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png"
+    },
+    {
+      "speaker": "Jam",
+      "text": "...Pourquoi j'ai l'impression que ce n'est pas mon visage ? Quelque chose cloche.",
+      "sprite": "assets/sprites/jam/dialogs/jam_stunned.png"
+    },
+    {
+      "speaker": "Jam",
+      "text": "Je... je ne sens rien.",
+      "sprite": "assets/sprites/jam/dialogs/jam_unhappy.png"
+    }
+  ],
+  "broken_frame_after": [
+    {
+      "speaker": "Jam",
+      "text": "Je n'y toucherai plus. Pas comme ça.",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad.png",
+      "thought": true
+    }
+  ],
+  "horse": [
+    {
+      "speaker": "Jam",
+      "text": "Un petit cheval à bascule miniature. Ça ne colle pas vraiment avec le reste de la pièce.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
+      "thought": true
+    }
+  ],
+  "death_glass_void": [
+    {
+      "speaker": "Mr. P",
+      "text": "Elle me manque. Laisse-moi la retrouver. ARGHHHH",
+      "sprite": "assets/sprites/glitch_man.png",
+      "sfx": "assets/sounds/tremblement.mp3"
+    }
+  ],
+  "death_glass_after": [
+    {
+      "speaker": "Jam",
+      "text": "Ce n'est pas la première fois que je ressens ça. Ce vide. Ce manque. Mais... de quoi ?",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad.png",
+      "thought": true
+    },
+    {
+      "speaker": "Jam",
+      "text": "Qui est la personne dont il parle ?",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+      "thought": true
+    }
+  ]
+}

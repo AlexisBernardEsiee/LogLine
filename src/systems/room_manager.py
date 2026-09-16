@@ -19,6 +19,7 @@ class RoomManager:
         self.entry_facing_right = True
         self.floor_y = 168
         self.on_enter = None
+        self.on_enter_flag = None
         self.tutorial = False
         self.background = None
         self.layers = []
@@ -39,18 +40,47 @@ class RoomManager:
         self.entry_x, self.entry_facing_right = self._entry_from(data, from_room_id)
         self.floor_y = data.get("floor_y", 168)
         self.on_enter = data.get("on_enter")
+        self.on_enter_flag = data.get("on_enter_flag")
         self.tutorial = bool(data.get("tutorial", False))
         self.background = data.get("background")
         self.layers = data.get("layers", [])
         self.interactables = [Interactable(item) for item in data.get("interactables", [])]
         self._override = None
 
-    def consume_on_enter(self):
+    def consume_on_enter(self, state=None):
+        if not self.on_enter:
+            return None
+        if state is not None and self.on_enter_flag:
+            if state.flag(self.on_enter_flag):
+                return None
+            state.set_flag(self.on_enter_flag)
+            return self.on_enter
         room_id = self.current_room_id
         if room_id is None or room_id in self._visited:
             return None
         self._visited.add(room_id)
         return self.on_enter
+
+    def active_interactables(self, state=None):
+        return [item for item in self.interactables if item.is_active(state)]
+
+    def get_nearby_interactable(self, player, state=None):
+        if player is None or not self.shows_world:
+            return None
+        matches = [item for item in self.active_interactables(state) if item.contains(player)]
+        if not matches:
+            return None
+        return max(matches, key=lambda item: item.priority)
+
+    def get_interactable_at(self, x, y, state=None):
+        if not self.shows_world:
+            return None
+        matches = [
+            item for item in self.active_interactables(state) if item.contains_point(x, y)
+        ]
+        if not matches:
+            return None
+        return max(matches, key=lambda item: item.priority)
 
     def set_scene(self, scene):
         if scene in (None, constants.SCENE_ROOM):
@@ -90,23 +120,7 @@ class RoomManager:
             return self._texture(spec["path"])
         return None
 
-    def get_nearby_interactable(self, player):
-        if player is None or not self.shows_world:
-            return None
-        for item in self.interactables:
-            if item.contains(player):
-                return item
-        return None
-
-    def get_interactable_at(self, x, y):
-        if not self.shows_world:
-            return None
-        for item in reversed(self.interactables):
-            if item.contains_point(x, y):
-                return item
-        return None
-
-    def draw(self):
+    def draw(self, state=None):
         if self._override is not None:
             kind, value = self._override
             if kind == "color":
@@ -114,7 +128,7 @@ class RoomManager:
             else:
                 self._draw_texture(value)
                 if value is self._room_background_texture():
-                    self._draw_overlays()
+                    self._draw_overlays(state)
             return
 
         if self.background:
@@ -135,8 +149,8 @@ class RoomManager:
                     tuple(layer["color"]),
                 )
             for item in self.interactables:
-                self._draw_item(item)
-        self._draw_overlays()
+                    self._draw_item(item)
+        self._draw_overlays(state)
 
     def _entry_from(self, data, from_room_id):
         default_x = data.get("entry_x", 220)
@@ -183,8 +197,8 @@ class RoomManager:
             self._textures[key] = arcade.Texture(image, hash=key)
         return self._textures[key]
 
-    def _draw_overlays(self):
-        for item in self.interactables:
+    def _draw_overlays(self, state=None):
+        for item in self.active_interactables(state):
             if not item.sprite:
                 continue
             texture = self._overlay_texture(item.sprite)

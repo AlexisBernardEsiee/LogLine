@@ -1,1 +1,83 @@
-{}
+{
+  "id": "room_3",
+  "name": "La chambre",
+  "background": "chambre",
+  "entry_x": 280,
+  "entries": {
+    "room_2": {
+      "x": 280,
+      "facing": "right"
+    },
+    "room_4": {
+      "x": 1640,
+      "facing": "left"
+    }
+  },
+  "floor_y": 280,
+  "interactables": [
+    {
+      "name": "door_bar",
+      "kind": "door",
+      "hitbox": [40, 160, 200, 800],
+      "leads_to": "room_2"
+    },
+    {
+      "name": "journal",
+      "kind": "journal",
+      "hitbox": [1208, 1360, 407, 540],
+      "rect": [1208, 1360, 407, 540],
+      "sprite": "assets/sprites/diaries.png",
+      "dialogue_id": "journal",
+      "sfx": "assets/sounds/tourner_page.mp3",
+      "inspect": {
+        "effect": "sprite",
+        "sprite": "assets/sprites/diaries.png",
+        "zoom": 1.0,
+        "duration": 0.5
+      }
+    },
+    {
+      "name": "broken_frame",
+      "kind": "frame",
+      "hitbox": [1435, 1604, 202, 327],
+      "rect": [1435, 1604, 202, 327],
+      "sprite": "assets/sprites/broken_frame.png",
+      "dialogue_id": "broken_frame",
+      "done_dialogue": "broken_frame_after",
+      "inspect": {
+        "effect": "sprite",
+        "sprite": "assets/sprites/broken_frame.png",
+        "zoom": 1.0,
+        "duration": 0.5
+      },
+      "death": {
+        "id": "glass",
+        "flag": "died_glass",
+        "effect": "green_glitch",
+        "sfx": "assets/sounds/verre_coupure.mp3",
+        "void_dialogue": "death_glass_void",
+        "aftermath_dialogue": "death_glass_after"
+      }
+    },
+    {
+      "name": "horse",
+      "kind": "toy",
+      "hitbox": [358, 547, 265, 418],
+      "rect": [358, 547, 265, 418],
+      "sprite": "assets/sprites/horse.png",
+      "dialogue_id": "horse",
+      "inspect": {
+        "effect": "sprite",
+        "sprite": "assets/sprites/horse.png",
+        "zoom": 1.0,
+        "duration": 0.4
+      }
+    },
+    {
+      "name": "door_office",
+      "kind": "door",
+      "hitbox": [1688, 1890, 200, 800],
+      "leads_to": "room_4"
+    }
+  ]
+}

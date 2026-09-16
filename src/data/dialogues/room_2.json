@@ -1,1 +1,58 @@
-{}
+{
+  "bar_intro": [
+    {
+      "speaker": "Jam",
+      "text": "Un bar à whisky. Ces bouteilles doivent valoir une fortune !",
+      "sprite": "assets/sprites/jam/dialogs/jam_smile_1.png"
+    }
+  ],
+  "glass": [
+    {
+      "speaker": "Jam",
+      "text": "Un verre... encore à moitié plein. Comme s'il avait été interrompu en pleine soirée.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png"
+    },
+    {
+      "speaker": "Jam",
+      "text": "Cette odeur...",
+      "sprite": "assets/sprites/jam/dialogs/jam_stunned.png"
+    }
+  ],
+  "glass_after": [
+    {
+      "speaker": "Jam",
+      "text": "Je ne m'approcherai plus de ce verre.",
+      "sprite": "assets/sprites/jam/dialogs/jam_unhappy.png",
+      "thought": true
+    }
+  ],
+  "ashtray": [
+    {
+      "speaker": "Jam",
+      "text": "Des mégots entassés. Quelqu'un a beaucoup fumé, ici, avant de partir.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
+      "thought": true
+    }
+  ],
+  "death_poison_void": [
+    {
+      "speaker": "Mr. P",
+      "text": "Comment sortir d'ici. De toute façon, tout cela n'est pas réel. Alors autant tester.",
+      "sprite": "assets/sprites/shadow_man.png"
+    },
+    {
+      "speaker": "???",
+      "text": "Non. Pas comme ça.",
+      "thought": true,
+      "sfx": "assets/sounds/tremblement.mp3"
+    }
+  ],
+  "death_poison_after": [
+    {
+      "speaker": "Jam",
+      "text": "...Qu'est-ce qu'il se passe ? Il faut que je sois plus prudente. Et puis « sortir d'ici » ? C'est son manoir, personne ne l'empêchait de partir…",
+      "sprite": "assets/sprites/jam/dialogs/jam_stunned.png",
+      "thought": true
+    }
+  ]
+}

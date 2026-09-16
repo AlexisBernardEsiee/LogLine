@@ -2,87 +2,63 @@
   "corridor_intro": [
     {
       "speaker": "Jam",
-      "text": "Si je récapitule bien… monsieur Plènozas a disparu il y a trois semaines.",
+      "text": "Si je récapitule bien, monsieur Plènozas a disparu il y a trois semaines. Personne ne l'a revu depuis le soir de son anniversaire.",
       "sprite": "assets/sprites/jam/dialogs/jam_speechless_1.png",
-      "thought": true,
-      "scene": "accueil"
-    },
-    {
-      "speaker": "Jam",
-      "text": "Personne ne l'a revu depuis le soir de son anniversaire. Ni la famille, ni le personnel.",
-      "sprite": "assets/sprites/jam/dialogs/jam_speechless_2.png",
-      "thought": true,
-      "scene": "accueil"
-    },
-    {
-      "speaker": "Jam",
-      "text": "Une grande maison, une fête, puis plus rien.",
-      "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png",
-      "thought": true,
-      "scene": "accueil"
-    },
-    {
-      "speaker": "Jam",
-      "text": "Comme s'il s'était volatilisé entre deux coupes de champagne.",
-      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
-      "thought": true,
-      "scene": "accueil"
-    },
-    {
-      "speaker": "Jam",
-      "text": "Bon. On commence par le couloir. Les murs parlent souvent plus que les témoins.",
-      "sprite": "assets/sprites/jam/dialogs/jam_speechless_3.png",
-      "thought": true,
-      "scene": "accueil"
+      "thought": true
     }
   ],
   "photo": [
     {
       "speaker": "Jam",
-      "text": "Un simple tableau. Un aristocrate figé dans sa plus belle pose.",
+      "text": "Un tableau classique. Quelqu'un l'a un peu déplacé…",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png"
     },
     {
       "speaker": "Jam",
-      "text": "Ils aiment se mettre en valeur, pour leurs descendants…",
+      "text": "Il y a quelque chose derrière.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png"
+    }
+  ],
+  "key": [
+    {
+      "speaker": "Jam",
+      "text": "C'est sûrement la clé de la porte.",
       "sprite": "assets/sprites/jam/dialogs/jam_speechless_2.png"
-    },
+    }
+  ],
+  "door_locked": [
     {
       "speaker": "Jam",
-      "text": "… et pour l'éternité, apparemment.",
-      "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png"
-    },
-    {
-      "speaker": "Jam",
-      "text": "Ce n'est pas lui. Le regard est trop sûr.",
-      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png"
-    },
-    {
-      "speaker": "Jam",
-      "text": "Trop lisse. Monsieur Plènozas n'avait pas cet air-là.",
-      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png"
+      "text": "Fermée à clé. Il doit bien y avoir un moyen de l'ouvrir.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png",
+      "thought": true
     }
   ],
   "photo_plenoza": [
     {
       "speaker": "Jam",
-      "text": "Attendez… celle-ci n'est pas comme les autres.",
-      "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png"
-    },
-    {
-      "speaker": "Jam",
-      "text": "Monsieur Plènozas…",
+      "text": "Monsieur Plènozas...",
       "sprite": "assets/sprites/jam/dialogs/jam_speechless_1.png"
     },
     {
       "speaker": "Jam",
-      "text": "C'est bien lui. Le costume, la bibliothèque… même ce petit sourire un peu forcé.",
-      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png"
+      "text": "...j'ai l'impression de le connaître.",
+      "sprite": "assets/sprites/jam/dialogs/jam_stunned.png",
+      "sfx": "assets/sounds/erreur.mp3"
     },
     {
       "speaker": "Jam",
-      "text": "Pourtant… j'ai l'impression de le connaître. Plus que je ne devrais.",
-      "sprite": "assets/sprites/jam/dialogs/jam_stunned.png"
+      "text": "Non. C'est absurde. Je n'ai jamais mis les pieds ici avant aujourd'hui.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+      "thought": true
+    }
+  ],
+  "house_thought": [
+    {
+      "speaker": "Jam",
+      "text": "Étrange, cette maison. On dirait qu'elle retient son souffle. Pourtant, je m'y sens bien.",
+      "sprite": "assets/sprites/jam/dialogs/jam_speechless_3.png",
+      "thought": true
     }
   ],
   "vase": [
