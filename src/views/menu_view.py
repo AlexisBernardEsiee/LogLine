@@ -4,6 +4,7 @@ import sys
 import arcade
 
 from src import constants
+from src.camera import WorldCamera
 from src.ui.menu import MenuButton
 from src.ui.scenes import load_scene_texture
 from src.views.game_view import GameView
@@ -13,6 +14,7 @@ from src.views.settings_view import SettingsView
 class MenuView(arcade.View):
     def __init__(self):                    
         super().__init__()
+        self.world_camera = WorldCamera(self.window)
         self.background = load_scene_texture(constants.SCENE_MENU)
         self.scale = constants.SCREEN_HEIGHT / constants.BASE_HEIGHT
         s = self.scale
@@ -45,11 +47,12 @@ class MenuView(arcade.View):
 
     def on_show_view(self):
         self.window.background_color = (8, 8, 10)
+        self.world_camera.fit_to_window()
         for button in self.buttons:
             button.hovered = False
 
     def on_draw(self):
-        self.clear()
+        self.world_camera.begin_frame()
         arcade.draw_texture_rect(
             self.background,
             arcade.LBWH(0, 0, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT),
@@ -69,10 +72,12 @@ class MenuView(arcade.View):
             button.draw()
 
     def on_mouse_motion(self, x, y, dx, dy):
+        x, y = self.world_camera.to_world(x, y)
         for button in self.buttons:
             button.hovered = button.contains(x, y)
 
-    def on_mouse_press(self, x, y, button, modifiers):
+    def on_mouse_press(self, x, y, button, modifiers):  
+        x, y = self.world_camera.to_world(x, y)
         for menu_button in self.buttons:
             if menu_button.contains(x, y):
                 menu_button.on_click()
@@ -88,3 +93,6 @@ class MenuView(arcade.View):
 
     def on_settings(self):
         self.window.show_view(SettingsView(self))
+
+    def on_resize(self, width, height):
+        self.world_camera.fit_to_window()

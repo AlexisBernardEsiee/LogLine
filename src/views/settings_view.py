@@ -1,6 +1,7 @@
 import arcade
 
 from src import constants
+from src.camera import WorldCamera
 from src.ui.key_names import key_name
 from src.ui.menu import MenuButton
 from src.ui.scenes import load_scene_texture
@@ -17,6 +18,7 @@ KEY_ACTIONS = [
 class SettingsView(arcade.View):
     def __init__(self, previous_view):
         super().__init__()
+        self.world_camera = WorldCamera(self.window)
         self.previous_view = previous_view
         self.scale = constants.SCREEN_HEIGHT / constants.BASE_HEIGHT
         s = self.scale
@@ -72,9 +74,11 @@ class SettingsView(arcade.View):
         self.refresh_key_buttons()
 
     # ---------- Affichage ----------
+    def on_show_view(self):
+            self.world_camera.fit_to_window()
 
     def on_draw(self):
-        self.clear()
+        self.world_camera.begin_frame()
         s = self.scale
         arcade.draw_texture_rect(
             self.background,
@@ -135,16 +139,19 @@ class SettingsView(arcade.View):
         elif key == arcade.key.ESCAPE:
             self.on_back()
 
-    def on_mouse_press(self, x, y, button, modifiers):
-        if self.waiting_action is not None:
-            return
-        for menu_button in self.buttons:
-            if menu_button.contains(x, y):
-                menu_button.on_click()
-
     def on_mouse_motion(self, x, y, dx, dy):
+        x, y = self.world_camera.to_world(x, y)
         for button in self.buttons:
             button.hovered = button.contains(x, y)
 
+    def on_mouse_press(self, x, y, button, modifiers):  
+            x, y = self.world_camera.to_world(x, y)
+            for menu_button in self.buttons:
+                if menu_button.contains(x, y):
+                    menu_button.on_click()
+
     def on_back(self):
         self.window.show_view(self.previous_view)
+
+    def on_resize(self, width, height):
+        self.world_camera.fit_to_window()
