@@ -28,7 +28,6 @@ class AudioManager:
         self.stop_music()
         self._music_path = Path(path)
         self._music_loop = loop
-        self.music_volume = volume
         self._start_stream()
 
     def _start_stream(self) -> None:

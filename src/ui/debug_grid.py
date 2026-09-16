@@ -5,7 +5,7 @@ from src import constants
 
 class DebugGrid:
     def __init__(self):
-        self.visible = True
+        self.visible = False
         self.mouse_x = 0.0
         self.mouse_y = 0.0
         self.anchor = None
