@@ -18,15 +18,17 @@ class Player(arcade.Sprite):
         self._idle_time = 0.0
         self._cycle = sum(constants.PLAYER_WALK_FRAME_DURATIONS)
 
-    def place_on_floor(self, x: float, floor_y: float):
+    def place_on_floor(self, x: float, floor_y: float, facing_right: bool = True):
         self.center_x = x
         self.ground_y = floor_y
         self.bottom = floor_y
         self.speed_x = 0
+        self.facing_right = facing_right
         self._walk_time = 0.0
         self._idle_time = 0.0
         self.angle = 0
         self.scale_y = constants.PLAYER_SCALE
+        self.scale_x = constants.PLAYER_SCALE if facing_right else -constants.PLAYER_SCALE
         self.texture = self.idle_texture
 
     def _walk_frame(self) -> int:
@@ -56,14 +58,14 @@ class Player(arcade.Sprite):
             self.scale_y = constants.PLAYER_SCALE
             step = (self._walk_time / self._cycle) % 1.0
             bob = -abs(math.sin(step * math.pi * 2.0)) * constants.PLAYER_WALK_BOB_PIXELS
-            self.bottom = self.ground_y + bob
+            self.bottom = self.ground_y - 50 + bob
         else:
             self._idle_time += delta_time
             self.texture = self.idle_texture
             self.angle = 0
             self.scale_y = constants.PLAYER_SCALE
             bob = (1.0 - math.cos(self._idle_time * constants.PLAYER_IDLE_BOB_SPEED)) * 0.5 * constants.PLAYER_IDLE_BOB_PIXELS
-            self.bottom = self.ground_y + bob
+            self.bottom = self.ground_y  - 50 + bob
 
         abs_scale = abs(self.scale_x) or constants.PLAYER_SCALE
         self.scale_x = abs_scale if self.facing_right else -abs_scale

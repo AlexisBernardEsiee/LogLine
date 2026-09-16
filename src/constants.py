@@ -10,8 +10,8 @@ BASE_HEIGHT = 1080
 
 def get_window_size():
     screen_width, screen_height = arcade.get_display_size()
-    max_width = int(screen_width * 0.7)
-    max_height = int(screen_height * 0.7)
+    max_width = int(screen_width)
+    max_height = int(screen_height)
     aspect_ratio = BASE_WIDTH / BASE_HEIGHT
 
     width = max_width
@@ -28,8 +28,9 @@ SCREEN_WIDTH, SCREEN_HEIGHT = get_window_size()
 SCREEN_TITLE = "LogLine"
 FPS = 60
 
-PLAYER_SCALE = 0.6
+PLAYER_SCALE = 0.3
 PLAYER_SPEED = 7
+<<<<<<< HEAD
 SPRITE_JAM_DIR = PROJECT_ROOT / "assets" / "sprites" / "jam" / "walk"
 SPRITE_JAM_MENU = PROJECT_ROOT / "assets" / "sprites" / "jam" / "dialogs" / "jam_smile_1.png"
 SPRITE_JAM_IDLE = str(SPRITE_JAM_DIR / "walk1.png")
@@ -37,6 +38,16 @@ SPRITE_JAM_WALK = [
     str(SPRITE_JAM_DIR / "walk2.png"),
     str(SPRITE_JAM_DIR / "walk3.png"),
     str(SPRITE_JAM_DIR / "walk4.png"),
+=======
+SPRITE_JAM_WALK_DIR = PROJECT_ROOT / "assets" / "sprites" / "jam" / "walk"
+SPRITE_JAM_DIR = PROJECT_ROOT / "assets" / "sprites" / "jam"
+SPRITE_JAM_IDLE = str(SPRITE_JAM_DIR / "jam_idle.png")
+SPRITE_JAM_WALK = [
+    str(SPRITE_JAM_WALK_DIR / "walk1.png"),
+    str(SPRITE_JAM_WALK_DIR / "walk2.png"),
+    str(SPRITE_JAM_WALK_DIR / "walk3.png"),
+    str(SPRITE_JAM_WALK_DIR / "walk4.png"),
+>>>>>>> origin/main
 ]
 # Durées par frame : contact (3 et 5) un peu plus long, pour poser le pied.
 PLAYER_WALK_FRAME_DURATIONS = (0.15, 0.19, 0.15, 0.19)
@@ -87,6 +98,10 @@ BASE_DIALOGUE_FONT_SIZE = 25
 DIALOGUE_FONT_SIZE = int(
     BASE_DIALOGUE_FONT_SIZE * SCREEN_HEIGHT / BASE_HEIGHT
 )
+
+INSPECT_DURATION = 0.55
+INSPECT_ZOOM = 2.5
+INSPECT_FADE_ALPHA = 175
 
 ROOM_CORRIDOR = "room_1"
 ROOM_BAR = "room_2"
