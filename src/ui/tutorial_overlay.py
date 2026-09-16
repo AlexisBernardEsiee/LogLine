@@ -11,7 +11,7 @@ class TutorialOverlay:
             "<-  ->  pour marcher",
             constants.SCREEN_WIDTH / 2,
             constants.SCREEN_HEIGHT - 70,
-            (70, 60, 50, 210),
+            (255, 255, 255, 210),
             20,
             anchor_x="center",
         )
@@ -19,7 +19,7 @@ class TutorialOverlay:
             "E  pour interagir",
             constants.SCREEN_WIDTH / 2,
             constants.SCREEN_HEIGHT - 104,
-            (70, 60, 50, 210),
+            (255, 255, 255, 210),
             20,
             anchor_x="center",
         )

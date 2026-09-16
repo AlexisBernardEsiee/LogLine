@@ -19,6 +19,102 @@ class MenuView(arcade.View):
         self.background = load_scene_texture(constants.SCENE_MENU)
         self.scale = constants.SCREEN_HEIGHT / constants.BASE_HEIGHT
         s = self.scale
+
+        button_x = constants.SCREEN_WIDTH * 0.8
+        self.buttons = [
+            MenuButton("Reprendre le jeu", button_x, 640 * s, 420 * s, 76 * s, self.on_play, int(26 * s)),
+            MenuButton("Recommencer le jeu", button_x, 545 * s, 420 * s, 76 * s, self.on_reset, int(26 * s)),
+            MenuButton("Paramètres", button_x, 450 * s, 420 * s, 76 * s, self.on_settings, int(26 * s)),
+            MenuButton("Crédits", button_x, 355 * s, 420 * s, 76 * s, self.on_credits, int(26 * s)),
+            MenuButton("Quitter", button_x, 260 * s, 420 * s, 76 * s, self.on_quit, int(26 * s)),
+        ]
+
+    def on_show_view(self):
+        self.window.background_color = (8, 8, 10)
+        self.world_camera.fit_to_window()
+        for button in self.buttons:
+            button.hovered = False
+        arcade.schedule_once(self._warmup_game, 0.05)
+
+    def _warmup_game(self, _dt):
+        arcade.load_texture(constants.SPRITE_JAM_IDLE)
+        for path in constants.SPRITE_JAM_WALK:
+            arcade.load_texture(path)
+        arcade.load_texture(
+            str(constants.PROJECT_ROOT / "assets" / "sprites" / "rooms" / "jeu_1920x1080" / "salle1_couloir_v2.png")
+        )
+        from src.ui.dialogue_box import warmup_portraits
+
+        warmup_portraits(["assets/sprites/jam/dialogs/jam_speechless_1.png"])
+
+    def on_draw(self):
+        self.world_camera.begin_frame()
+        arcade.draw_texture_rect(
+            self.background,
+            arcade.LBWH(0, 0, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT),
+            pixelated=True,
+        )
+
+        for button in self.buttons:
+            button.draw()
+
+    def on_mouse_motion(self, x, y, dx, dy):
+        x, y = self.world_camera.to_world(x, y)
+        for button in self.buttons:
+            button.hovered = button.contains(x, y)
+
+    def on_mouse_press(self, x, y, button, modifiers):  
+        x, y = self.world_camera.to_world(x, y)
+        for menu_button in self.buttons:
+            if menu_button.contains(x, y):
+                menu_button.on_click()
+
+    def on_play(self):
+        game = GameView()
+        game.setup()
+        self.window.show_view(game)
+
+    def on_reset(self):
+        GameState.clear()
+        game = GameView()
+        game.setup(new_game=True)
+        self.window.show_view(game)
+
+    def on_quit(self):
+        self.window.close()
+        os._exit(0)
+
+    def on_settings(self):
+        self.window.show_view(SettingsView(self))
+
+    def on_credits(self):
+        self.window.show_view(CreditsView(self))
+
+    def on_resize(self, width, height):
+        self.world_camera.fit_to_window()   
+        
+"""
+import os
+
+import arcade
+
+from src import constants
+from src.camera import WorldCamera
+from src.systems.game_state import GameState
+from src.ui.menu import MenuButton
+from src.ui.scenes import load_scene_texture
+from src.views.credits_view import CreditsView
+from src.views.game_view import GameView
+from src.views.settings_view import SettingsView
+
+
+class MenuView(arcade.View):
+    def __init__(self):                    
+        super().__init__()
+        self.world_camera = WorldCamera(self.window)
+        self.background = load_scene_texture(constants.SCENE_MENU)
+        self.scale = constants.SCREEN_HEIGHT / constants.BASE_HEIGHT
+        s = self.scale
         
         self.title = arcade.Text(
             constants.SCREEN_TITLE,      
@@ -113,4 +209,5 @@ class MenuView(arcade.View):
         self.window.show_view(CreditsView(self))
 
     def on_resize(self, width, height):
-        self.world_camera.fit_to_window()
+        self.world_camera.fit_to_window()     
+"""
