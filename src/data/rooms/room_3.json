@@ -55,6 +55,7 @@
         "flag": "died_glass",
         "effect": "green_glitch",
         "sfx": "assets/sounds/verre_coupure.mp3",
+        "sfx_volume": 0.55,
         "void_dialogue": "death_glass_void",
         "aftermath_dialogue": "death_glass_after"
       }

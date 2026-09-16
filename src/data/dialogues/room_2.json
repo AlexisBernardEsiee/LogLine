@@ -44,7 +44,8 @@
       "speaker": "???",
       "text": "Non. Pas comme ça.",
       "thought": true,
-      "sfx": "assets/sounds/tremblement.mp3"
+      "sfx": "assets/sounds/tremblement.mp3",
+      "sfx_volume": 0.1
     }
   ],
   "death_poison_after": [

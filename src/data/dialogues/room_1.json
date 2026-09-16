@@ -44,7 +44,8 @@
       "speaker": "Jam",
       "text": "...j'ai l'impression de le connaître.",
       "sprite": "assets/sprites/jam/dialogs/jam_speechless_3.png",
-      "sfx": "assets/sounds/erreur.mp3"
+      "sfx": "assets/sounds/erreur.mp3",
+      "sfx_volume": 0.35
     },
     {
       "speaker": "Jam",

@@ -233,9 +233,15 @@ class GameView(arcade.View):
         self.dialogue_box.show(line)
         if "scene" in line:
             self.room_manager.set_scene(line["scene"])
-        sfx = line.get("sfx")
+        sfx = line.get("sfx") or ""
+        if "tremblement" not in sfx and "erreur" not in sfx:
+            self.audio.stop_glitch()
         if sfx:
-            self.audio.play_sfx(sfx, constants.PROJECT_ROOT / sfx)
+            self.audio.play_sfx(
+                sfx,
+                constants.PROJECT_ROOT / sfx,
+                volume_modifier=float(line.get("sfx_volume", 1.0)),
+            )
 
     def _advance_dialogue(self):
         if self.dialogue_box.is_typing():
@@ -244,6 +250,7 @@ class GameView(arcade.View):
         ended = self.dialogue_manager.advance()
         if ended:
             self.dialogue_box.hide()
+            self.audio.stop_glitch()
             self.room_manager.set_scene(constants.SCENE_ROOM)
             self.inspect.close()
             self._finish_interaction()
@@ -275,7 +282,8 @@ class GameView(arcade.View):
         self.audio.set_music_volume(0.05)
         sfx = spec.get("sfx")
         if sfx:
-            self.audio.play_sfx(sfx, constants.PROJECT_ROOT / sfx, volume_modifier=1.2)
+            modifier = float(spec.get("sfx_volume", 0.7))
+            self.audio.play_sfx(sfx, constants.PROJECT_ROOT / sfx, volume_modifier=modifier)
         self.death.start(spec, extra_hold=extra)
 
     def _respawn_after_death(self):
