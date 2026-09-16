@@ -4,36 +4,51 @@
       "sfx": "assets/sounds/tourner_page.mp3",
       "sfx_volume": 2,
       "speaker": "Jam",
-      "text": "« J'ai une fille. Je le sais. Mais tout le monde me dit que ce n'est pas vrai. Que je n'ai jamais eu d'enfant. Pourquoi est-ce que je suis le seul à m'en souvenir ? C'est lui qui a fait ça. »",
+      "text": "« J'ai une fille. Je le sais. Mais tout le monde me soutient le contraire, que je n'ai jamais eu d'enfant. Pourquoi suis-je le seul à m'en souvenir ? »",
+      "sprite": "assets/sprites/jam/dialogs/jam_speechless_2.png"
+    },
+    {
+      "text": "...(plusieurs pages ont été arrachées avec violence)"
+    },
+    {
+      "sfx": "assets/sounds/tourner_page.mp3",
+      "sfx_volume": 2,
+      "speaker": "Jam",
+      "text": "« ...J'ai fini par le découvrir... On est tous piégés dans ce monde... C'est lui qui a fait ça. »",
       "sprite": "assets/sprites/jam/dialogs/jam_speechless_2.png"
     },
     {
       "speaker": "Jam",
-      "text": "...Une fille.",
-      "sprite": "assets/sprites/jam/dialogs/jam_sad_2.png"
+      "text": "...Monsieur Plènozas avait dont une fille? C'est vrai que ses documents officiels n'en font pas mention... et comme il l'écrit, personne ne s'en souvient.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png"
+    },
+    {
+      "speaker": "Jam",
+      "text": "Mais comment est-ce possible? Et surtout... qui est ce «lui» dont il parle?",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png"
     }
   ],
   "broken_frame": [
     {
       "speaker": "Jam",
-      "text": "Cette photo... elle est déchirée en deux. Comme s'il avait voulu effacer quelqu'un.",
+      "text": "Le cadre est cassé. Comme si quelqu'un a voulu effacer une personne de cette image.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png"
     },
     {
       "speaker": "Jam",
-      "text": "...Pourquoi j'ai l'impression que ce n'est pas mon visage ? Quelque chose cloche.",
-      "sprite": "assets/sprites/jam/dialogs/jam_stunned.png"
+      "text": "Attends, en regardant mon reflet dans le verre brisé... Pourquoi j'ai l'impression que ce n'est pas mon visage ?",
+      "sprite": "assets/sprites/jam/dialogs/jam_speechless_3.png"
     },
     {
       "speaker": "Jam",
-      "text": "Je... je ne sens rien.",
-      "sprite": "assets/sprites/jam/dialogs/jam_unhappy.png"
+      "text": "Je... je ne sens plus rien...",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png"
     }
   ],
   "broken_frame_after": [
     {
       "speaker": "Jam",
-      "text": "Je n'y toucherai plus. Pas comme ça.",
+      "text": "Je ferais mieux de ne plus toucher à ces éclats de verre.",
       "sprite": "assets/sprites/jam/dialogs/jam_sad_2.png",
       "thought": true
     }
@@ -44,24 +59,30 @@
       "text": "Un petit cheval à bascule miniature. Ça ne colle pas vraiment avec le reste de la pièce.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
       "thought": true
+    },
+    {
+      "speaker": "Jam",
+      "text": "C'était donc pour sa fille...?",
+      "sprite": "assets/sprites/jam/dialogs/jam_smile_3.png",
+      "thought": true
     }
   ],
     "death_glass_void": [
     {
-      "speaker": "Mr. P",
-      "text": "Ce visage... je le connais. Je l'ai toujours connu.",
+      "speaker": "Mr. Plènozas",
+      "text": "Ce visage... je le connais par coeur. Je l'ai toujours eu sous les yeux, je l'ai vu grandir.",
       "sprite": "assets/sprites/shadow_man.png",
       "scene": "flashback2_1_cadre"
     },
     {
-      "speaker": "Mr. P",
-      "text": "Ils disent qu'elle n'a jamais existé.",
+      "speaker": "Mr. Plènozas",
+      "text": "Et pourtant, ils osent dire qu'elle n'a jamais existé...Ma fille.",
       "sprite": "assets/sprites/shadow_man.png",
       "scene": "flashback2_2_cadre_brise"
     },
     {
       "speaker": "Mr. P",
-      "text": "Elle me manque. Laisse-moi la retrouver. ARGHHHH",
+      "text": "Elle me manque tellement. Laisse-moi la retrouver...!",
       "sprite": "assets/sprites/glitch_man.png",
       "sfx": "assets/sounds/radio_flashback.mp3",
       "sfx_volume": 0.2,
@@ -71,13 +92,13 @@
   "death_glass_after": [
     {
       "speaker": "Jam",
-      "text": "Ce n'est pas la première fois que je ressens ça. Ce vide. Ce manque. Mais... de quoi ?",
+      "text": "Ce n'est pas la première fois que je ressens ce vide... Ce manque indicible. Mais de quoi s'agit-il ?",
       "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
       "thought": true
     },
     {
       "speaker": "Jam",
-      "text": "Qui est la personne dont il parle ?",
+      "text": "De qui parlait-il à travers ce souvenir ? Qui est sa fille ?",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
       "thought": true
     }
