@@ -34,17 +34,27 @@ def scale_h(value):
     return value * SCREEN_HEIGHT / BASE_HEIGHT
 
 PLAYER_SCALE = 0.5
+PLAYER_SEARCH_HEIGHT = 1.06
 PLAYER_SPEED = 7
 SPRITE_JAM_WALK_DIR = PROJECT_ROOT / "assets" / "sprites" / "jam" / "walk"
 SPRITE_JAM_DIR = PROJECT_ROOT / "assets" / "sprites" / "jam"
 SPRITE_JAM_MENU = str(SPRITE_JAM_DIR / "dialogs" / "jam_smile_1.png")
 SPRITE_JAM_IDLE = str(SPRITE_JAM_DIR / "jam_idle.png")
+SPRITE_JAM_SEARCH = str(SPRITE_JAM_DIR / "jam_idle_search.png")
 SPRITE_JAM_WALK = [
     str(SPRITE_JAM_WALK_DIR / "walk1.png"),
     str(SPRITE_JAM_WALK_DIR / "walk2.png"),
     str(SPRITE_JAM_WALK_DIR / "walk3.png"),
     str(SPRITE_JAM_WALK_DIR / "walk4.png"),
 ]
+SPRITE_JAM_DEATH_DIR = SPRITE_JAM_DIR / "death"
+SPRITE_JAM_DEATH = [
+    str(SPRITE_JAM_DEATH_DIR / "death1.png"),
+    str(SPRITE_JAM_DEATH_DIR / "death2.png"),
+    str(SPRITE_JAM_DEATH_DIR / "death3.png"),
+]
+
+DEATH_FRAME_DURATION = 1.2
 
 PLAYER_WALK_FRAME_DURATIONS = (0.15, 0.19, 0.15, 0.19)
 PLAYER_WALK_BOB_PIXELS = 2.2
@@ -95,8 +105,8 @@ DIALOGUE_BOX_RIGHT = int(SCREEN_WIDTH * DIALOGUE_TEXT_RATIO)
 DIALOGUE_BOX_BOTTOM = 36
 DIALOGUE_BOX_TOP = 336
 DIALOGUE_FONT_SIZE = 25
-DIALOGUE_PORTRAIT_PAD = 40
-DIALOGUE_PORTRAIT_HEIGHT_RATIO = 0.42
+DIALOGUE_PORTRAIT_PAD = -20
+DIALOGUE_PORTRAIT_HEIGHT_RATIO = 0.6
 
 INSPECT_DURATION = 0.55
 INSPECT_ZOOM = 2.5
@@ -106,6 +116,7 @@ ROOM_CORRIDOR = "room_1"
 ROOM_BAR = "room_2"
 ROOM_BEDROOM = "room_3"
 ROOM_OFFICE = "room_4"
+ROOM_VOID = "void"
 SCENE_ROOM = "room"
 SCENE_MENU = "menu"
 
@@ -119,7 +130,12 @@ SPRITE_FRAME = "assets/sprites/broken_frame.png"
 SPRITE_HORSE = "assets/sprites/horse.png"
 SPRITE_MR_P = "assets/sprites/shadow_man.png"
 SPRITE_MR_P_GLITCH = "assets/sprites/glitch_man.png"
+SPRITE_BOOKMARK_FRONT = "assets/sprites/bookmark/front_bookmark.png"
+SPRITE_BOOKMARK_BACK = "assets/sprites/bookmark/back_bookmark.png"
+SPRITE_LETTERS = "assets/sprites/Letters.png"
+SPRITE_LUSTRE = "assets/sprites/lustre/lustre_x4.png"
 
+SOUND_AMBIANCE = PROJECT_ROOT / "assets" / "sounds" / "ambiance_2.mp3"
 SOUND_DISCORD = PROJECT_ROOT / "assets" / "sounds" / "erreur.mp3"
 SOUND_POISON = PROJECT_ROOT / "assets" / "sounds" / "respiration_poison.mp3"
 SOUND_GLASS = PROJECT_ROOT / "assets" / "sounds" / "verre_coupure.mp3"
@@ -128,6 +144,9 @@ SOUND_DOOR = PROJECT_ROOT / "assets" / "sounds" / "grincement_porte.mp3"
 SOUND_PAGE = PROJECT_ROOT / "assets" / "sounds" / "tourner_page.mp3"
 SOUND_STATIC = PROJECT_ROOT / "assets" / "sounds" / "tremblement.mp3"
 SOUND_MENU = PROJECT_ROOT / "assets" / "sounds" / "accueil.mp3"
+SOUND_LUSTRE = PROJECT_ROOT / "assets" / "sounds" / "lustre.mp3"
+SOUND_VOID = PROJECT_ROOT / "assets" / "sounds" / "neant.mp3"
+SOUND_DISINTEGRATION = PROJECT_ROOT / "assets" / "sounds" / "desintegration_pere.mp3"
 
 CREDITS_BACKGROUND = (
     PROJECT_ROOT / "assets" / "sprites" / "rooms" / "jeu_1920x1080" / "neant.png"

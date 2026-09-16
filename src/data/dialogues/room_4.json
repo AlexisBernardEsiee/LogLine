@@ -1,1 +1,45 @@
-{}
+{
+  "bookmark": [
+    {
+      "speaker": "Jam",
+      "text": "Un marque-page... dessiné par un enfant.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png"
+    },
+    {
+      "speaker": "Jam",
+      "text": "...Jam.",
+      "sprite": "assets/sprites/jam/dialogs/jam_stunned.png",
+      "inspect_sprite": "assets/sprites/bookmark/back_bookmark.png"
+    },
+    {
+      "speaker": "Jam",
+      "text": "Mais … c'est... mon prénom.",
+      "sprite": "assets/sprites/jam/dialogs/jam_unhappy.png"
+    }
+  ],
+  "bookmark_after": [
+    {
+      "speaker": "Jam",
+      "text": "Jam. Écrit à la main. Par un enfant.",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
+      "thought": true,
+      "inspect_sprite": "assets/sprites/bookmark/back_bookmark.png"
+    }
+  ],
+  "letters": [
+    {
+      "speaker": "Jam",
+      "text": "Toutes adressées à monsieur Plènozas. Aucune n'a de tampon de la poste.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
+      "thought": true
+    }
+  ],
+  "chandelier_after": [
+    {
+      "speaker": "Jam",
+      "text": "Il n'y a plus qu'une direction.",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
+      "thought": true
+    }
+  ]
+}

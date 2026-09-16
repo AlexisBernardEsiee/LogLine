@@ -21,7 +21,7 @@
   },
   "bar": {
     "type": "image",
-    "path": "assets/sprites/rooms/jeu_1920x1080/salle2_bar.png"
+    "path": "assets/sprites/rooms/jeu_1920x1080/salle2_bar_v2.png"
   },
   "chambre": {
     "type": "image",

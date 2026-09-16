@@ -10,7 +10,7 @@
     {
       "speaker": "Jam",
       "text": "...Une fille.",
-      "sprite": "assets/sprites/jam/dialogs/jam_sad.png"
+      "sprite": "assets/sprites/jam/dialogs/jam_sad_2.png"
     }
   ],
   "broken_frame": [
@@ -34,7 +34,7 @@
     {
       "speaker": "Jam",
       "text": "Je n'y toucherai plus. Pas comme ça.",
-      "sprite": "assets/sprites/jam/dialogs/jam_sad.png",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad_2.png",
       "thought": true
     }
   ],
@@ -59,7 +59,7 @@
     {
       "speaker": "Jam",
       "text": "Ce n'est pas la première fois que je ressens ça. Ce vide. Ce manque. Mais... de quoi ?",
-      "sprite": "assets/sprites/jam/dialogs/jam_sad.png",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
       "thought": true
     },
     {

@@ -75,6 +75,16 @@ class InspectEffect:
         self.progress = 0.0
         return True
 
+    def set_sprite(self, sprite_path):
+        if not sprite_path or not self.active:
+            return False
+        if sprite_path not in self._sprite_cache:
+            self._sprite_cache[sprite_path] = _load_inspect_sprite(sprite_path)
+        texture = self._sprite_cache[sprite_path]
+        self.texture = texture
+        self.dst = self._target_from_texture(texture, 1.0)
+        return True
+
     def close(self):
         if not self.active:
             return

@@ -22,6 +22,9 @@ class RoomManager:
         self.on_enter_flag = None
         self.tutorial = False
         self.background = None
+        self.background_if = {}
+        self.auto_deaths = []
+        self.lustre_prop = None
         self.layers = []
         self.interactables = []
         self._visited = set()
@@ -43,6 +46,9 @@ class RoomManager:
         self.on_enter_flag = data.get("on_enter_flag")
         self.tutorial = bool(data.get("tutorial", False))
         self.background = data.get("background")
+        self.background_if = data.get("background_if", {})
+        self.auto_deaths = data.get("auto_deaths", [])
+        self.lustre_prop = data.get("lustre_prop")
         self.layers = data.get("layers", [])
         self.interactables = [Interactable(item) for item in data.get("interactables", [])]
         self._override = None
@@ -97,28 +103,36 @@ class RoomManager:
         else:
             self._override = ("image", self._texture(spec["path"]))
 
-    def current_background_texture(self):
-        if self._override is not None:
-            kind, value = self._override
-            return value if kind == "image" else None
-        if not self.background:
+    def resolved_background(self, state=None):
+        if state is not None:
+            for flag, name in self.background_if.items():
+                if state.flag(flag):
+                    return name
+        return self.background
+
+    def _background_spec(self, state=None):
+        background = self.resolved_background(state)
+        if not background:
             return None
-        spec = self.named_scenes.get(self.background, self.background)
+        return self.named_scenes.get(background, background)
+
+    def _texture_from_spec(self, spec):
+        if spec is None:
+            return None
         if isinstance(spec, str):
             return self._texture(spec)
         if isinstance(spec, dict) and spec.get("type") == "image":
             return self._texture(spec["path"])
         return None
 
-    def _room_background_texture(self):
-        if not self.background:
-            return None
-        spec = self.named_scenes.get(self.background, self.background)
-        if isinstance(spec, str):
-            return self._texture(spec)
-        if isinstance(spec, dict) and spec.get("type") == "image":
-            return self._texture(spec["path"])
-        return None
+    def current_background_texture(self, state=None):
+        if self._override is not None:
+            kind, value = self._override
+            return value if kind == "image" else None
+        return self._texture_from_spec(self._background_spec(state))
+
+    def _room_background_texture(self, state=None):
+        return self._texture_from_spec(self._background_spec(state))
 
     def draw(self, state=None):
         if self._override is not None:
@@ -127,12 +141,12 @@ class RoomManager:
                 self._fill(value)
             else:
                 self._draw_texture(value)
-                if value is self._room_background_texture():
+                if value is self._room_background_texture(state):
                     self._draw_overlays(state)
             return
 
-        if self.background:
-            spec = self.named_scenes.get(self.background, self.background)
+        spec = self._background_spec(state)
+        if spec:
             if isinstance(spec, str):
                 self._draw_texture(self._texture(spec))
             elif spec.get("type") == "color":

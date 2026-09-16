@@ -1,1 +1,10 @@
-{}
+{
+  "id": "void",
+  "name": "Le Néant",
+  "background": "neant",
+  "entry_x": 960,
+  "floor_y": 260,
+  "on_enter": "void_reveal",
+  "on_enter_flag": "seen_void_reveal",
+  "interactables": []
+}
