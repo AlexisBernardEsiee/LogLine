@@ -68,8 +68,8 @@
     {
       "name": "letters",
       "kind": "letters",
-      "hitbox": [1520, 1720, 318, 400],
-      "rect": [1560, 1700, 318, 392],
+      "hitbox": [1210, 1350, 228, 302],
+      "rect": [1210, 1350, 228, 302],
       "sprite": "assets/sprites/Letters.png",
       "dialogue_id": "letters",
       "done_dialogue": "letters",
