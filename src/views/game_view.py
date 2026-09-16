@@ -452,9 +452,6 @@ class GameView(arcade.View):
                 zoom=zoom,
                 duration=duration,
             )
-<<<<<<< HEAD
-        return False
-=======
         return False
 
     def _target_is_search(self, target):
@@ -584,4 +581,3 @@ class GameView(arcade.View):
         from src.views.fin_view import FinView
 
         self.window.show_view(FinView())
->>>>>>> origin/main
