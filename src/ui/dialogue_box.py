@@ -3,6 +3,27 @@ from PIL import Image
 
 from src import constants
 
+_PORTRAIT_TEXTURES = {}
+
+
+def _portrait_texture(relative_path):
+    texture = _PORTRAIT_TEXTURES.get(relative_path)
+    if texture is not None:
+        return texture
+    full_path = constants.PROJECT_ROOT / relative_path
+    image = Image.open(full_path).convert("RGBA")
+    bbox = image.getbbox()
+    if bbox:
+        image = image.crop(bbox)
+    texture = arcade.Texture(image, hash=f"dialogue-portrait:{relative_path}")
+    _PORTRAIT_TEXTURES[relative_path] = texture
+    return texture
+
+
+def warmup_portraits(relative_paths):
+    for relative_path in relative_paths:
+        _portrait_texture(relative_path)
+
 
 class DialogueBox:
     def __init__(self, audio_manager=None):
@@ -97,12 +118,7 @@ class DialogueBox:
         if not relative_path:
             return None
         if relative_path not in self._portraits:
-            full_path = constants.PROJECT_ROOT / relative_path
-            image = Image.open(full_path).convert("RGBA")
-            bbox = image.getbbox()
-            if bbox:
-                image = image.crop(bbox)
-            texture = arcade.Texture(image, hash=f"dialogue-portrait:{relative_path}")
+            texture = _portrait_texture(relative_path)
             sprite = arcade.Sprite(texture)
             pad = constants.DIALOGUE_PORTRAIT_PAD
             avail_w = constants.SCREEN_WIDTH - constants.DIALOGUE_BOX_RIGHT - pad * 2

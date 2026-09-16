@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+
 import arcade
 
 from src import constants
@@ -15,26 +16,35 @@ class AudioManager:
         self.music_volume: float = 0.5
         self.sfx_volume: float = 0.7
         self.sounds_cache: dict[str, arcade.Sound] = {}
+        self._music_path: Path | None = None
+        self._music_loop = False
+        self._music_was_playing = False
 
     def play_music(self, path: str | Path, volume: float = 0.5, loop: bool = True) -> None:
-        """Joue une musique de fond en boucle."""
+        """Joue une musique de fond. En streaming pour ne pas bloquer au chargement."""
         self.stop_music()
+        self._music_path = Path(path)
+        self._music_loop = loop
+        self.music_volume = volume
+        self._start_stream()
 
-        sound_path = Path(path)
-        if not sound_path.exists():
-            print(f"[AudioManager] Fichier audio introuvable : {sound_path}")
+    def _start_stream(self) -> None:
+        if self._music_path is None or not self._music_path.exists():
+            if self._music_path is not None:
+                print(f"[AudioManager] Fichier audio introuvable : {self._music_path}")
             return
-
         try:
-            sound = arcade.Sound(sound_path)
-            self.music_volume = volume
-            self.music_player = sound.play(volume=self.music_volume, loop=loop)
+            sound = arcade.Sound(self._music_path, streaming=True)
             self.current_music_sound = sound
+            self.music_player = sound.play(volume=self.music_volume, loop=False)
+            self._music_was_playing = False
         except Exception as e:
-            print(f"[AudioManager] Erreur lors de la lecture de {sound_path} : {e}")
+            print(f"[AudioManager] Erreur lors de la lecture de {self._music_path} : {e}")
 
     def stop_music(self) -> None:
         """Arrête la musique d'ambiance en cours."""
+        self._music_loop = False
+        self._music_was_playing = False
         if self.music_player:
             try:
                 self.music_player.stop()
@@ -42,6 +52,16 @@ class AudioManager:
                 pass
             self.music_player = None
             self.current_music_sound = None
+
+    def update(self) -> None:
+        if not self._music_loop or self.music_player is None:
+            return
+        playing = bool(getattr(self.music_player, "playing", False))
+        if playing:
+            self._music_was_playing = True
+            return
+        if self._music_was_playing:
+            self._start_stream()
 
     def set_music_volume(self, volume: float) -> None:
         """Ajuste le volume de la musique en cours (0.0 à 1.0)."""
@@ -62,7 +82,7 @@ class AudioManager:
                 self.sounds_cache[name].play(volume=vol)
             except Exception as e:
                 print(f"[AudioManager] Erreur lors de la lecture du SFX '{name}' : {e}")
-    
+
     def play_typewriter_sound(self) -> None:
         """Joue un son léger de touche de clavier pour le défilement du texte."""
         sound_path = constants.PROJECT_ROOT / "assets" / "sounds" / "clic.mp3"

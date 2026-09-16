@@ -62,6 +62,7 @@ class GameView(arcade.View):
         self.debug_grid.draw(self.room_manager, self.player)
 
     def on_update(self, delta_time):
+        self.audio.update()
         self.dialogue_box.update(delta_time)
         self.inspect.update(delta_time)
         if self.inspect.just_opened and self._pending_dialogue:

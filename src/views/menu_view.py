@@ -51,6 +51,18 @@ class MenuView(arcade.View):
         self.world_camera.fit_to_window()
         for button in self.buttons:
             button.hovered = False
+        arcade.schedule_once(self._warmup_game, 0.05)
+
+    def _warmup_game(self, _dt):
+        arcade.load_texture(constants.SPRITE_JAM_IDLE)
+        for path in constants.SPRITE_JAM_WALK:
+            arcade.load_texture(path)
+        arcade.load_texture(
+            str(constants.PROJECT_ROOT / "assets" / "sprites" / "rooms" / "jeu_1920x1080" / "salle1_couloir_v2.png")
+        )
+        from src.ui.dialogue_box import warmup_portraits
+
+        warmup_portraits(["assets/sprites/jam/dialogs/jam_speechless_1.png"])
 
     def on_draw(self):
         self.world_camera.begin_frame()
