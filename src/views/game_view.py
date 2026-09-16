@@ -1,6 +1,7 @@
 import arcade
 
 from src import constants
+from src.camera import WorldCamera
 from src.entities.player import Player
 from src.systems.dialogue_manager import DialogueManager
 from src.systems.room_manager import RoomManager
@@ -16,6 +17,7 @@ class GameView(arcade.View):
         super().__init__()
         self.player = None
         self.keys_held = set()
+        self.world_camera = WorldCamera(self.window)
         self.room_manager = RoomManager()
         self.dialogue_manager = DialogueManager()
         self.dialogue_box = DialogueBox()
@@ -34,10 +36,14 @@ class GameView(arcade.View):
         self._enter_room(constants.ROOM_CORRIDOR)
 
     def on_show_view(self):
-        self.window.background_color = (8, 8, 10)
+        self.window.background_color = constants.LETTERBOX_COLOR
+        self.world_camera.fit_to_window()
+
+    def on_resize(self, width, height):
+        self.world_camera.fit_to_window()
 
     def on_draw(self):
-        self.clear()
+        self.world_camera.begin_frame()
         self.room_manager.draw()
         if self.room_manager.shows_world and self.player:
             arcade.draw_sprite(self.player)
@@ -77,6 +83,9 @@ class GameView(arcade.View):
         self.prompt.set_target(self.player, nearby)
 
     def on_key_press(self, key, modifiers):
+        if key == constants.KEY_FULLSCREEN:
+            self.window.set_fullscreen(not self.window.fullscreen)
+            return
         if key == constants.KEY_GRID:
             self.debug_grid.toggle()
             return
@@ -100,16 +109,24 @@ class GameView(arcade.View):
         self.keys_held.discard(key)
 
     def on_mouse_motion(self, x, y, dx, dy):
-        self.debug_grid.on_mouse_motion(x, y)
+        world_x, world_y = self.world_camera.to_world(x, y)
+        self.debug_grid.on_mouse_motion(world_x, world_y)
 
     def on_mouse_press(self, x, y, button, modifiers):
-        if self.debug_grid.on_mouse_press(x, y, button):
+        world_x, world_y = self.world_camera.to_world(x, y)
+        if self.debug_grid.on_mouse_press(world_x, world_y, button):
             return
         if self.inspect.active and not self.inspect.closing and not self.dialogue_manager.is_active:
             self.inspect.skip_open()
             return
         if self.dialogue_manager.is_active:
             self._advance_dialogue()
+            return
+        if not self.room_manager.shows_world:
+            return
+        target = self.room_manager.get_interactable_at(world_x, world_y)
+        if target is not None:
+            self._interact_with(target)
 
     def _enter_room(self, room_id, from_room_id=None):
         self.room_manager.show(room_id, from_room_id=from_room_id)
@@ -165,6 +182,9 @@ class GameView(arcade.View):
 
     def _interact(self):
         target = self.room_manager.get_nearby_interactable(self.player)
+        self._interact_with(target)
+
+    def _interact_with(self, target):
         if target is None:
             return
         if target.leads_to:

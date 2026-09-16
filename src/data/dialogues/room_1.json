@@ -84,5 +84,13 @@
       "text": "Pourtant… j'ai l'impression de le connaître. Plus que je ne devrais.",
       "sprite": "assets/sprites/jam/dialogs/jam_stunned.png"
     }
+  ],
+  "vase": [
+    {
+      "speaker": "Jam",
+      "text": "Personne n'a pensé à les changer depuis un moment.",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad.png",
+      "thought": true
+    }
   ]
 }

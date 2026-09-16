@@ -9,7 +9,7 @@
       "facing": "left"
     }
   },
-  "floor_y": 220,
+  "floor_y": 300,
   "on_enter": "corridor_intro",
   "tutorial": true,
   "interactables": [
@@ -34,6 +34,20 @@
         "sprite": "assets/sprites/picture.png",
         "zoom": 1.0,
         "duration": 0.55
+      }
+    },
+    {
+      "name": "vase",
+      "kind": "vase",
+      "hitbox": [1321, 1474, 453, 564],
+      "rect": [1321, 1474, 453, 564],
+      "sprite": "assets/sprites/flower.png",
+      "dialogue_id": "vase",
+      "inspect": {
+        "effect": "sprite",
+        "sprite": "assets/sprites/flower.png",
+        "zoom": 1.0,
+        "duration": 0.45
       }
     },
     {

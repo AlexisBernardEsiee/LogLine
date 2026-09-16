@@ -3,7 +3,7 @@
   "name": "Le bar à whisky",
   "background": "bar",
   "entry_x": 280,
-  "floor_y": 220,
+  "floor_y": 280,
   "interactables": [
   {
     "name": "door",
