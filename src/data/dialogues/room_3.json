@@ -107,7 +107,7 @@
     },
     {
       "speaker": "Mr. P",
-      "text": "Elle me manque tellement. Laisse-moi la retrouver...!",
+      "text": "Elle me manque tellement. Je t'attends en bas, sous le lustre...!",
       "sprite": "assets/sprites/glitch_man.png",
       "sfx": "assets/sounds/radio_flashback.mp3",
       "sfx_volume": 0.2,
@@ -125,6 +125,12 @@
       "speaker": "Jam",
       "text": "De qui parlait-il à travers ce souvenir ? Qui est sa fille ?",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+      "thought": true
+    },
+    {
+      "speaker": "Jam",
+      "text": "« Sous le lustre »... Le trou du bureau. Il est là, en bas.",
+      "sprite": "assets/sprites/jam/dialogs/jam_speechless_1.png",
       "thought": true
     }
   ]

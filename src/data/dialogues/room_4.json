@@ -76,5 +76,46 @@
     "sfx_volume": 0.2,
     "scene": "flashback_lustre_3_boucle"
   }
-]
+],
+  "hole_locked": [
+    {
+      "speaker": "Jam",
+      "text": "C'est beaucoup trop haut. Je ne sauterai pas là-dedans sans une bonne raison.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png",
+      "thought": true
+    }
+  ],
+  "hole_jump": [
+    {
+      "speaker": "Jam",
+      "text": "C'est vraiment très haut... Mais il m'attend en bas, sous le lustre.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+      "thought": true
+    },
+    {
+      "speaker": "Jam",
+      "text": "Est-ce que je saute ?",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
+      "thought": true,
+      "choices": [
+        { "text": "Sauter", "next": "hole_jump_yes", "fall": true },
+        { "text": "Pas encore", "next": "hole_jump_no" }
+      ]
+    }
+  ],
+  "hole_jump_yes": [
+    {
+      "speaker": "Jam",
+      "text": "Papa... j'arrive.",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad_2.png"
+    }
+  ],
+  "hole_jump_no": [
+    {
+      "speaker": "Jam",
+      "text": "Pas maintenant. Je dois d'abord en être sûre.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
+      "thought": true
+    }
+  ]
 }

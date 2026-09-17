@@ -38,6 +38,8 @@ class GameView(arcade.View):
         self._pending_dialogue = None
         self._pending_death = None
         self._choice_death = None
+        self._choice_fall = None
+        self._pending_fall = None
         self._pending_reveal = None
         self._pending_give = None
         self._pending_ending = False
@@ -56,6 +58,7 @@ class GameView(arcade.View):
         self._pending_tutorial = False
         self._pending_dialogue = None
         self._pending_death = None
+        self._pending_fall = None
         self._pending_reveal = None
         self._pending_give = None
         self._pending_ending = False
@@ -371,6 +374,8 @@ class GameView(arcade.View):
     def _handle_dialogue_choice(self, choice):
         if choice.get("death"):
             self._pending_death = self._choice_death
+        if choice.get("fall"):
+            self._pending_fall = self._choice_fall
 
         choice_index = self.dialogue_box.get_selected_choice()
         self.dialogue_manager.choose(choice_index)
@@ -392,6 +397,10 @@ class GameView(arcade.View):
             spec = self._pending_death
             self._pending_death = None
             self._begin_death(spec)
+        if self._pending_fall:
+            room_id = self._pending_fall
+            self._pending_fall = None
+            self._start_fall(room_id)
 
     def _begin_death(self, spec, skip_sfx=False):
         extra = 1.0 if spec.get("effect") == "green_glitch" else 0.0
@@ -451,6 +460,11 @@ class GameView(arcade.View):
                 if target.locked_dialogue:
                     self._object_search = True
                     self._start_dialogue(target.locked_dialogue)
+                return
+            if target.dialogue_id:
+                self._choice_fall = target.leads_to
+                self._object_search = True
+                self._start_dialogue(target.dialogue_id)
                 return
             if target.sfx:
                 self.audio.play_sfx(target.sfx, constants.PROJECT_ROOT / target.sfx)

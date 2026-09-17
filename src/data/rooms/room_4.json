@@ -98,6 +98,9 @@
       "leads_to": "void",
       "transition": "fall",
       "hidden_unless": "died_lustre",
+      "requires": "died_glass",
+      "locked_dialogue": "hole_locked",
+      "dialogue_id": "hole_jump",
       "priority": 8
     }
   ]
