@@ -7,10 +7,6 @@
     "room_2": {
       "x": 280,
       "facing": "right"
-    },
-    "room_4": {
-      "x": 1640,
-      "facing": "left"
     }
   },
   "floor_y": 280,
@@ -74,12 +70,6 @@
         "zoom": 1.0,
         "duration": 0.4
       }
-    },
-    {
-      "name": "door_office",
-      "kind": "door",
-      "hitbox": [1688, 1890, 200, 800],
-      "leads_to": "room_4"
     }
   ]
 }

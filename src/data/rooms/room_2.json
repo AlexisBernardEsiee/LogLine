@@ -4,7 +4,7 @@
   "background": "bar",
   "entry_x": 280,
   "entries": {
-    "room_1": {
+    "room_4": {
       "x": 280,
       "facing": "right"
     },
@@ -18,10 +18,10 @@
   "on_enter_flag": "seen_bar_intro",
   "interactables": [
     {
-      "name": "door_corridor",
+      "name": "door_office",
       "kind": "door",
       "hitbox": [59, 173, 196, 806],
-      "leads_to": "room_1"
+      "leads_to": "room_4"
     },
     {
       "name": "glass",
