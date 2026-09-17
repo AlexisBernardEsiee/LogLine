@@ -1,11 +1,32 @@
 {
   "void_reveal": [
     {
+      "speaker": "???",
+      "text": "Ce personnage se souvient de choses qu'il ne devrait pas savoir.",
+      "thought": true,
+      "scene": "flashback3_1_confirmation"
+    },
+    {
+      "speaker": "???",
+      "text": "Un bug. Rien de plus.",
+      "thought": true,
+      "scene": "flashback3_2_main_souris"
+    },
+    {
+      "speaker": "???",
+      "text": "...",
+      "thought": true,
+      "sfx": "assets/sounds/tremblement.mp3",
+      "sfx_volume": 0.1,
+      "scene": "flashback3_3_suppression"
+    },
+    {
       "speaker": "Monsieur Plènozas",
       "text": "Tu as compris, n'est-ce pas... Jam, ma fille.",
       "sprite": "assets/sprites/shadow_man.png",
       "sfx": "assets/sounds/tremblement.mp3",
-      "sfx_volume": 0.08
+      "sfx_volume": 0.08,
+      "scene": "room"
     },
     {
       "speaker": "Jam",

@@ -2,31 +2,26 @@
   "bookmark": [
     {
       "speaker": "Jam",
-      "text": "Un marque-page... griffonné par la main d'un enfant.",
+      "text": "Un marque-page... dessiné par un enfant.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png"
     },
     {
       "speaker": "Jam",
-      "text": "...",
-      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+      "text": "...Jam.",
+      "sprite": "assets/sprites/jam/dialogs/jam_stunned.png",
       "inspect_sprite": "assets/sprites/bookmark/back_bookmark.png"
     },
     {
       "speaker": "Jam",
-      "text": "Mais.. c'est mon prénom écrit dessus. Jam. Est-ce une coincidence...?",
-      "sprite": "assets/sprites/jam/dialogs/jam_speechless_1.png"
-    },
-    {
-      "speaker": "Jam",
-      "text": "J'ai toujours été orpheline, je n'ai aucun souvenir d'avoir écrit ça. ",
-      "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png"
+      "text": "Mais … c'est... mon prénom.",
+      "sprite": "assets/sprites/jam/dialogs/jam_unhappy.png"
     }
   ],
   "bookmark_after": [
     {
       "speaker": "Jam",
-      "text": "Ce marque-page avec mon prénom...",
-      "sprite": "assets/sprites/jam/dialogs/jam_speechless_2.png",
+      "text": "Jam. Écrit à la main. Par un enfant.",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
       "thought": true,
       "inspect_sprite": "assets/sprites/bookmark/back_bookmark.png"
     }
@@ -34,39 +29,93 @@
   "letters": [
     {
       "speaker": "Jam",
-      "text": "Toutes ces lettres sont adressées à Monsieur Plènozas. Étrange, aucune n'a de tampon postal...",
+      "text": "Toutes adressées à monsieur Plènozas. Aucune n'a de tampon de la poste.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
       "thought": true
     }
   ],
   "chandelier_after": [
+  {
+    "speaker": "Jam",
+    "text": "Je respire... Ce lustre m'a tuée, et pourtant je suis toujours là.",
+    "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
+    "thought": true
+  },
+  {
+    "speaker": "Jam",
+    "text": "« Le Pantin qui rêvait d'être vivant »... Ce titre me dit quelque chose. Je dois m'en souvenir.",
+    "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+    "thought": true
+  }
+],
+  "death_lustre_void": [
+  {
+    "speaker": "Jam",
+    "text": "Le lustre... Il m'est tombé dessus. Je suis... morte ?",
+    "sprite": "assets/sprites/jam/dialogs/jam_sad_2.png",
+    "thought": true,
+    "scene": "flashback_lustre_1_anniversaire"
+  },
+  {
+    "speaker": "Mr. Plènozas",
+    "text": "Le soir de mon anniversaire. Elle avait tenu à m'offrir un livre.",
+    "sprite": "assets/sprites/shadow_man.png",
+    "scene": "flashback_lustre_1_anniversaire"
+  },
+  {
+    "speaker": "Mr. Plènozas",
+    "text": "Le Pantin qui rêvait d'être vivant. Elle voulait toujours que je le lui lise.",
+    "sprite": "assets/sprites/shadow_man.png",
+    "scene": "flashback_lustre_2_livre"
+  },
+  {
+    "speaker": "Mr. Plènozas",
+    "text": "Mais cette soirée recommence. La même bougie. La même minute. Encore et encore.",
+    "sprite": "assets/sprites/glitch_man.png",
+    "sfx": "assets/sounds/radio_flashback.mp3",
+    "sfx_volume": 0.2,
+    "scene": "flashback_lustre_3_boucle"
+  }
+],
+  "hole_locked": [
     {
       "speaker": "Jam",
-      "text": "Il n'y a plus d'autre issue. Je pense qu'il faut que j'y aille...par là où je suis morte.",
-      "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
+      "text": "C'est beaucoup trop haut. Je ne sauterai pas là-dedans sans une bonne raison.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png",
       "thought": true
     }
   ],
-    "death_lustre_void": [
+  "hole_jump": [
     {
-      "speaker": "???",
-      "text": "Ce personnage se souvient de choses qu'il ne devrait pas savoir.",
-      "thought": true,
-      "scene": "flashback3_1_confirmation"
+      "speaker": "Jam",
+      "text": "C'est vraiment très haut... Mais il m'attend en bas, sous le lustre.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+      "thought": true
     },
     {
-      "speaker": "???",
-      "text": "Un simple bug dans le système. Rien de plus à corriger.",
+      "speaker": "Jam",
+      "text": "Est-ce que je saute ?",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
       "thought": true,
-      "scene": "flashback3_2_main_souris"
-    },
+      "choices": [
+        { "text": "Sauter", "next": "hole_jump_yes", "fall": true },
+        { "text": "Pas encore", "next": "hole_jump_no" }
+      ]
+    }
+  ],
+  "hole_jump_yes": [
     {
-      "speaker": "???",
-      "text": "...",
-      "thought": true,
-      "sfx": "assets/sounds/tremblement.mp3",
-      "sfx_volume": 0.1,
-      "scene": "flashback3_3_suppression"
+      "speaker": "Jam",
+      "text": "Papa... j'arrive.",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad_2.png"
+    }
+  ],
+  "hole_jump_no": [
+    {
+      "speaker": "Jam",
+      "text": "Pas maintenant. Je dois d'abord en être sûre.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
+      "thought": true
     }
   ]
 }

@@ -7,10 +7,6 @@
     "vide_bar_chambre": {
       "x": 280,
       "facing": "right"
-    },
-    "vide_chambre_bureau": {
-      "x": 1640,
-      "facing": "left"
     }
   },
   "floor_y": 280,
@@ -78,11 +74,12 @@
       }
     },
     {
-      "name": "door_office",
+      "name": "door_end",
       "kind": "door",
       "hitbox": [1688, 1890, 200, 800],
-      "leads_to": "vide_chambre_bureau",
-      "sfx": "assets/sounds/grincement_porte.mp3"
+      "leads_to": "room_3",
+      "requires": "door_end_open",
+      "locked_dialogue": "door_end_locked"
     }
   ]
 }
