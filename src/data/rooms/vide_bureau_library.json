@@ -1,0 +1,43 @@
+{
+  "id": "vide_bureau_library",
+  "name": "",
+  "background": "vide",
+  "entry_x": 280,
+  "entries": {
+    "room_4": {
+      "x": 280,
+      "facing": "right"
+    },
+    "room_library": {
+      "x": 1640,
+      "facing": "left"
+    }
+  },
+  "floor_y": 300,
+  "auto_exits": [
+    {
+      "x_max": 180,
+      "leads_to": "room_4"
+    },
+    {
+      "x_min": 1740,
+      "leads_to": "room_library"
+    }
+  ],
+  "interactables": [
+    {
+      "name": "door_left",
+      "kind": "door",
+      "hitbox": [0, 360, 0, 1080],
+      "leads_to": "room_4",
+      "priority": 5
+    },
+    {
+      "name": "door_right",
+      "kind": "door",
+      "hitbox": [1560, 1920, 0, 1080],
+      "leads_to": "room_library",
+      "priority": 5
+    }
+  ]
+}

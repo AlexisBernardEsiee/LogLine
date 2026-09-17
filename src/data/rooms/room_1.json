@@ -4,7 +4,7 @@
   "background": "couloir",
   "entry_x": 280,
   "entries": {
-    "room_4": {
+    "vide_couloir_bureau": {
       "x": 1640,
       "facing": "left"
     }
@@ -75,7 +75,7 @@
       "name": "door",
       "kind": "door",
       "hitbox": [1727, 1884, 217, 753],
-      "leads_to": "room_4",
+      "leads_to": "vide_couloir_bureau",
       "requires": "has_key",
       "locked_dialogue": "door_locked",
       "sfx": "assets/sounds/grincement_porte.mp3"

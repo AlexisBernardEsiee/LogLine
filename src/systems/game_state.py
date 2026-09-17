@@ -18,6 +18,10 @@ DEFAULT_FLAGS = {
     "seen_void_reveal": False,
     "seen_pantin_note": False,
     "door_chambre_open": False,
+    "seen_library_intro": False,
+    "seen_catalogue": False,
+    "seen_blank_book": False,
+    "library_door_open": False,
     "tutorial_done": False,
     "death_count": 0,
 }

@@ -7,11 +7,11 @@
   },
   "entry_x": 280,
   "entries": {
-    "room_1": {
+    "vide_couloir_bureau": {
       "x": 280,
       "facing": "right"
     },
-    "room_2": {
+    "vide_bureau_library": {
       "x": 1640,
       "facing": "left"
     },
@@ -50,14 +50,14 @@
       "name": "door_corridor",
       "kind": "door",
       "hitbox": [40, 160, 200, 800],
-      "leads_to": "room_1",
+      "leads_to": "vide_couloir_bureau",
       "sfx": "assets/sounds/grincement_porte.mp3"
     },
     {
-      "name": "door_bar",
+      "name": "door_library",
       "kind": "door",
       "hitbox": [1700, 1920, 220, 800],
-      "leads_to": "room_2",
+      "leads_to": "vide_bureau_library",
       "sfx": "assets/sounds/grincement_porte.mp3"
     },
     {
