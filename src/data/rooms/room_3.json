@@ -19,7 +19,8 @@
       "name": "door_bar",
       "kind": "door",
       "hitbox": [40, 160, 200, 800],
-      "leads_to": "room_2"
+      "leads_to": "room_2",
+      "sfx": "assets/sounds/grincement_porte.mp3"
     },
     {
       "name": "journal",
@@ -80,7 +81,8 @@
       "name": "door_office",
       "kind": "door",
       "hitbox": [1688, 1890, 200, 800],
-      "leads_to": "room_4"
+      "leads_to": "room_4",
+      "sfx": "assets/sounds/grincement_porte.mp3"
     }
   ]
 }
