@@ -36,6 +36,9 @@
       "leads_to": "vide_library_bar",
       "requires": "library_door_open",
       "locked_dialogue": "library_door_locked",
+      "locked_dialogue_if": {
+        "seen_catalogue": "library_door_locked_catalogue"
+      },
       "priority": 20,
       "sfx": "assets/sounds/grincement_porte.mp3"
     },
@@ -100,7 +103,7 @@
     {
       "name": "shelf_accounts",
       "kind": "shelf",
-      "hitbox": [1302, 1743, 291, 903],
+      "hitbox": [1289, 1736, 273, 909],
       "dialogue_id": "shelf_accounts",
       "dialogue_if": {
         "seen_catalogue": "shelf_accounts_hint"

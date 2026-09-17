@@ -64,7 +64,7 @@ class DialogueBox:
         self._body_label = self._make_body_label(italic=False)
 
         self._hint_label = arcade.Text(
-            "▼",
+            "",
             constants.DIALOGUE_BOX_RIGHT - 42,
             constants.DIALOGUE_BOX_BOTTOM + 18,
             (200, 190, 170),
@@ -174,7 +174,7 @@ class DialogueBox:
         base_y = constants.DIALOGUE_BOX_BOTTOM + 55
 
         for i, choice in enumerate(self.choices):
-            prefix = "▶ " if i == self.selected_choice else "  "
+            prefix = "   "
             color = (232, 214, 168) if i == self.selected_choice else arcade.color.WHITE
 
             label = arcade.Text(
@@ -236,7 +236,26 @@ class DialogueBox:
         self._body_label.draw()
 
         if self.has_choices():
-            for label in self._choice_labels:
+            for index, label in enumerate(self._choice_labels):
                 label.draw()
+                if index == self.selected_choice:
+                    self._draw_arrow(
+                        constants.DIALOGUE_BOX_LEFT + 32,
+                        label.y + 8,
+                        "right",
+                        (232, 214, 168),
+                    )
         elif not self.is_typing():
-            self._hint_label.draw()
+            self._draw_arrow(
+                constants.DIALOGUE_BOX_RIGHT - 36,
+                constants.DIALOGUE_BOX_BOTTOM + 26,
+                "down",
+                (200, 190, 170),
+            )
+
+    @staticmethod
+    def _draw_arrow(x, y, direction, color):
+        if direction == "down":
+            arcade.draw_triangle_filled(x, y - 7, x - 8, y + 5, x + 8, y + 5, color)
+            return
+        arcade.draw_triangle_filled(x + 7, y, x - 5, y + 8, x - 5, y - 8, color)

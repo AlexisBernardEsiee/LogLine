@@ -230,23 +230,20 @@ class GameView(arcade.View):
             return
         if self.dialogue_manager.is_active:
             if self.dialogue_box.has_choices():
-                if key == arcade.key.UP:
+                if key in constants.DIALOGUE_CHOICE_UP:
                     self.dialogue_box.move_choice(-1)
                     return
-
-                if key == arcade.key.DOWN:
+                if key in constants.DIALOGUE_CHOICE_DOWN:
                     self.dialogue_box.move_choice(1)
                     return
-
-                if key in (constants.KEY_CONFIRM, constants.KEY_SKIP):
+                if key in (constants.KEY_CONFIRM, constants.KEY_INTERACT, constants.KEY_SKIP):
                     choice_index = self.dialogue_box.get_selected_choice()
                     choice = self.dialogue_manager.get_choices()[choice_index]
                     self._handle_dialogue_choice(choice)
                     return
-                
                 return
 
-            if key in (constants.KEY_CONFIRM, constants.KEY_INTERACT, constants.KEY_SKIP):
+            if key in constants.DIALOGUE_ADVANCE:
                 self._advance_dialogue()
                 return
 
@@ -520,9 +517,10 @@ class GameView(arcade.View):
                 if target.keypad:
                     self._open_keypad(target)
                     return
-                if target.locked_dialogue:
+                locked_id = target.resolve_locked_dialogue(self.state)
+                if locked_id:
                     self._object_search = True
-                    self._start_dialogue(target.locked_dialogue)
+                    self._start_dialogue(locked_id)
                 return
             if target.dialogue_id:
                 self._choice_fall = target.leads_to

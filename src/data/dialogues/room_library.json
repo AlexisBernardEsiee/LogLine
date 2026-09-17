@@ -2,26 +2,32 @@
   "library_intro": [
     {
       "speaker": "Jam",
-      "text": "Des centaines de dos. Un seul a été rayé de la mémoire de cette maison. Encore faut-il trouver lequel... et où.",
+      "text": "La porte du fond est bloquée. Cette maison ne me laissera pas passer tant que je n'aurai pas trouvé le livre qu'on a voulu faire disparaître.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+      "thought": true
+    },
+    {
+      "speaker": "Jam",
+      "text": "Il doit y avoir un registre quelque part. Un inventaire. Si un ouvrage a été rayé, c'est là qu'il est noté.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
       "thought": true
     }
   ],
   "catalogue": [
     {
       "speaker": "Jam",
-      "text": "Un registre. L'inventaire de chaque ouvrage, comme un livre de comptes.",
+      "text": "Le registre. Chaque livre de la pièce est listé ici.",
       "sprite": "assets/sprites/jam/dialogs/jam_speechless_1.png",
       "sfx": "assets/sounds/tourner_page.mp3"
     },
     {
       "speaker": "Jam",
-      "text": "Une ligne barrée. Recueil pour enfant. Motif : « n'a jamais existé ».",
+      "text": "Une ligne a été barrée. Recueil pour enfant. Motif : « n'a jamais existé ».",
       "sprite": "assets/sprites/jam/dialogs/jam_speechless_3.png"
     },
     {
       "speaker": "Jam",
-      "text": "L'emplacement est resté. Travée de la deuxième lampe. Tablette du haut. Dos sans titre.",
+      "text": "L'emplacement est encore écrit : deuxième lampe en partant de la gauche. Étagère du haut. Un dos sans aucun titre. C'est celui-là que je dois ouvrir.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
       "thought": true
     }
@@ -29,7 +35,7 @@
   "catalogue_after": [
     {
       "speaker": "Jam",
-      "text": "Deuxième lampe. Tablette du haut. Un dos nu. C'est tout ce que le registre a laissé.",
+      "text": "Je n'ai pas encore ce livre. Deuxième lampe à gauche, étagère du haut, dos sans titre.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
       "thought": true
     }
@@ -37,18 +43,18 @@
   "blank_book_click": [
     {
       "speaker": "Jam",
-      "text": "Là. Sous la deuxième lumière. Le dos n'a plus de nom.",
+      "text": "Là. Sous la deuxième lampe, tout en haut. Le dos n'a plus de nom.",
       "sprite": "assets/sprites/jam/dialogs/jam_speechless_1.png",
       "sfx": "assets/sounds/tourner_page.mp3"
     },
     {
       "speaker": "Jam",
-      "text": "Le titre a été gratté. Il reste la place de trois lettres.",
+      "text": "Le titre a été gratté. Il reste la place de trois lettres. C'est bien le recueil « inexistant ».",
       "sprite": "assets/sprites/jam/dialogs/jam_speechless_3.png"
     },
     {
       "speaker": "Jam",
-      "text": "L'ouvrage « inexistant » n'a jamais quitté le rayon. La porte devrait s'ouvrir.",
+      "text": "Je l'ai. La porte du fond devrait s'ouvrir maintenant.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png",
       "thought": true
     }
@@ -56,7 +62,7 @@
   "blank_book_after": [
     {
       "speaker": "Jam",
-      "text": "Trois lettres grattées. Un nom qu'on n'avait plus le droit d'écrire.",
+      "text": "Trois lettres grattées. Un nom qu'on n'avait plus le droit d'écrire. La porte est ouverte.",
       "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
       "thought": true
     }
@@ -64,15 +70,35 @@
   "library_door_locked": [
     {
       "speaker": "Jam",
-      "text": "Rien. Il manque une entrée au catalogue de cette maison. Sans le registre, je cherche à l'aveugle.",
+      "text": "Fermée. Je ne sortirai pas par là tant que je n'aurai pas identifié le livre rayé.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png",
+      "thought": true
+    },
+    {
+      "speaker": "Jam",
+      "text": "D'abord le registre. Il est posé sur une étagère, dans cette pièce. Sans lui, je cherche à l'aveugle.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+      "thought": true
+    }
+  ],
+  "library_door_locked_catalogue": [
+    {
+      "speaker": "Jam",
+      "text": "Toujours fermée. J'ai le registre. Il me manque le livre.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png",
+      "thought": true
+    },
+    {
+      "speaker": "Jam",
+      "text": "Deuxième lampe en partant de la gauche. Étagère du haut. Un dos sans titre. Je dois l'ouvrir.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
       "thought": true
     }
   ],
   "shelf_law": [
     {
       "speaker": "Jam",
-      "text": "Du code civil. Tous les titres sont encore là. Ce n'est pas un inventaire.",
+      "text": "Du code civil. Tous les titres sont encore là. Ce n'est pas le registre, et ce n'est pas un livre sans nom.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
       "thought": true
     }
@@ -80,7 +106,7 @@
   "shelf_center": [
     {
       "speaker": "Jam",
-      "text": "Des dizaines de dos dorés. Aucun n'est anonyme. Si un livre a été effacé, ce n'est pas en regardant au hasard que je le verrai.",
+      "text": "Des dizaines de dos dorés, tous titrés. Si je cherche un livre anonyme, ce n'est pas en fouillant au hasard. Il me faut le registre.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
       "thought": true
     }
@@ -88,7 +114,7 @@
   "shelf_law_hint": [
     {
       "speaker": "Jam",
-      "text": "Toujours du droit. Le registre ne parlait pas de ce rayon-là.",
+      "text": "Toujours du droit. Le registre ne parlait pas de ce rayon. Le livre est sous la deuxième lampe, tout en haut.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
       "thought": true
     }
@@ -96,7 +122,7 @@
   "shelf_accounts": [
     {
       "speaker": "Jam",
-      "text": "Comptes, millésimes, totaux. Chaque étiquette est intacte.",
+      "text": "Comptes, millésimes, totaux. Chaque étiquette est intacte. Rien n'a été rayé ici.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
       "thought": true
     }
@@ -104,7 +130,7 @@
   "shelf_accounts_hint": [
     {
       "speaker": "Jam",
-      "text": "Trop loin, contre le mur. Le registre disait : travée de la deuxième lampe, tablette du haut.",
+      "text": "Trop loin, contre le mur de droite. Le registre disait : deuxième lampe à gauche, étagère du haut, dos sans titre.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
       "thought": true
     }
