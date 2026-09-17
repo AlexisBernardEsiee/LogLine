@@ -29,7 +29,6 @@
   },
   "auto_deaths": [
     {
-      "requires": ["seen_bookmark", "seen_letters"],
       "unless": "died_lustre",
       "x": [820, 1120],
       "death": {
@@ -40,7 +39,7 @@
         "sfx": "assets/sounds/lustre.mp3",
         "sfx_volume": 0.85,
         "respawn_x": 280,
-        "void_scene": "flashback3_1_confirmation",
+        "void_scene": "flashback_lustre_1_anniversaire",
         "void_dialogue": "death_lustre_void",
         "aftermath_dialogue": "chandelier_after"
       }
