@@ -23,10 +23,14 @@ class Player(arcade.Sprite):
         self.search_texture, self.search_scale, self._search_foot_lift = self._prepare_search(
             idle_image, idle_bbox
         )
+        idle_below_feet = idle_image.height - idle_bbox[3] if idle_bbox else 0
+        self._death_foot_lift = idle_below_feet * constants.PLAYER_SCALE
+        self.death_frames = self._prepare_death_frames(idle, idle_image, idle_bbox)
         self.speed_x = 0
         self.facing_right = True
         self.ground_y = 0
         self.searching = False
+        self.dying = False
         self._walk_time = 0.0
         self._idle_time = 0.0
         self._cycle = sum(constants.PLAYER_WALK_FRAME_DURATIONS)
@@ -45,6 +49,40 @@ class Player(arcade.Sprite):
         foot_lift = idle_below_feet * constants.PLAYER_SCALE
         return texture, scale, foot_lift
 
+    @staticmethod
+    def _prepare_death_frames(idle_texture, idle_image, idle_bbox):
+        idle_body_h = max(1, idle_bbox[3] - idle_bbox[1]) if idle_bbox else idle_image.height
+        frames = [(idle_texture, constants.PLAYER_SCALE, False, False)]
+        for index, path in enumerate(constants.SPRITE_JAM_DEATH_POSE[1:]):
+            image = Image.open(path).convert("RGBA")
+            bbox = image.getbbox()
+            if bbox:
+                image = image.crop(bbox)
+            texture = arcade.Texture(image, hash=f"jam-death-pose-{index}")
+            body_span = max(image.width, image.height, 1)
+            scale = constants.PLAYER_SCALE * idle_body_h / body_span
+            pose_index = index + 1
+            scale *= constants.DEATH_POSE_SCALE[pose_index]
+            lying = image.width > image.height
+            frames.append((texture, scale, True, lying))
+        return frames
+
+    def apply_death_pose(self, index):
+        self.dying = True
+        self.searching = False
+        index = max(0, min(int(index), len(self.death_frames) - 1))
+        texture, scale, cropped, lying = self.death_frames[index]
+        self.texture = texture
+        self.scale_y = scale
+        self.scale_x = scale if self.facing_right else -scale
+        self.angle = 0
+        display_h = texture.height * abs(scale)
+        feet_y = self.ground_y - 50
+        if cropped and not lying:
+            feet_y += self._death_foot_lift
+        feet_y -= constants.DEATH_POSE_DROP[index]
+        self.center_y = feet_y + display_h / 2
+
     def place_on_floor(self, x: float, floor_y: float, facing_right: bool = True):
         self.center_x = x
         self.ground_y = floor_y
@@ -54,6 +92,7 @@ class Player(arcade.Sprite):
         self._idle_time = 0.0
         self.angle = 0
         self.searching = False
+        self.dying = False
         self.apply_idle_pose()
 
     def _walk_frame(self) -> int:
@@ -83,6 +122,9 @@ class Player(arcade.Sprite):
         self.bottom = self.ground_y - 50 + lift + bob
 
     def update(self, delta_time: float = 1 / 60, *args, **kwargs):
+        if self.dying:
+            self.speed_x = 0
+            return
         self.center_x += self.speed_x
         if self.speed_x > 0:
             self.facing_right = True

@@ -115,6 +115,8 @@ class GameView(arcade.View):
         self.dialogue_box.update(delta_time)
         self.inspect.update(delta_time)
         self.death.update(delta_time)
+        if self.player and self.death.playing_pose:
+            self.player.apply_death_pose(self.death.pose_index)
         self.lustre.update(delta_time)
         if self.lustre.just_landed and self._pending_lustre_death:
             spec = self._pending_lustre_death
@@ -152,7 +154,8 @@ class GameView(arcade.View):
 
         if self.death.blocking or self.dialogue_manager.is_active or self.inspect.active or self.lustre.blocking:
             self.player.speed_x = 0
-            self._apply_search_pose()
+            if not self.player.dying:
+                self._apply_search_pose()
             self.player.update(delta_time)
             self.prompt.visible = False
             return
@@ -368,6 +371,8 @@ class GameView(arcade.View):
             modifier = float(spec.get("sfx_volume", 0.7))
             self.audio.play_sfx(sfx, constants.PROJECT_ROOT / sfx, volume_modifier=modifier)
         self.death.start(spec, extra_hold=extra)
+        if self.player is not None:
+            self.player.apply_death_pose(0)
 
     def _play_world_music(self):
         path = getattr(constants, "SOUND_AMBIANCE", None) or (

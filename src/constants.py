@@ -48,13 +48,23 @@ SPRITE_JAM_WALK = [
     str(SPRITE_JAM_WALK_DIR / "walk4.png"),
 ]
 SPRITE_JAM_DEATH_DIR = SPRITE_JAM_DIR / "death"
+SPRITE_JAM_DEATH_POSE = [
+    SPRITE_JAM_IDLE,
+    str(SPRITE_JAM_DEATH_DIR / "death_spirte_1.png"),
+    str(SPRITE_JAM_DEATH_DIR / "death_spirte_2.png"),
+    str(SPRITE_JAM_DEATH_DIR / "death_spirte_3.png"),
+    str(SPRITE_JAM_DEATH_DIR / "death_spirte_4.png"),
+]
 SPRITE_JAM_DEATH = [
     str(SPRITE_JAM_DEATH_DIR / "death1.png"),
     str(SPRITE_JAM_DEATH_DIR / "death2.png"),
     str(SPRITE_JAM_DEATH_DIR / "death3.png"),
 ]
 
-DEATH_FRAME_DURATION = 1.2
+DEATH_POSE_DURATIONS = (0.22, 0.48, 0.38, 0.42, 0.75)
+DEATH_OVERLAY_DURATION = 0.85
+DEATH_POSE_SCALE = (1.0, 0.82, 1.12, 1.12, 1.12)
+DEATH_POSE_DROP = (0.0, 0.0, 38.0, 38.0, 38.0)
 
 PLAYER_WALK_FRAME_DURATIONS = (0.15, 0.19, 0.15, 0.19)
 PLAYER_WALK_BOB_PIXELS = 2.2

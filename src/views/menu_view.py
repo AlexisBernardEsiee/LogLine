@@ -45,6 +45,8 @@ class MenuView(arcade.View):
         arcade.load_texture(constants.SPRITE_JAM_IDLE)
         for path in constants.SPRITE_JAM_WALK:
             arcade.load_texture(path)
+        for path in constants.SPRITE_JAM_DEATH_POSE[1:]:
+            arcade.load_texture(path)
         for path in constants.SPRITE_JAM_DEATH:
             arcade.load_texture(path)
         arcade.load_texture(

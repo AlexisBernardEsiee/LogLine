@@ -26,14 +26,20 @@ class DeathEffect:
         self._rects = []
         self._hold_fired = False
 
-        # Animation de mort
+        # Overlays plein écran death1 → death2 → death3
         self.frames = [arcade.load_texture(path) for path in frames]
         self.frame_index = 0
         self.frame_timer = 0.0
+        self.pose_index = 0
+        self.pose_timer = 0.0
 
     @property
     def blocking(self):
         return self.active
+
+    @property
+    def playing_pose(self):
+        return self.active and self.phase == "collapse"
 
     @property
     def hiding_world(self):
@@ -47,6 +53,10 @@ class DeathEffect:
     def hide_player(self):
         if not self.active:
             return False
+        if self.phase == "collapse":
+            return False
+        if self.phase in ("overlay", "flash", "fade"):
+            return True
         if self.spec.get("void_scene") and self.phase == "void":
             return True
         return self.hiding_world
@@ -55,7 +65,7 @@ class DeathEffect:
         self.spec = spec or {}
 
         self.active = True
-        self.phase = "animation"
+        self.phase = "collapse"
         self.timer = 0.0
 
         self.just_void = False
@@ -70,7 +80,8 @@ class DeathEffect:
         self._hold_fired = False
         self._roll_rects()
 
-        # Recommence toujours à death1
+        self.pose_index = 0
+        self.pose_timer = 0.0
         self.frame_index = 0
         self.frame_timer = 0.0
 
@@ -91,24 +102,34 @@ class DeathEffect:
         effect = self.spec.get("effect", "white_flash")
         silent = effect == "silence"
 
-        # Animation de mort : death1 → death2 → death3
-        if self.phase == "animation":
+        # Chute de Jam : idle → poses → overlays death1/2/3
+        if self.phase == "collapse":
+            durations = constants.DEATH_POSE_DURATIONS
+            self.pose_timer += delta_time
+            current = durations[min(self.pose_index, len(durations) - 1)]
+            if self.pose_timer >= current:
+                self.pose_timer -= current
+                if self.pose_index < len(durations) - 1:
+                    self.pose_index += 1
+                else:
+                    self.phase = "overlay"
+                    self.timer = 0.0
+                    self.frame_index = 0
+                    self.frame_timer = 0.0
+
+        elif self.phase == "overlay":
             if self.frames:
                 self.frame_timer += delta_time
-
-                # Une image toutes les secondes
-                if self.frame_timer >= 1.0:
-                    self.frame_timer -= 1.0
-
+                duration = constants.DEATH_OVERLAY_DURATION
+                if self.frame_timer >= duration:
+                    self.frame_timer -= duration
                     if self.frame_index < len(self.frames) - 1:
                         self.frame_index += 1
-
-            # Death3 reste affiché pendant 1 seconde avant le flash
-            if self.frame_index == len(self.frames) - 1 and self.timer >= len(self.frames):
+            last_hold = constants.DEATH_OVERLAY_DURATION * max(1, len(self.frames))
+            if self.frame_index >= max(0, len(self.frames) - 1) and self.timer >= last_hold:
                 self.phase = "flash"
                 self.timer = 0.0
                 self.flash = 1.0
-
                 if effect == "green_glitch":
                     self.glitch = 1.0
 
@@ -207,8 +228,8 @@ class DeathEffect:
             return
 
         # Animation de mort
-        # Les images s'empilent : death1 → death1 + death2 → death1 + death2 + death3
-        if self.active and self.frames and self.phase == "animation":
+        # Poses : dessinées sur le personnage. Overlays empilés : death1 → +death2 → +death3
+        if self.active and self.frames and self.phase == "overlay":
             for i in range(self.frame_index + 1):
                 arcade.draw_texture_rect(
                     self.frames[i],
