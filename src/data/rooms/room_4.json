@@ -34,7 +34,7 @@
         "effect": "silence",
         "silence_hold": 1.0,
         "sfx": "assets/sounds/lustre.mp3",
-        "sfx_volume": 0.85,
+        "sfx_volume": 0.7,
         "respawn_x": 280,
         "void_scene": "flashback3_1_confirmation",
         "void_dialogue": "death_lustre_void",

@@ -21,7 +21,8 @@
       "name": "door_corridor",
       "kind": "door",
       "hitbox": [59, 173, 196, 806],
-      "leads_to": "room_1"
+      "leads_to": "room_1",
+      "sfx": "assets/sounds/grincement_porte.mp3"
     },
     {
       "name": "glass",
@@ -66,7 +67,8 @@
       "name": "door_bedroom",
       "kind": "door",
       "hitbox": [1688, 1888, 210, 780],
-      "leads_to": "room_3"
+      "leads_to": "room_3",
+      "sfx": "assets/sounds/grincement_porte.mp3"
     }
   ]
 }
