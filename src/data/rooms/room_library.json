@@ -4,7 +4,7 @@
   "background": "bibliotheque",
   "entry_x": 280,
   "entries": {
-    "room_1": {
+    "vide_bureau_library": {
       "x": 280,
       "facing": "right"
     },
@@ -22,10 +22,10 @@
   },
   "interactables": [
     {
-      "name": "door_corridor",
+      "name": "door_office",
       "kind": "door",
       "hitbox": [38, 188, 215, 815],
-      "leads_to": "room_1",
+      "leads_to": "vide_bureau_library",
       "priority": 20,
       "sfx": "assets/sounds/grincement_porte.mp3"
     },

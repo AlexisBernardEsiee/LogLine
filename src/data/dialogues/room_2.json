@@ -61,33 +61,27 @@
     }
   ],
     "death_poison_void": [
-      {
-      "speaker": "Jam",
-      "text": "Qu... Qu'est-ce qui se passe ? Je ne sens plus mes mains. Je suis... morte ?",
-      "sprite": "assets/sprites/jam/dialogs/jam_sad_2.png",
-      "thought": true
-    },
     {
       "speaker": "Jam",
-      "text": "Attends, c'est quoi cet endroit ? Suis-je au paradis... ou en enfer ?",
+      "text": "Encore ce vide... Je suis morte. Une deuxième fois.",
       "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
       "thought": true
     },
     {
       "speaker": "Mr. Plènozas",
-      "text": "Un verre, rien qu'un verre...",
+      "text": "Le 23 septembre. Encore le soir de mon anniversaire. Encore ce verre.",
       "sprite": "assets/sprites/shadow_man.png",
       "scene": "flashback1_1_verre_poison"
     },
     {
       "speaker": "Jam",
-      "text": "Cette personne... C'est Monsieur Plènozas ?! Il est là, mais... impossible de l'atteindre ou de lui parler.",
+      "text": "Monsieur Plènozas... Il revit cette même soirée, lui aussi ?",
       "sprite": "assets/sprites/jam/dialogs/jam_unhappy.png",
       "scene": "flashback1_2_main_ombre"
     },
     {
       "speaker": "Mr. Plènozas",
-      "text": "Comment sortir d'ici. De toute façon, tout cela n'est pas réel. Alors autant tester.",
+      "text": "Cette soirée ne finit jamais. De toute façon, rien de tout cela n'est réel. Alors autant tester.",
       "sprite": "assets/sprites/shadow_man.png",
       "sfx": "assets/sounds/radio_flashback.mp3",
       "sfx_volume": 0.2,
@@ -105,20 +99,82 @@
   "death_poison_after": [
     {
       "speaker": "Jam",
-      "text": "...Ouf. Je respire à nouveau. Je suis revenue ici ?",
+      "text": "...Je respire. Morte, puis revenue. Comme avec le lustre.",
       "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
       "thought": true
     },
     {
       "speaker": "Jam",
-      "text": "En y repensant... Je l'ai vraiment bu, ce verre, et j'en suis morte. Sauf que je suis revenue à la vie. Même si c'est vraiment étrange...mais c'est la seule explication.",
-      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+      "text": "Le 23 septembre, le soir de son anniversaire... Tout tourne autour de cette date.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
       "thought": true
     },
     {
       "speaker": "Jam",
-      "text": "Ce n'était pas qu'un simple rêve. J'ai revu ses derniers instants... c'était donc la mémoire de Monsieur Plènozas. Qu'est-ce qui se trame ici ?",
+      "text": "Le 23... du 9. Il faut que je m'en souvienne.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+      "thought": true
+    }
+  ],
+  "book_memoires": [
+    {
+      "speaker": "Jam",
+      "text": "« Mémoires du manoir ». Des pages entières sur les réceptions données ici... Aucune ne parle d'un enfant.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png",
+      "thought": true
+    }
+  ],
+  "book_poisons": [
+    {
+      "speaker": "Jam",
+      "text": "« Traité des poisons ». Une page est cornée : les amandes amères. Charmante lecture pour un bar.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
+      "thought": true
+    }
+  ],
+  "book_contes": [
+    {
+      "speaker": "Jam",
+      "text": "« Contes de la mer ». Les pages sont encore collées. Personne ne l'a jamais ouvert.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+      "thought": true
+    }
+  ],
+  "book_pantin": [
+    {
+      "speaker": "Jam",
+      "text": "« Le Pantin qui rêvait d'être vivant »... C'est le livre de son souvenir !",
+      "sprite": "assets/sprites/jam/dialogs/jam_speechless_1.png",
+      "sfx": "assets/sounds/tourner_page.mp3"
+    },
+    {
+      "speaker": "Jam",
+      "text": "Un mot est glissé entre les pages, d'une écriture d'enfant.",
+      "sprite": "assets/sprites/jam/dialogs/jam_speechless_2.png"
+    },
+    {
+      "text": "« Le pantin ne se souvient de sa vie qu'au moment où il la perd. Bois, et souviens-toi. »"
+    },
+    {
+      "speaker": "Jam",
+      "text": "Bois, et souviens-toi... Le verre, sur le comptoir ?",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+      "thought": true
+    }
+  ],
+  "book_whisky": [
+    {
+      "speaker": "Jam",
+      "text": "« Whiskies d'Écosse ». Vu les bouteilles, il avait fait ses devoirs.",
+      "sprite": "assets/sprites/jam/dialogs/jam_smile_1.png",
+      "thought": true
+    }
+  ],
+  "book_comptes": [
+    {
+      "speaker": "Jam",
+      "text": "« Le Livre des comptes ». Des colonnes de chiffres... qui s'arrêtent net il y a trois semaines.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png",
       "thought": true
     }
   ]
