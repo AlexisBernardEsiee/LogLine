@@ -4,11 +4,11 @@
   "background": "bar",
   "entry_x": 280,
   "entries": {
-    "room_1": {
+    "vide_library_bar": {
       "x": 280,
       "facing": "right"
     },
-    "room_3": {
+    "vide_bar_chambre": {
       "x": 1640,
       "facing": "left"
     }
@@ -21,34 +21,34 @@
       "name": "door_corridor",
       "kind": "door",
       "hitbox": [59, 173, 196, 806],
-      "leads_to": "room_1",
+      "leads_to": "vide_library_bar",
       "sfx": "assets/sounds/grincement_porte.mp3"
     },
-  {
-    "name": "glass",
-    "kind": "glass",
-    "hitbox": [603, 705, 470, 500],
-    "rect": [603, 705, 470, 500],
-    "sprite": "assets/sprites/poison.png",
-    "dialogue_id": "glass",
-    "done_dialogue": "glass_after",
-    "inspect": {
-      "effect": "sprite",
+    {
+      "name": "glass",
+      "kind": "glass",
+      "hitbox": [603, 705, 470, 500],
+      "rect": [603, 705, 470, 500],
       "sprite": "assets/sprites/poison.png",
-      "zoom": 1.0,
-      "duration": 0.5
+      "dialogue_id": "glass",
+      "done_dialogue": "glass_after",
+      "inspect": {
+        "effect": "sprite",
+        "sprite": "assets/sprites/poison.png",
+        "zoom": 1.0,
+        "duration": 0.5
+      },
+      "death": {
+        "id": "poison",
+        "flag": "died_poison",
+        "effect": "white_flash",
+        "sfx": "assets/sounds/respiration_poison.mp3",
+        "sfx_volume": 0.7,
+        "void_dialogue": "death_poison_void",
+        "void_scene": "flashback1_1_verre_poison",
+        "aftermath_dialogue": "death_poison_after"
+      }
     },
-    "death": {
-      "id": "poison",
-      "flag": "died_poison",
-      "effect": "white_flash",
-      "sfx": "assets/sounds/respiration_poison.mp3",
-      "sfx_volume": 0.7,
-      "void_dialogue": "death_poison_void",
-      "void_scene": "flashback1_1_verre_poison",
-      "aftermath_dialogue": "death_poison_after"
-    }
-  },
     {
       "name": "ashtray",
       "kind": "ashtray",
@@ -67,7 +67,7 @@
       "name": "door_bedroom",
       "kind": "door",
       "hitbox": [1688, 1888, 210, 780],
-      "leads_to": "room_3",
+      "leads_to": "vide_bar_chambre",
       "sfx": "assets/sounds/grincement_porte.mp3"
     }
   ]

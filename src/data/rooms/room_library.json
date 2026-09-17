@@ -1,0 +1,116 @@
+{
+  "id": "room_library",
+  "name": "La bibliothèque",
+  "background": "bibliotheque",
+  "entry_x": 280,
+  "entries": {
+    "room_1": {
+      "x": 280,
+      "facing": "right"
+    },
+    "vide_library_bar": {
+      "x": 1640,
+      "facing": "left"
+    }
+  },
+  "floor_y": 280,
+  "on_enter": "library_intro",
+  "on_enter_flag": "seen_library_intro",
+  "unlock_if": {
+    "flag": "library_door_open",
+    "all": ["seen_catalogue", "seen_blank_book"]
+  },
+  "interactables": [
+    {
+      "name": "door_corridor",
+      "kind": "door",
+      "hitbox": [38, 188, 215, 815],
+      "leads_to": "room_1",
+      "priority": 20,
+      "sfx": "assets/sounds/grincement_porte.mp3"
+    },
+    {
+      "name": "door_bar",
+      "kind": "door",
+      "hitbox": [1735, 1912, 210, 815],
+      "leads_to": "vide_library_bar",
+      "requires": "library_door_open",
+      "locked_dialogue": "library_door_locked",
+      "priority": 20,
+      "sfx": "assets/sounds/grincement_porte.mp3"
+    },
+    {
+      "name": "shelf_law",
+      "kind": "shelf",
+      "hitbox": [220, 412, 468, 552],
+      "dialogue_id": "shelf_law",
+      "dialogue_if": {
+        "seen_catalogue": "shelf_law_hint"
+      },
+      "priority": 1,
+      "inspect": {
+        "effect": "fade_zoom",
+        "zoom": 2.4,
+        "duration": 0.5
+      }
+    },
+    {
+      "name": "catalogue",
+      "kind": "catalogue",
+      "hitbox": [436, 629, 560, 635],
+      "dialogue_id": "catalogue",
+      "done_dialogue": "catalogue_after",
+      "reveals": "seen_catalogue",
+      "priority": 8,
+      "inspect": {
+        "effect": "sprite",
+        "sprite": "assets/sprites/library/catalogue.png",
+        "zoom": 1.0,
+        "duration": 0.5
+      }
+    },
+    {
+      "name": "shelf_center",
+      "kind": "shelf",
+      "hitbox": [962, 1231, 279, 914],
+      "dialogue_id": "shelf_center",
+      "priority": 1,
+      "inspect": {
+        "effect": "fade_zoom",
+        "zoom": 2.0,
+        "duration": 0.5
+      }
+    },
+    {
+      "name": "blank_book",
+      "kind": "book",
+      "hitbox": [710, 958, 556, 640],
+      "dialogue_id": "blank_book_click",
+      "done_dialogue": "blank_book_after",
+      "reveals": "seen_blank_book",
+      "hidden_unless": "seen_catalogue",
+      "priority": 12,
+      "inspect": {
+        "effect": "sprite",
+        "sprite": "assets/sprites/library/blank_book.png",
+        "zoom": 1.0,
+        "duration": 0.5
+      }
+    },
+    {
+      "name": "shelf_accounts",
+      "kind": "shelf",
+      "hitbox": [1302, 1743, 291, 903],
+      "dialogue_id": "shelf_accounts",
+      "dialogue_if": {
+        "seen_catalogue": "shelf_accounts_hint"
+      },
+      "priority": 1,
+      "inspect": {
+        "effect": "fade_zoom",
+        "zoom": 2.2,
+        "duration": 0.5
+      }
+    }
+  ]
+}

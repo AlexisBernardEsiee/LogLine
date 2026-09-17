@@ -44,6 +44,7 @@ class GameView(arcade.View):
         self._object_search = False
         self._pending_lustre_death = None
         self._fall = None
+        self._door_fade_texture = None
         self._void_glitch_rects = []
         self._void_glitch_t = 0.0
         self.audio = None
@@ -65,11 +66,13 @@ class GameView(arcade.View):
         self.inspect.active = False
         self.death.active = False
         if new_game:
+            self.state.set_flag("seen_catalogue")
             self.state = GameState()
             self.state.save()
         else:
             self.state = GameState.load()
         self._enter_room(self.state.room_id, from_room_id=self.state.from_room_id)
+        self._ensure_door_fade_texture()
         if self.state.room_id != constants.ROOM_VOID:
             self._play_world_music()
 
@@ -95,7 +98,7 @@ class GameView(arcade.View):
         self.room_manager.draw(self.state)
         if self.room_manager.shows_world:
             if self.player and not self.death.hide_player:
-                if not (self._fall and self._fall["phase"] == "out"):
+                if not (self._fall and self._fall["phase"] in ("out", "hold")):
                     arcade.draw_sprite(self.player)
             self._draw_lustre()
             if not self.death.blocking and not self._fall and not self.lustre.blocking:
@@ -175,8 +178,13 @@ class GameView(arcade.View):
         self.player.update(delta_time)
         self._maybe_house_thought()
         self._maybe_auto_deaths()
+        if self._maybe_auto_exits():
+            return
         nearby = self.room_manager.get_nearby_interactable(self.player, self.state)
-        self.prompt.set_target(self.player, nearby)
+        if str(self.room_manager.current_room_id).startswith("vide_"):
+            self.prompt.visible = False
+        else:
+            self.prompt.set_target(self.player, nearby)
         self._apply_search_pose(nearby)
 
     def on_key_press(self, key, modifiers):
@@ -392,6 +400,18 @@ class GameView(arcade.View):
             spec = self._pending_death
             self._pending_death = None
             self._begin_death(spec)
+        self._maybe_unlock_room()
+
+    def _maybe_unlock_room(self):
+        spec = getattr(self.room_manager, "unlock_if", None)
+        if not spec:
+            return
+        flag = spec.get("flag")
+        needed = spec.get("all") or []
+        if not flag or self.state.flag(flag):
+            return
+        if needed and all(self.state.flag(name) for name in needed):
+            self.state.set_flag(flag)
 
     def _begin_death(self, spec, skip_sfx=False):
         extra = 1.0 if spec.get("effect") == "green_glitch" else 0.0
@@ -457,19 +477,19 @@ class GameView(arcade.View):
             if target.transition == "fall":
                 self._start_fall(target.leads_to)
                 return
-            self._enter_room(target.leads_to, from_room_id=self.room_manager.current_room_id)
+            self._start_door_fade(target.leads_to)
             return
 
         death = target.death
         already_died = death and self.state.flag(death.get("flag"))
         already_seen = (
-            target.done_flag and self.state.flag(target.done_flag)
-        ) or (
-            target.reveals and self.state.flag(target.reveals) and target.done_dialogue
+            bool(target.done_flag and self.state.flag(target.done_flag))
+            or bool(target.reveals and self.state.flag(target.reveals) and target.done_dialogue)
         )
-
-        dialogue_id = target.done_dialogue if (already_died or already_seen) else target.dialogue_id
-                
+        if already_died or already_seen:
+            dialogue_id = target.done_dialogue
+        else:
+            dialogue_id = target.resolve_dialogue(self.state)
         self._pending_reveal = None if already_seen else target.reveals
         self._pending_give = target.gives
         self._pending_death = None
@@ -516,7 +536,9 @@ class GameView(arcade.View):
             return
         searching = False
         if not self.death.blocking and self.room_manager.current_room_id != constants.ROOM_VOID:
-            if self.inspect.active or self._object_search:
+            if str(self.room_manager.current_room_id).startswith("vide_"):
+                searching = False
+            elif self.inspect.active or self._object_search:
                 searching = True
             else:
                 if nearby is None:
@@ -527,6 +549,24 @@ class GameView(arcade.View):
 
         if self.player.speed_x == 0:
             self.player.apply_idle_pose()
+
+    def _maybe_auto_exits(self):
+        if self.player is None or self._fall or self.death.blocking or self.lustre.blocking:
+            return False
+        half_w = abs(self.player.width) / 2
+        at_left = self.player.center_x <= half_w + 2
+        at_right = self.player.center_x >= constants.SCREEN_WIDTH - half_w - 2
+        for spec in getattr(self.room_manager, "auto_exits", []) or []:
+            dest = spec.get("leads_to")
+            if not dest:
+                continue
+            if spec.get("x_max") is not None and (at_left or self.player.center_x <= spec["x_max"]):
+                self._start_door_fade(dest)
+                return True
+            if spec.get("x_min") is not None and (at_right or self.player.center_x >= spec["x_min"]):
+                self._start_door_fade(dest)
+                return True
+        return False
 
     def _maybe_auto_deaths(self):
         if self.player is None or self.death.blocking or self.lustre.blocking:
@@ -577,16 +617,42 @@ class GameView(arcade.View):
         if self.player is not None:
             self.player.speed_x = 0
         self.audio.stop_music()
-        self._fall = {"t": 0.0, "room": room_id, "phase": "out"}
+        self._fall = {"t": 0.0, "room": room_id, "phase": "out", "kind": "fall"}
+
+    def _start_door_fade(self, room_id):
+        self.keys_held.clear()
+        if self.player is not None:
+            self.player.speed_x = 0
+        self._ensure_door_fade_texture()
+        from_id = self.room_manager.current_room_id
+        if str(from_id).startswith("vide_"):
+            self._enter_room(room_id, from_room_id=from_id)
+            self._fall = {"t": 0.0, "room": room_id, "phase": "in", "kind": "door"}
+            return
+        self._fall = {"t": 0.0, "room": room_id, "phase": "out", "kind": "door"}
+
+    def _ensure_door_fade_texture(self):
+        if self._door_fade_texture is not None:
+            return
+        path = constants.PROJECT_ROOT / constants.SPRITE_EMPTY_CORRIDOR
+        if path.exists():
+            self._door_fade_texture = arcade.load_texture(str(path))
 
     def _update_fall(self, delta_time):
         if not self._fall:
             return False
         self._fall["t"] += delta_time
-        if self._fall["phase"] == "out" and self._fall["t"] >= 1.15:
-            self._enter_room(self._fall["room"], from_room_id=self.room_manager.current_room_id)
-            self._fall = {"t": 0.0, "room": self._fall["room"], "phase": "in"}
-        elif self._fall["phase"] == "in" and self._fall["t"] >= 0.9:
+        kind = self._fall.get("kind", "fall")
+        out_t = constants.DOOR_FADE_OUT if kind == "door" else 1.15
+        in_t = constants.DOOR_FADE_IN if kind == "door" else 0.9
+        if self._fall["phase"] == "out" and self._fall["t"] >= out_t:
+            dest = self._fall["room"]
+            self._enter_room(dest, from_room_id=self.room_manager.current_room_id)
+            if kind == "door" and str(dest).startswith("vide_"):
+                self._fall = None
+                return False
+            self._fall = {"t": 0.0, "room": dest, "phase": "in", "kind": kind}
+        elif self._fall["phase"] == "in" and self._fall["t"] >= in_t:
             self._fall = None
             return False
         return True
@@ -594,18 +660,31 @@ class GameView(arcade.View):
     def _draw_fall(self):
         if not self._fall:
             return
-        if self._fall["phase"] == "out":
-            alpha = min(1.0, self._fall["t"] / 0.85)
+        kind = self._fall.get("kind", "fall")
+        if kind == "door":
+            out_t, in_t = constants.DOOR_FADE_OUT, constants.DOOR_FADE_IN
         else:
-            alpha = max(0.0, 1.0 - self._fall["t"] / 0.9)
+            out_t, in_t = 0.85, 0.9
+        if self._fall["phase"] == "out":
+            alpha = min(1.0, self._fall["t"] / max(out_t, 0.001))
+        else:
+            alpha = max(0.0, 1.0 - self._fall["t"] / max(in_t, 0.001))
         if alpha <= 0.02:
             return
+        if kind == "door" and self._door_fade_texture is not None:
+            arcade.draw_texture_rect(
+                self._door_fade_texture,
+                arcade.LBWH(0, 0, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT),
+                alpha=int(255 * alpha),
+            )
+            return
+        color = (8, 8, 10) if kind == "door" else (4, 2, 6)
         arcade.draw_lrbt_rectangle_filled(
             0,
             constants.SCREEN_WIDTH,
             0,
             constants.SCREEN_HEIGHT,
-            (4, 2, 6, int(255 * alpha)),
+            (*color, int(255 * alpha)),
         )
 
     def _draw_void_glitch(self):

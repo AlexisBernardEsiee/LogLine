@@ -1,0 +1,112 @@
+{
+  "library_intro": [
+    {
+      "speaker": "Jam",
+      "text": "Des centaines de dos. Un seul a été rayé de la mémoire de cette maison. Encore faut-il trouver lequel... et où.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+      "thought": true
+    }
+  ],
+  "catalogue": [
+    {
+      "speaker": "Jam",
+      "text": "Un registre. L'inventaire de chaque ouvrage, comme un livre de comptes.",
+      "sprite": "assets/sprites/jam/dialogs/jam_speechless_1.png",
+      "sfx": "assets/sounds/tourner_page.mp3"
+    },
+    {
+      "speaker": "Jam",
+      "text": "Une ligne barrée. Recueil pour enfant. Motif : « n'a jamais existé ».",
+      "sprite": "assets/sprites/jam/dialogs/jam_speechless_3.png"
+    },
+    {
+      "speaker": "Jam",
+      "text": "L'emplacement est resté. Travée de la deuxième lampe. Tablette du haut. Dos sans titre.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
+      "thought": true
+    }
+  ],
+  "catalogue_after": [
+    {
+      "speaker": "Jam",
+      "text": "Deuxième lampe. Tablette du haut. Un dos nu. C'est tout ce que le registre a laissé.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+      "thought": true
+    }
+  ],
+  "blank_book_click": [
+    {
+      "speaker": "Jam",
+      "text": "Là. Sous la deuxième lumière. Le dos n'a plus de nom.",
+      "sprite": "assets/sprites/jam/dialogs/jam_speechless_1.png",
+      "sfx": "assets/sounds/tourner_page.mp3"
+    },
+    {
+      "speaker": "Jam",
+      "text": "Le titre a été gratté. Il reste la place de trois lettres.",
+      "sprite": "assets/sprites/jam/dialogs/jam_speechless_3.png"
+    },
+    {
+      "speaker": "Jam",
+      "text": "L'ouvrage « inexistant » n'a jamais quitté le rayon. La porte devrait s'ouvrir.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png",
+      "thought": true
+    }
+  ],
+  "blank_book_after": [
+    {
+      "speaker": "Jam",
+      "text": "Trois lettres grattées. Un nom qu'on n'avait plus le droit d'écrire.",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
+      "thought": true
+    }
+  ],
+  "library_door_locked": [
+    {
+      "speaker": "Jam",
+      "text": "Rien. Il manque une entrée au catalogue de cette maison. Sans le registre, je cherche à l'aveugle.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png",
+      "thought": true
+    }
+  ],
+  "shelf_law": [
+    {
+      "speaker": "Jam",
+      "text": "Du code civil. Tous les titres sont encore là. Ce n'est pas un inventaire.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
+      "thought": true
+    }
+  ],
+  "shelf_center": [
+    {
+      "speaker": "Jam",
+      "text": "Des dizaines de dos dorés. Aucun n'est anonyme. Si un livre a été effacé, ce n'est pas en regardant au hasard que je le verrai.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+      "thought": true
+    }
+  ],
+  "shelf_law_hint": [
+    {
+      "speaker": "Jam",
+      "text": "Toujours du droit. Le registre ne parlait pas de ce rayon-là.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
+      "thought": true
+    }
+  ],
+  "shelf_accounts": [
+    {
+      "speaker": "Jam",
+      "text": "Comptes, millésimes, totaux. Chaque étiquette est intacte.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+      "thought": true
+    }
+  ],
+  "shelf_accounts_hint": [
+    {
+      "speaker": "Jam",
+      "text": "Trop loin, contre le mur. Le registre disait : travée de la deuxième lampe, tablette du haut.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
+      "thought": true
+    }
+  ]
+}
