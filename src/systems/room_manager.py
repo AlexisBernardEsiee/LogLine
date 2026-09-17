@@ -24,6 +24,8 @@ class RoomManager:
         self.background = None
         self.background_if = {}
         self.auto_deaths = []
+        self.auto_exits = []
+        self.unlock_if = None
         self.lustre_prop = None
         self.layers = []
         self.interactables = []
@@ -48,6 +50,8 @@ class RoomManager:
         self.background = data.get("background")
         self.background_if = data.get("background_if", {})
         self.auto_deaths = data.get("auto_deaths", [])
+        self.auto_exits = data.get("auto_exits", [])
+        self.unlock_if = data.get("unlock_if")
         self.lustre_prop = data.get("lustre_prop")
         self.layers = data.get("layers", [])
         self.interactables = [Interactable(item) for item in data.get("interactables", [])]

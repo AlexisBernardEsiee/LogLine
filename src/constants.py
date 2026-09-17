@@ -118,11 +118,16 @@ DIALOGUE_FONT_SIZE = 25
 DIALOGUE_PORTRAIT_PAD = -20
 DIALOGUE_PORTRAIT_HEIGHT_RATIO = 0.6
 
+DOOR_FADE_OUT = 0.16
+DOOR_FADE_IN = 0.18
+SPRITE_EMPTY_CORRIDOR = "assets/sprites/rooms/jeu_1920x1080/salle1_couloir.png"
+
 INSPECT_DURATION = 0.55
 INSPECT_ZOOM = 2.5
 INSPECT_FADE_ALPHA = 175
 
 ROOM_CORRIDOR = "room_1"
+ROOM_LIBRARY = "room_library"
 ROOM_BAR = "room_2"
 ROOM_BEDROOM = "room_3"
 ROOM_OFFICE = "room_4"
@@ -136,6 +141,8 @@ SPRITE_KEY = "assets/sprites/key.png"
 SPRITE_POISON = "assets/sprites/poison.png"
 SPRITE_ASHTRAY = "assets/sprites/ashtray.png"
 SPRITE_DIARY = "assets/sprites/diaries.png"
+SPRITE_LIBRARY_CATALOGUE = "assets/sprites/library/catalogue.png"
+SPRITE_LIBRARY_BLANK_BOOK = "assets/sprites/library/blank_book.png"
 SPRITE_FRAME = "assets/sprites/broken_frame.png"
 SPRITE_HORSE = "assets/sprites/horse.png"
 SPRITE_MR_P = "assets/sprites/shadow_man.png"

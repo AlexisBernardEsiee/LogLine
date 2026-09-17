@@ -8,14 +8,27 @@
   ],
   "glass": [
     {
-      "speaker": "Jam",
-      "text": "Un verre de whisky encore à moitié plein. Comme si son propriétaire avait été interrompu en pleine soirée.",
-      "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png",
-      "sfx": "assets/sounds/verre_prendre.mp3"
-    },
+        "speaker": "Jam",
+        "text": "Un verre de whisky encore à moitié plein. Comme si son propriétaire avait été interrompu en pleine soirée.",
+        "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png",
+        "sfx": "assets/sounds/verre_prendre.mp3",
+        "choices": [
+            {
+                "text": "Examiner de plus près le verre",
+                "next": "glass_examine",
+                "death": true
+            },
+            {
+                "text": "Ce verre n'a rien d'intéressant",
+                "next": "glass_ignore"
+            }
+        ]
+    }
+  ],
+  "glass_examine": [
     {
       "speaker": "Jam",
-      "text": "Cette odeur...",
+      "text": "Cette odeur...ça sent les amandes amères.",
       "sprite": "assets/sprites/jam/dialogs/jam_stunned.png"
     },
     {
@@ -23,6 +36,13 @@
       "text": "Non...(perte de conscience)",
       "sprite": "assets/sprites/jam/dialogs/jam_sad_2.png"
     }
+  ],
+  "glass_ignore": [
+    {
+      "speaker": "Jam",
+      "text": "...Je préfère voir autre chose.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png"
+    } 
   ],
   "glass_after": [
     {

@@ -4,7 +4,7 @@
   "background": "couloir",
   "entry_x": 280,
   "entries": {
-    "room_2": {
+    "room_library": {
       "x": 1640,
       "facing": "left"
     }
@@ -19,7 +19,8 @@
       "kind": "photo",
       "hitbox": [1057, 1194, 534, 703],
       "dialogue_id": "photo",
-      "reveals": "key_revealed",
+      "done_dialogue": "photo_after",
+      "done_flag": "photo_examined",
       "inspect": {
         "effect": "fade_zoom",
         "zoom": 2.6,
@@ -74,7 +75,7 @@
       "name": "door",
       "kind": "door",
       "hitbox": [1727, 1884, 217, 753],
-      "leads_to": "room_2",
+      "leads_to": "room_library",
       "requires": "has_key",
       "locked_dialogue": "door_locked",
       "sfx": "assets/sounds/grincement_porte.mp3"

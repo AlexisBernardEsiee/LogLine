@@ -36,13 +36,38 @@
     },
     {
       "speaker": "Jam",
-      "text": "Attends, en regardant mon reflet dans le verre brisé... Pourquoi j'ai l'impression que ce n'est pas mon visage ?",
-      "sprite": "assets/sprites/jam/dialogs/jam_speechless_3.png"
+      "text": "...",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png"
     },
     {
       "speaker": "Jam",
-      "text": "Je... je ne sens plus rien...",
-      "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png"
+      "text": "Peut-être que je peux essayer...",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
+      "choices": [
+            {
+                "text": "Soulever les éclats de verre",
+                "next": "frame_death",
+                "death": true
+            },
+            {
+                "text": "Ne rien faire",
+                "next": "frame_ignore"
+            }
+        ]
+    }
+  ],
+  "frame_death": [
+    {
+      "speaker": "Jam",
+      "text": "...Je dois savoir ce qu'il s'est passé.",
+      "sprite": "assets/sprites/jam/dialogs/jam_speechless_2.png"
+    }
+  ],
+  "frame_ignore": [
+    {
+      "speaker": "Jam",
+      "text": "Non... Mais qu'est-ce qui me prend ? Je perds la tête...",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad_2.png"
     }
   ],
   "broken_frame_after": [

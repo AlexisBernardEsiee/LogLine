@@ -4,11 +4,11 @@
   "background": "chambre",
   "entry_x": 280,
   "entries": {
-    "room_2": {
+    "vide_bar_chambre": {
       "x": 280,
       "facing": "right"
     },
-    "room_4": {
+    "vide_chambre_bureau": {
       "x": 1640,
       "facing": "left"
     }
@@ -19,7 +19,7 @@
       "name": "door_bar",
       "kind": "door",
       "hitbox": [40, 160, 200, 800],
-      "leads_to": "room_2",
+      "leads_to": "vide_bar_chambre",
       "sfx": "assets/sounds/grincement_porte.mp3"
     },
     {
@@ -45,6 +45,7 @@
       "sprite": "assets/sprites/broken_frame.png",
       "dialogue_id": "broken_frame",
       "done_dialogue": "broken_frame_after",
+      "done_flag": "died_glass",
       "inspect": {
         "effect": "sprite",
         "sprite": "assets/sprites/broken_frame.png",
@@ -80,7 +81,7 @@
       "name": "door_office",
       "kind": "door",
       "hitbox": [1688, 1890, 200, 800],
-      "leads_to": "room_4",
+      "leads_to": "vide_chambre_bureau",
       "sfx": "assets/sounds/grincement_porte.mp3"
     }
   ]

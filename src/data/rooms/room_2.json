@@ -4,11 +4,11 @@
   "background": "bar",
   "entry_x": 280,
   "entries": {
-    "room_1": {
+    "vide_library_bar": {
       "x": 280,
       "facing": "right"
     },
-    "room_3": {
+    "vide_bar_chambre": {
       "x": 1640,
       "facing": "left"
     }
@@ -21,7 +21,7 @@
       "name": "door_corridor",
       "kind": "door",
       "hitbox": [59, 173, 196, 806],
-      "leads_to": "room_1",
+      "leads_to": "vide_library_bar",
       "sfx": "assets/sounds/grincement_porte.mp3"
     },
     {
@@ -67,7 +67,7 @@
       "name": "door_bedroom",
       "kind": "door",
       "hitbox": [1688, 1888, 210, 780],
-      "leads_to": "room_3",
+      "leads_to": "vide_bar_chambre",
       "sfx": "assets/sounds/grincement_porte.mp3"
     }
   ]

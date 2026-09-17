@@ -19,6 +19,14 @@
     "type": "image",
     "path": "assets/sprites/rooms/jeu_1920x1080/salle1_couloir_v2.png"
   },
+  "bibliotheque": {
+    "type": "image",
+    "path": "assets/sprites/rooms/jeu_1920x1080/bibliotheque.png"
+  },
+  "vide": {
+    "type": "image",
+    "path": "assets/sprites/rooms/jeu_1920x1080/salle1_couloir.png"
+  },
   "bar": {
     "type": "image",
     "path": "assets/sprites/rooms/jeu_1920x1080/salle2_bar_v2.png"

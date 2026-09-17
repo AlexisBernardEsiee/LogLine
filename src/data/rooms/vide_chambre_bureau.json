@@ -1,0 +1,37 @@
+{
+  "id": "vide_chambre_bureau",
+  "name": "",
+  "background": "vide",
+  "entry_x": 280,
+  "entries": {
+    "room_3": {
+      "x": 280,
+      "facing": "right"
+    },
+    "room_4": {
+      "x": 1640,
+      "facing": "left"
+    }
+  },
+  "floor_y": 300,
+  "auto_exits": [
+    { "x_max": 180, "leads_to": "room_3" },
+    { "x_min": 1740, "leads_to": "room_4" }
+  ],
+  "interactables": [
+    {
+      "name": "door_left",
+      "kind": "door",
+      "hitbox": [0, 360, 0, 1080],
+      "leads_to": "room_3",
+      "priority": 5
+    },
+    {
+      "name": "door_right",
+      "kind": "door",
+      "hitbox": [1560, 1920, 0, 1080],
+      "leads_to": "room_4",
+      "priority": 5
+    }
+  ]
+}

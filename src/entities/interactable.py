@@ -6,6 +6,7 @@ class Interactable:
         self.rect = tuple(data.get("rect", self.hitbox))
         self.dialogue_id = data.get("dialogue_id")
         self.done_dialogue = data.get("done_dialogue")
+        self.done_flag = data.get("done_flag")
         self.locked_dialogue = data.get("locked_dialogue")
         self.leads_to = data.get("leads_to")
         self.requires = data.get("requires")
@@ -15,6 +16,7 @@ class Interactable:
         self.hide_if = data.get("hide_if")
         self.reveals = data.get("reveals")
         self.gives = data.get("gives")
+        self.dialogue_if = data.get("dialogue_if") or {}
         self.death = data.get("death")
         self.sfx = data.get("sfx")
         self.transition = data.get("transition")
@@ -28,6 +30,13 @@ class Interactable:
         if self.hide_if and state.flag(self.hide_if):
             return False
         return True
+
+    def resolve_dialogue(self, state):
+        if state is not None:
+            for flag, scene_id in self.dialogue_if.items():
+                if scene_id and state.flag(flag):
+                    return scene_id
+        return self.dialogue_id
 
     def contains(self, sprite):
         left, right, _bottom, _top = self.hitbox

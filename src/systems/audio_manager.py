@@ -14,7 +14,7 @@ class AudioManager:
     def __init__(self) -> None:
         self.music_player = None
         self.current_music_sound: arcade.Sound | None = None
-        self.music_volume: float = 0.5
+        self.music_volume: float = 0.7
         self.sfx_volume: float = 0.7
         self.sounds_cache: dict[str, arcade.Sound] = {}
         self._music_path: Path | None = None
