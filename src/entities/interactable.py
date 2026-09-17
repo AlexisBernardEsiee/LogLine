@@ -20,6 +20,7 @@ class Interactable:
         self.death = data.get("death")
         self.sfx = data.get("sfx")
         self.transition = data.get("transition")
+        self.blocks = bool(data.get("blocks", False))
         self.keypad = data.get("keypad")
         self.bookshelf = data.get("bookshelf")
         self.priority = int(data.get("priority", 0))

@@ -27,6 +27,8 @@ class RoomManager:
         self.auto_exits = []
         self.unlock_if = None
         self.lustre_prop = None
+        self.collisions = []
+        self.spawn_if = {}
         self.layers = []
         self.interactables = []
         self._visited = set()
@@ -53,6 +55,8 @@ class RoomManager:
         self.auto_exits = data.get("auto_exits", [])
         self.unlock_if = data.get("unlock_if")
         self.lustre_prop = data.get("lustre_prop")
+        self.collisions = data.get("collisions", [])
+        self.spawn_if = data.get("spawn_if", {})
         self.layers = data.get("layers", [])
         self.interactables = [Interactable(item) for item in data.get("interactables", [])]
         self._override = None
@@ -126,7 +130,7 @@ class RoomManager:
         if isinstance(spec, str):
             return self._texture(spec)
         if isinstance(spec, dict) and spec.get("type") == "image":
-            return self._texture(spec["path"])
+            return self._texture(spec["path"], flip_x=bool(spec.get("flip_x")))
         return None
 
     def current_background_texture(self, state=None):
@@ -156,7 +160,7 @@ class RoomManager:
             elif spec.get("type") == "color":
                 self._fill(tuple(spec["color"]))
             elif spec.get("type") == "image":
-                self._draw_texture(self._texture(spec["path"]))
+                self._draw_texture(self._texture(spec["path"], flip_x=bool(spec.get("flip_x"))))
         else:
             for layer in self.layers:
                 arcade.draw_lrbt_rectangle_filled(
@@ -194,13 +198,18 @@ class RoomManager:
             arcade.LBWH(0, 0, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT),
         )
 
-    def _texture(self, relative_path):
-        if relative_path not in self._textures:
+    def _texture(self, relative_path, flip_x=False):
+        key = f"{relative_path}:fx" if flip_x else relative_path
+        if key not in self._textures:
             full_path = constants.PROJECT_ROOT / relative_path
             if not full_path.exists():
                 raise FileNotFoundError(f"Image introuvable : {full_path}")
-            self._textures[relative_path] = arcade.load_texture(str(full_path))
-        return self._textures[relative_path]
+            if flip_x:
+                image = Image.open(full_path).convert("RGBA").transpose(Image.FLIP_LEFT_RIGHT)
+                self._textures[key] = arcade.Texture(image, hash=key)
+            else:
+                self._textures[key] = arcade.load_texture(str(full_path))
+        return self._textures[key]
 
     def _overlay_texture(self, relative_path):
         key = f"overlay:{relative_path}"

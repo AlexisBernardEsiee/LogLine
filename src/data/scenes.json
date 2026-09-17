@@ -37,11 +37,13 @@
   },
   "bureau": {
     "type": "image",
-    "path": "assets/sprites/rooms/jeu_1920x1080/salle4_bureau.png"
+    "path": "assets/sprites/rooms/jeu_1920x1080/salle4_bureau.png",
+    "flip_x": true
   },
   "bureau_trou": {
     "type": "image",
-    "path": "assets/sprites/rooms/jeu_1920x1080/salle4_bureau_trou.png"
+    "path": "assets/sprites/rooms/jeu_1920x1080/salle4_bureau_trou.png",
+    "flip_x": true
   },
   "neant": {
     "type": "image",

@@ -193,6 +193,7 @@ class GameView(arcade.View):
                 self.state.set_flag("tutorial_done")
 
         self.player.update(delta_time)
+        self._apply_collisions()
         self._maybe_house_thought()
         self._maybe_auto_deaths()
         if self._maybe_auto_exits():
@@ -328,10 +329,19 @@ class GameView(arcade.View):
     def _spawn_player(self):
         if self.player is None:
             self.player = Player()
+        x = self.room_manager.entry_x
+        facing_right = self.room_manager.entry_facing_right
+        for flag, spec in (getattr(self.room_manager, "spawn_if", None) or {}).items():
+            if spec and self.state.flag(flag):
+                x = spec.get("x", x)
+                facing = spec.get("facing")
+                if facing is not None:
+                    facing_right = facing != "left"
+                break
         self.player.place_on_floor(
-            self.room_manager.entry_x,
+            x,
             self.room_manager.floor_y,
-            facing_right=self.room_manager.entry_facing_right,
+            facing_right=facing_right,
         )
         self.keys_held.clear()
 
@@ -485,13 +495,18 @@ class GameView(arcade.View):
         self._spawn_player()
         respawn_x = self.death.spec.get("respawn_x")
         if respawn_x is not None and self.player:
+            facing_right = self.death.spec.get("respawn_facing", "right") != "left"
             self.player.place_on_floor(
                 respawn_x,
                 self.room_manager.floor_y,
-                facing_right=True,
+                facing_right=facing_right,
             )
         self.prompt.visible = False
         self.keys_held.clear()
+        self.state.room_id = room_id
+        if self.death.spec.get("respawn_x") is not None:
+            self.state.from_room_id = "died_lustre"
+        self.state.save()
 
     def _interact(self):
         target = self.room_manager.get_nearby_interactable(self.player, self.state)
@@ -675,6 +690,34 @@ class GameView(arcade.View):
                 self._start_door_fade(dest)
                 return True
         return False
+
+    def _apply_collisions(self):
+        if self.player is None:
+            return
+        x = self.player.center_x
+        for left, right in self._collision_spans():
+            if left < x < right:
+                if self.player.speed_x < 0 or (self.player.speed_x == 0 and x >= (left + right) / 2):
+                    self.player.center_x = right
+                else:
+                    self.player.center_x = left
+
+    def _collision_spans(self):
+        spans = []
+        for spec in getattr(self.room_manager, "collisions", []) or []:
+            flag = spec.get("if")
+            if flag and not self.state.flag(flag):
+                continue
+            box = spec.get("hitbox") or spec.get("x")
+            if not box or len(box) < 2:
+                continue
+            spans.append((box[0], box[1]))
+        for item in self.room_manager.active_interactables(self.state):
+            if not getattr(item, "blocks", False):
+                continue
+            left, right, _bottom, _top = item.hitbox
+            spans.append((left, right))
+        return spans
 
     def _maybe_auto_deaths(self):
         if self.player is None or self.death.blocking or self.lustre.blocking:
