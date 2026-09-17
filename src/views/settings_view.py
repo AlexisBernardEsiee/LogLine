@@ -11,7 +11,7 @@ KEY_ACTIONS = [
     ("KEY_LEFT", "Aller à gauche"),
     ("KEY_RIGHT", "Aller à droite"),
     ("KEY_INTERACT", "Interagir"),
-    ("KEY_CONFIRM", "Valider"),
+    ("KEY_CONFIRM", "Valider un choix"),
     ("KEY_SKIP", "Passer le dialogue"),
 ]
 
