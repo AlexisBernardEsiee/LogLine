@@ -10,7 +10,9 @@ from src.systems.room_manager import RoomManager
 from src.ui.death_effect import DeathEffect
 from src.ui.debug_grid import DebugGrid
 from src.ui.dialogue_box import DialogueBox
+from src.ui.bookshelf import BookshelfOverlay
 from src.ui.inspect_effect import InspectEffect
+from src.ui.keypad import KeypadOverlay
 from src.ui.lustre import LustreProp
 from src.ui.prompt import InteractionPrompt
 from src.ui.tutorial_overlay import TutorialOverlay
@@ -32,6 +34,9 @@ class GameView(arcade.View):
         self.debug_grid = DebugGrid()
         self.inspect = InspectEffect()
         self.lustre = LustreProp()
+        self.bookshelf = BookshelfOverlay()
+        self.keypad = KeypadOverlay()
+        self._keypad_target = None
         self.death = DeathEffect(constants.SPRITE_JAM_DEATH)
         self.state = GameState()
         self._pending_tutorial = False
@@ -106,6 +111,8 @@ class GameView(arcade.View):
                 self.tutorial.draw()
         if not self.death.hiding_world:
             self.inspect.draw()
+            self.bookshelf.draw()
+            self.keypad.draw()
         self._draw_void_glitch()
         self.death.draw()
         self._draw_fall()
@@ -122,6 +129,7 @@ class GameView(arcade.View):
         if self.player and self.death.playing_pose:
             self.player.apply_death_pose(self.death.pose_index)
         self.lustre.update(delta_time)
+        self.keypad.update(delta_time)
         if self.lustre.just_landed and self._pending_lustre_death:
             spec = self._pending_lustre_death
             self._pending_lustre_death = None
@@ -156,7 +164,13 @@ class GameView(arcade.View):
         if self.player is None or not self.room_manager.shows_world:
             return
 
-        if self.death.blocking or self.dialogue_manager.is_active or self.inspect.active or self.lustre.blocking:
+        if (
+            self.death.blocking
+            or self.dialogue_manager.is_active
+            or self.inspect.active
+            or self.lustre.blocking
+            or self._overlay_active()
+        ):
             self.player.speed_x = 0
             if not self.player.dying:
                 self._apply_search_pose()
@@ -183,6 +197,9 @@ class GameView(arcade.View):
         self._apply_search_pose(nearby)
 
     def on_key_press(self, key, modifiers):
+        if self._overlay_active() and not self.dialogue_manager.is_active:
+            self._overlay_key_press(key)
+            return
         if key == constants.KEY_BACK:
             if self._fall or self.lustre.blocking or (self.death.blocking and not self.dialogue_manager.is_active):
                 return
@@ -236,6 +253,8 @@ class GameView(arcade.View):
     def on_mouse_motion(self, x, y, dx, dy):
         world_x, world_y = self.world_camera.to_world(x, y)
         self.debug_grid.on_mouse_motion(world_x, world_y)
+        if self.keypad.active:
+            self.keypad.on_mouse_motion(world_x, world_y)
 
     def on_mouse_press(self, x, y, button, modifiers):
         world_x, world_y = self.world_camera.to_world(x, y)
@@ -244,6 +263,9 @@ class GameView(arcade.View):
         if self.death.blocking and not self.dialogue_manager.is_active:
             return
         if self.debug_grid.on_mouse_press(world_x, world_y, button):
+            return
+        if self._overlay_active() and not self.dialogue_manager.is_active:
+            self._overlay_mouse_press(world_x, world_y)
             return
         if self.inspect.active and not self.inspect.closing and not self.dialogue_manager.is_active:
             self.inspect.skip_open()
@@ -275,6 +297,9 @@ class GameView(arcade.View):
         self._object_search = False
         self.inspect.active = False
         self.inspect.texture = None
+        self.bookshelf.close()
+        self.keypad.close()
+        self._keypad_target = None
         self.lustre.configure(self.room_manager.lustre_prop)
         if self.state.flag("died_lustre"):
             self.lustre.hide()
@@ -457,6 +482,9 @@ class GameView(arcade.View):
             return
         if target.leads_to:
             if target.requires and not self.state.flag(target.requires):
+                if target.keypad:
+                    self._open_keypad(target)
+                    return
                 if target.locked_dialogue:
                     self._object_search = True
                     self._start_dialogue(target.locked_dialogue)
@@ -472,6 +500,10 @@ class GameView(arcade.View):
                 self._start_fall(target.leads_to)
                 return
             self._enter_room(target.leads_to, from_room_id=self.room_manager.current_room_id)
+            return
+
+        if target.bookshelf:
+            self._open_bookshelf(target)
             return
 
         death = target.death
@@ -497,6 +529,68 @@ class GameView(arcade.View):
             self._start_dialogue(dialogue_id)
             return
         self._finish_interaction()
+
+    # Vues rapprochées (étagère, cadenas)
+
+    def _overlay_active(self):
+        return self.bookshelf.active or self.keypad.active
+
+    def _open_bookshelf(self, target):
+        self.keys_held.clear()
+        if target.sfx:
+            self.audio.play_sfx(target.sfx, constants.PROJECT_ROOT / target.sfx)
+        self.bookshelf.open(target.bookshelf)
+
+    def _read_selected_book(self):
+        book = self.bookshelf.selected_book()
+        if book is None:
+            return
+        self._pending_reveal = book.get("reveals")
+        self._pending_give = None
+        self._pending_death = None
+        self._start_dialogue(book.get("dialogue"))
+
+    def _open_keypad(self, target):
+        self.keys_held.clear()
+        self._keypad_target = target
+        self.keypad.open(target.keypad)
+
+    def _unlock_keypad_target(self):
+        target = self._keypad_target
+        self.keypad.close()
+        self._keypad_target = None
+        if target is None:
+            return
+        self.state.set_flag(target.requires)
+        self._interact_with(target)
+
+    def _overlay_key_press(self, key):
+        if self.keypad.active:
+            if key == constants.KEY_BACK:
+                self.keypad.close()
+                self._keypad_target = None
+            elif self.keypad.on_key_press(key):
+                self._unlock_keypad_target()
+            return
+        if key == constants.KEY_BACK:
+            self.bookshelf.close()
+        elif key in (constants.KEY_LEFT, arcade.key.LEFT, arcade.key.UP):
+            self.bookshelf.move(-1)
+        elif key in (constants.KEY_RIGHT, arcade.key.RIGHT, arcade.key.DOWN):
+            self.bookshelf.move(1)
+        elif key in (constants.KEY_INTERACT, constants.KEY_CONFIRM, constants.KEY_SKIP):
+            self._read_selected_book()
+
+    def _overlay_mouse_press(self, x, y):
+        if self.keypad.active:
+            if self.keypad.on_mouse_press(x, y):
+                self._unlock_keypad_target()
+            return
+        index = self.bookshelf.book_at(x, y)
+        if index is None:
+            return
+        self.bookshelf.selected = index
+        self._read_selected_book()
 
     def _start_inspect(self, target):
         if not target.inspect:

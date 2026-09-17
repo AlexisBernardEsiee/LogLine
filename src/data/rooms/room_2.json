@@ -63,10 +63,34 @@
       }
     },
     {
+      "name": "commode",
+      "kind": "commode",
+      "hitbox": [1100, 1415, 270, 550],
+      "sfx": "assets/sounds/tourner_page.mp3",
+      "bookshelf": {
+        "image": "assets/sprites/rooms/jeu_1920x1080/salle2_commode_zoom.png",
+        "books": [
+          { "hitbox": [388, 570, 290, 935], "dialogue": "book_memoires" },
+          { "hitbox": [580, 760, 290, 935], "dialogue": "book_poisons" },
+          { "hitbox": [770, 955, 290, 870], "dialogue": "book_contes" },
+          { "hitbox": [963, 1147, 290, 870], "dialogue": "book_pantin", "reveals": "seen_pantin_note" },
+          { "hitbox": [1152, 1335, 290, 925], "dialogue": "book_whisky" },
+          { "hitbox": [1340, 1530, 290, 870], "dialogue": "book_comptes" }
+        ]
+      }
+    },
+    {
       "name": "door_bedroom",
       "kind": "door",
       "hitbox": [1688, 1888, 210, 780],
-      "leads_to": "room_3"
+      "leads_to": "room_3",
+      "requires": "door_chambre_open",
+      "sfx": "assets/sounds/grincement_porte.mp3",
+      "keypad": {
+        "code": "2309",
+        "title": "Un cadenas à 4 chiffres",
+        "hint": "Une date, peut-être ?"
+      }
     }
   ]
 }

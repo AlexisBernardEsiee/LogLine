@@ -133,5 +133,13 @@
       "sprite": "assets/sprites/jam/dialogs/jam_speechless_1.png",
       "thought": true
     }
+  ],
+  "door_end_locked": [
+    {
+      "speaker": "Jam",
+      "text": "Cette porte refuse de s'ouvrir. On dirait qu'elle ne mène nulle part.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png",
+      "thought": true
+    }
   ]
 }

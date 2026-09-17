@@ -71,6 +71,14 @@
         "zoom": 1.0,
         "duration": 0.4
       }
+    },
+    {
+      "name": "door_end",
+      "kind": "door",
+      "hitbox": [1688, 1890, 200, 800],
+      "leads_to": "room_3",
+      "requires": "door_end_open",
+      "locked_dialogue": "door_end_locked"
     }
   ]
 }
