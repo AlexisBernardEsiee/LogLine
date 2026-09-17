@@ -25,7 +25,13 @@ class AudioManager:
 
     def play_music(self, path: str | Path, volume: float = 0.5, loop: bool = True) -> None:
         """Joue une musique de fond. En streaming pour ne pas bloquer au chargement."""
+        path_str = str(Path(path).resolve())
+
+        if self.current_music_sound == path_str and self.music_player:
+            return
+
         self.stop_music()
+        self.current_music_sound = path_str
         self._music_path = Path(path)
         self._music_loop = loop
         self._start_stream()
@@ -37,7 +43,7 @@ class AudioManager:
             return
         try:
             sound = arcade.Sound(self._music_path, streaming=True)
-            self.current_music_sound = sound
+            #self.current_music_sound = sound
             self.music_player = sound.play(volume=self.music_volume, loop=False)
             self._music_was_playing = False
         except Exception as e:

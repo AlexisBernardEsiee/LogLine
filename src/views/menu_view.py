@@ -38,7 +38,7 @@ class MenuView(arcade.View):
         arcade.schedule_once(self._warmup_game, 0.05)
         
         # Stop la musique actuelle avant de lancer celle du menu
-        self.window.audio.stop_music()
+        #self.window.audio.stop_music()
         self.window.audio.play_music(constants.SOUND_MENU, volume=0.4, loop=True)
 
     def _warmup_game(self, _dt):
