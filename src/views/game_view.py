@@ -78,13 +78,8 @@ class GameView(arcade.View):
         self.audio = self.window.audio
         self.dialogue_box.audio = self.window.audio
         
-        # Stop la musique du menu avant de lancer le son d'ambiance
-        self.audio.stop_music()
-        self.audio.play_music(
-            constants.PROJECT_ROOT / "assets" / "sounds" / "ambiance1.mp3",
-            volume=0.4,
-            loop=True,
-        )
+        ambiance_path = constants.PROJECT_ROOT / "assets" / "sounds" / "ambiance1.mp3"
+        self.audio.play_music(ambiance_path, volume=0.8, loop=True)
 
     def on_resize(self, width, height):
         self.world_camera.fit_to_window()
