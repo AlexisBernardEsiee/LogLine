@@ -7,7 +7,7 @@
   },
   "entry_x": 280,
   "entries": {
-    "vide_couloir_bureau": {
+    "room_1": {
       "x": 280,
       "facing": "right"
     },
@@ -50,7 +50,7 @@
       "name": "door_corridor",
       "kind": "door",
       "hitbox": [40, 160, 200, 800],
-      "leads_to": "vide_couloir_bureau",
+      "leads_to": "room_1",
       "sfx": "assets/sounds/grincement_porte.mp3"
     },
     {
