@@ -79,6 +79,18 @@
     "type": "image", 
     "path": "assets/sprites/flashback/flashback3_3_suppression.png" 
   },
+  "flashback_lustre_1_anniversaire": {
+    "type": "image",
+    "path": "assets/sprites/flashback/flashback_lustre_1_anniversaire.png"
+  },
+  "flashback_lustre_2_livre": {
+    "type": "image",
+    "path": "assets/sprites/flashback/flashback_lustre_2_livre.png"
+  },
+  "flashback_lustre_3_boucle": {
+    "type": "image",
+    "path": "assets/sprites/flashback/flashback_lustre_3_boucle.png"
+  },
   "room": {
     "type": "room"
   }
