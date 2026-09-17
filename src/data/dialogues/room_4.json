@@ -100,13 +100,13 @@
   "hole_jump": [
     {
       "speaker": "Jam",
-      "text": "C'est vraiment très haut... Mais il m'attend en bas, sous le lustre.",
+      "text": "C'est très haut... Si je saute, je vais sans doute mourir. Mais il m'attend en bas, sous le lustre.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
       "thought": true
     },
     {
       "speaker": "Jam",
-      "text": "Est-ce que je saute ?",
+      "text": "Je devrais...",
       "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
       "thought": true,
       "choices": [

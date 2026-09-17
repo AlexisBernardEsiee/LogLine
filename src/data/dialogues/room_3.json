@@ -31,21 +31,21 @@
   "broken_frame": [
     {
       "speaker": "Jam",
-      "text": "Le cadre est brisé. Les éclats sont encore plantés dans le portrait. Tranchants. Quelqu'un a voulu rayer un visage.",
+      "text": "Le cadre est brisé. Les éclats sont encore plantés dans le portrait. Quelqu'un a voulu rayer un visage.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png"
     },
     {
       "speaker": "Jam",
-      "text": "Si je les retire à mains nues, je vais me couper. Mais sans ça, je ne verrai jamais qui a été effacé.",
+      "text": "Est-ce que je devrais essayé...",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
       "choices": [
             {
-                "text": "Retirer les éclats à mains nues",
+                "text": "Prendre les éclats et me suicider",
                 "next": "frame_death",
                 "death": true
             },
             {
-                "text": "Laisser le verre en place",
+                "text": "Ne rien faire",
                 "next": "frame_ignore"
             }
         ]
@@ -54,27 +54,22 @@
   "frame_death": [
     {
       "speaker": "Jam",
-      "text": "Aïe... Ça a glissé. Le verre m'a ouvert la paume.",
-      "sprite": "assets/sprites/jam/dialogs/jam_stunned.png"
-    },
-    {
-      "speaker": "Jam",
-      "text": "Il y a trop de sang. Je... je ne tiens plus debout.",
-      "sprite": "assets/sprites/jam/dialogs/jam_sad_2.png"
+      "text": "...C'est pour la vérité. Je ne peux pas rester dans ce monde sans savoir qui est cette personne.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png"
     }
   ],
   "frame_ignore": [
     {
       "speaker": "Jam",
-      "text": "Non. Ces éclats me tueraient. Je n'y touche pas.",
+      "text": "Non...Mais je perds la tête, je devrais réfléchir un peu plus.",
       "sprite": "assets/sprites/jam/dialogs/jam_sad_2.png"
     }
   ],
   "broken_frame_after": [
     {
       "speaker": "Jam",
-      "text": "Ces éclats m'ont déjà tuée. Je ne recommencerai pas.",
-      "sprite": "assets/sprites/jam/dialogs/jam_sad_2.png",
+      "text": "C'est suffisant...",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
       "thought": true
     }
   ],
@@ -130,7 +125,7 @@
     },
     {
       "speaker": "Jam",
-      "text": "De qui parlait-il dans ce souvenir ? Qui est sa fille ?",
+      "text": "Sa fille...",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
       "thought": true
     },
