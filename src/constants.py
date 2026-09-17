@@ -81,6 +81,20 @@ KEY_COPY_HITBOX = C
 KEY_FULLSCREEN = F11
 KEY_BACK = ESCAPE
 
+
+def _key_codes(*names):
+    codes = []
+    for name in names:
+        value = getattr(arcade.key, name, None)
+        if value is not None:
+            codes.append(value)
+    return tuple(codes)
+
+
+DIALOGUE_CHOICE_UP = _key_codes("UP", "NUM_UP", "W")
+DIALOGUE_CHOICE_DOWN = _key_codes("DOWN", "NUM_DOWN", "S")
+DIALOGUE_ADVANCE = (KEY_CONFIRM, KEY_INTERACT, KEY_SKIP) + DIALOGUE_CHOICE_DOWN
+
 DEBUG_GRID_STEP = 50
 DEBUG_GRID_MAJOR = 100
 

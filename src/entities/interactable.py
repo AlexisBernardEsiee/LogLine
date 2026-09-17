@@ -8,6 +8,7 @@ class Interactable:
         self.done_dialogue = data.get("done_dialogue")
         self.done_flag = data.get("done_flag")
         self.locked_dialogue = data.get("locked_dialogue")
+        self.locked_dialogue_if = data.get("locked_dialogue_if") or {}
         self.leads_to = data.get("leads_to")
         self.requires = data.get("requires")
         self.inspect = data.get("inspect")
@@ -20,6 +21,7 @@ class Interactable:
         self.death = data.get("death")
         self.sfx = data.get("sfx")
         self.transition = data.get("transition")
+        self.blocks = bool(data.get("blocks", False))
         self.keypad = data.get("keypad")
         self.bookshelf = data.get("bookshelf")
         self.priority = int(data.get("priority", 0))
@@ -39,6 +41,13 @@ class Interactable:
                 if scene_id and state.flag(flag):
                     return scene_id
         return self.dialogue_id
+
+    def resolve_locked_dialogue(self, state):
+        if state is not None:
+            for flag, scene_id in self.locked_dialogue_if.items():
+                if scene_id and state.flag(flag):
+                    return scene_id
+        return self.locked_dialogue
 
     def contains(self, sprite):
         left, right, _bottom, _top = self.hitbox

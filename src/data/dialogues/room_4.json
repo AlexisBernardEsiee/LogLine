@@ -13,7 +13,7 @@
     },
     {
       "speaker": "Jam",
-      "text": "Mais … c'est... mon prénom.",
+      "text": "Mais... c'est... mon prénom.",
       "sprite": "assets/sprites/jam/dialogs/jam_unhappy.png"
     }
   ],
@@ -41,6 +41,12 @@
     "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
     "thought": true
   },
+   {
+    "speaker": "Jam",
+    "text": "C'était donc...les souvenirs de Monsieur Plènozas? ",
+    "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
+    "thought": true
+  },
   {
     "speaker": "Jam",
     "text": "« Le Pantin qui rêvait d'être vivant »... Ce titre me dit quelque chose. Je dois m'en souvenir.",
@@ -51,7 +57,7 @@
   "death_lustre_void": [
   {
     "speaker": "Jam",
-    "text": "Le lustre... Il m'est tombé dessus. Je suis... morte ?",
+    "text": "Le lustre... Il m'est tombé dessus. Je suis... morte ? Mais où suis-je?",
     "sprite": "assets/sprites/jam/dialogs/jam_sad_2.png",
     "thought": true,
     "scene": "flashback_lustre_1_anniversaire"
@@ -63,8 +69,14 @@
     "scene": "flashback_lustre_1_anniversaire"
   },
   {
+      "speaker": "Jam",
+      "text": "Cette personne... C'est Monsieur Plènozas ?! Il est là, mais... impossible de l'atteindre ou de lui parler.",
+      "sprite": "assets/sprites/jam/dialogs/jam_unhappy.png",
+      "scene": "flashback_lustre_1_anniversaire"
+  },
+  {
     "speaker": "Mr. Plènozas",
-    "text": "Le Pantin qui rêvait d'être vivant. Elle voulait toujours que je le lui lise.",
+    "text": "« Le Pantin qui rêvait d'être vivant ». Elle a toujours voulu que je lui lise ce livre.",
     "sprite": "assets/sprites/shadow_man.png",
     "scene": "flashback_lustre_2_livre"
   },

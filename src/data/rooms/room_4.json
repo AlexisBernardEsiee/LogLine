@@ -16,21 +16,31 @@
       "facing": "left"
     },
     "void": {
-      "x": 960,
-      "facing": "right"
+      "x": 1640,
+      "facing": "left"
+    },
+    "died_lustre": {
+      "x": 1640,
+      "facing": "left"
+    }
+  },
+  "spawn_if": {
+    "died_lustre": {
+      "x": 1640,
+      "facing": "left"
     }
   },
   "floor_y": 280,
   "lustre_prop": {
     "sprite": "assets/sprites/lustre/lustre_x4.png",
     "hang": [790, 1130, 580, 1020],
-    "land": [980, 1340, 230, 580],
+    "land": [580, 940, 230, 580],
     "fall_seconds": 0.9
   },
   "auto_deaths": [
     {
       "unless": "died_lustre",
-      "x": [820, 1120],
+      "x": [800, 1100],
       "death": {
         "id": "lustre",
         "flag": "died_lustre",
@@ -38,32 +48,34 @@
         "silence_hold": 1.0,
         "sfx": "assets/sounds/lustre.mp3",
         "sfx_volume": 0.85,
-        "respawn_x": 280,
+        "respawn_x": 1640,
+        "respawn_facing": "left",
         "void_scene": "flashback_lustre_1_anniversaire",
         "void_dialogue": "death_lustre_void",
         "aftermath_dialogue": "chandelier_after"
       }
     }
   ],
+  "collisions": [],
   "interactables": [
     {
       "name": "door_corridor",
       "kind": "door",
-      "hitbox": [40, 160, 200, 800],
+      "hitbox": [0, 220, 220, 800],
       "leads_to": "room_1",
       "sfx": "assets/sounds/grincement_porte.mp3"
     },
     {
       "name": "door_library",
       "kind": "door",
-      "hitbox": [1700, 1920, 220, 800],
+      "hitbox": [1760, 1880, 200, 800],
       "leads_to": "vide_bureau_library",
       "sfx": "assets/sounds/grincement_porte.mp3"
     },
     {
       "name": "bookmark",
       "kind": "bookmark",
-      "hitbox": [455, 545, 470, 575],
+      "hitbox": [1464, 1573, 491, 587],
       "dialogue_id": "bookmark",
       "done_dialogue": "bookmark_after",
       "reveals": "seen_bookmark",
@@ -78,8 +90,8 @@
     {
       "name": "letters",
       "kind": "letters",
-      "hitbox": [1210, 1350, 228, 302],
-      "rect": [1210, 1350, 228, 302],
+      "hitbox": [389, 518, 193, 271],
+      "rect": [389, 518, 193, 271],
       "sprite": "assets/sprites/Letters.png",
       "dialogue_id": "letters",
       "done_dialogue": "letters",
@@ -94,7 +106,8 @@
     {
       "name": "hole",
       "kind": "hole",
-      "hitbox": [675, 1236, 165, 484],
+      "hitbox": [686, 1336, 170, 482],
+      "blocks": true,
       "leads_to": "void",
       "transition": "fall",
       "hidden_unless": "died_lustre",

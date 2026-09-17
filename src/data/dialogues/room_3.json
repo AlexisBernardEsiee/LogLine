@@ -31,26 +31,21 @@
   "broken_frame": [
     {
       "speaker": "Jam",
-      "text": "Le cadre est cassé. Comme si quelqu'un a voulu effacer une personne de cette image.",
+      "text": "Le cadre est brisé. Les éclats sont encore plantés dans le portrait. Tranchants. Quelqu'un a voulu rayer un visage.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png"
     },
     {
       "speaker": "Jam",
-      "text": "...",
-      "sprite": "assets/sprites/jam/dialogs/jam_doubt_1.png"
-    },
-    {
-      "speaker": "Jam",
-      "text": "Peut-être que je peux essayer...",
+      "text": "Si je les retire à mains nues, je vais me couper. Mais sans ça, je ne verrai jamais qui a été effacé.",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_3.png",
       "choices": [
             {
-                "text": "Soulever les éclats de verre",
+                "text": "Retirer les éclats à mains nues",
                 "next": "frame_death",
                 "death": true
             },
             {
-                "text": "Ne rien faire",
+                "text": "Laisser le verre en place",
                 "next": "frame_ignore"
             }
         ]
@@ -59,21 +54,26 @@
   "frame_death": [
     {
       "speaker": "Jam",
-      "text": "...Je dois savoir ce qu'il s'est passé.",
-      "sprite": "assets/sprites/jam/dialogs/jam_speechless_2.png"
+      "text": "Aïe... Ça a glissé. Le verre m'a ouvert la paume.",
+      "sprite": "assets/sprites/jam/dialogs/jam_stunned.png"
+    },
+    {
+      "speaker": "Jam",
+      "text": "Il y a trop de sang. Je... je ne tiens plus debout.",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad_2.png"
     }
   ],
   "frame_ignore": [
     {
       "speaker": "Jam",
-      "text": "Non... Mais qu'est-ce qui me prend ? Je perds la tête...",
+      "text": "Non. Ces éclats me tueraient. Je n'y touche pas.",
       "sprite": "assets/sprites/jam/dialogs/jam_sad_2.png"
     }
   ],
   "broken_frame_after": [
     {
       "speaker": "Jam",
-      "text": "Je ferais mieux de ne plus toucher à ces éclats de verre.",
+      "text": "Ces éclats m'ont déjà tuée. Je ne recommencerai pas.",
       "sprite": "assets/sprites/jam/dialogs/jam_sad_2.png",
       "thought": true
     }
@@ -93,6 +93,13 @@
     }
   ],
     "death_glass_void": [
+    {
+      "speaker": "Jam",
+      "text": "Le verre... Il m'a tranchée. Je suis morte. Encore.",
+      "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
+      "thought": true,
+      "scene": "flashback2_1_cadre"
+    },
     {
       "speaker": "Mr. Plènozas",
       "text": "Ce visage... je le connais par coeur. Je l'ai toujours eu sous les yeux, je l'ai vu grandir.",
@@ -117,13 +124,13 @@
   "death_glass_after": [
     {
       "speaker": "Jam",
-      "text": "Ce n'est pas la première fois que je ressens ce vide... Ce manque indicible. Mais de quoi s'agit-il ?",
+      "text": "Je respire. Ces éclats m'ont tranchée. Morte, puis revenue.",
       "sprite": "assets/sprites/jam/dialogs/jam_sad_1.png",
       "thought": true
     },
     {
       "speaker": "Jam",
-      "text": "De qui parlait-il à travers ce souvenir ? Qui est sa fille ?",
+      "text": "De qui parlait-il dans ce souvenir ? Qui est sa fille ?",
       "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png",
       "thought": true
     },
