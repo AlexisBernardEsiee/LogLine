@@ -72,7 +72,7 @@
       "speaker": "Jam",
       "text": "Cette personne... C'est Monsieur Plènozas ?! Il est là, mais... impossible de l'atteindre ou de lui parler.",
       "sprite": "assets/sprites/jam/dialogs/jam_unhappy.png",
-      "scene": "flashback1_2_main_ombre"
+      "scene": "flashback_lustre_1_anniversaire"
   },
   {
     "speaker": "Mr. Plènozas",
