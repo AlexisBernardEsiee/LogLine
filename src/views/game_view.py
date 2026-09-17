@@ -206,7 +206,7 @@ class GameView(arcade.View):
                     self.dialogue_box.move_choice(1)
                     return
 
-                if key == constants.KEY_CONFIRM:
+                if key in (constants.KEY_CONFIRM, constants.KEY_SKIP):
                     choice_index = self.dialogue_box.get_selected_choice()
                     choice = self.dialogue_manager.get_choices()[choice_index]
                     self._handle_dialogue_choice(choice)
@@ -320,6 +320,9 @@ class GameView(arcade.View):
         self.dialogue_box.show(line)
         if "scene" in line:
             self.room_manager.set_scene(line["scene"])
+        if line.get("key"):
+            self.state.set_flag("key_revealed")
+            self.state.set_flag("photo_examined")
         if line.get("inspect_sprite"):
             self.inspect.set_sprite(line["inspect_sprite"])
         if line.get("ending"):
@@ -454,8 +457,14 @@ class GameView(arcade.View):
 
         death = target.death
         already_died = death and self.state.flag(death.get("flag"))
-        already_seen = bool(target.reveals and self.state.flag(target.reveals) and target.done_dialogue)
+        already_seen = (
+            target.done_flag and self.state.flag(target.done_flag)
+        ) or (
+            target.reveals and self.state.flag(target.reveals) and target.done_dialogue
+        )
+
         dialogue_id = target.done_dialogue if (already_died or already_seen) else target.dialogue_id
+                
         self._pending_reveal = None if already_seen else target.reveals
         self._pending_give = target.gives
         self._pending_death = None
