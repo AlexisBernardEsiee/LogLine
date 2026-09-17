@@ -40,6 +40,7 @@
       "sprite": "assets/sprites/broken_frame.png",
       "dialogue_id": "broken_frame",
       "done_dialogue": "broken_frame_after",
+      "done_flag": "died_glass",
       "inspect": {
         "effect": "sprite",
         "sprite": "assets/sprites/broken_frame.png",

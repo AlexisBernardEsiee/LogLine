@@ -6,6 +6,7 @@ class Interactable:
         self.rect = tuple(data.get("rect", self.hitbox))
         self.dialogue_id = data.get("dialogue_id")
         self.done_dialogue = data.get("done_dialogue")
+        self.done_flag = data.get("done_flag")
         self.locked_dialogue = data.get("locked_dialogue")
         self.leads_to = data.get("leads_to")
         self.requires = data.get("requires")

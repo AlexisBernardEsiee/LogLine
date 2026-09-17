@@ -19,7 +19,8 @@
       "kind": "photo",
       "hitbox": [1057, 1194, 534, 703],
       "dialogue_id": "photo",
-      "reveals": "key_revealed",
+      "done_dialogue": "photo_after",
+      "done_flag": "photo_examined",
       "inspect": {
         "effect": "fade_zoom",
         "zoom": 2.6,

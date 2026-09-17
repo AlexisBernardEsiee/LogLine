@@ -23,12 +23,32 @@
     {
       "speaker": "Jam",
       "text": "Un tableau classique. Attends, il est légèrement penché...",
-      "sprite": "assets/sprites/jam/dialogs/jam_speechless_1.png"
-    },
+      "sprite": "assets/sprites/jam/dialogs/jam_speechless_1.png",
+      "choices": [
+            {
+                "text": "Le retourner",
+                "next": "photo_examine"
+            },
+            {
+                "text": "Reposer le tableau",
+                "next": "photo_ignore"
+            }
+        ]
+    }
+  ],
+  "photo_examine": [
     {
       "speaker": "Jam",
       "text": "! Il y a un espace creux derrière.",
-      "sprite": "assets/sprites/jam/dialogs/jam_speechless_3.png"
+      "sprite": "assets/sprites/jam/dialogs/jam_smile_3.png",
+      "key": true
+    }
+  ],
+  "photo_ignore": [
+    {
+      "speaker": "Jam",
+      "text": "Il a l'air précieux...vaut mieux que je n'y touche pas.",
+      "sprite": "assets/sprites/jam/dialogs/jam_doubt_2.png"
     }
   ],
   "key": [
@@ -36,6 +56,14 @@
       "speaker": "Jam",
       "text": "Une clé! Quelle porte ouvrirait-elle?",
       "sprite": "assets/sprites/jam/dialogs/jam_smile_1.png"
+    }
+  ],
+  "photo_after": [
+    {
+      "speaker": "Jam",
+      "text": "Un tableau classique... la clé se cachait derrière.",
+      "sprite": "assets/sprites/jam/dialogs/jam_smile_1.png",
+      "thought": true
     }
   ],
   "door_locked": [
