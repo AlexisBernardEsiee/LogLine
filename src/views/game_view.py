@@ -37,6 +37,7 @@ class GameView(arcade.View):
         self._pending_tutorial = False
         self._pending_dialogue = None
         self._pending_death = None
+        self._choice_death = None
         self._pending_reveal = None
         self._pending_give = None
         self._pending_ending = False
@@ -196,12 +197,31 @@ class GameView(arcade.View):
                 self.inspect.skip_open()
             return
         if self.dialogue_manager.is_active:
+            if self.dialogue_box.has_choices():
+                if key == arcade.key.UP:
+                    self.dialogue_box.move_choice(-1)
+                    return
+
+                if key == arcade.key.DOWN:
+                    self.dialogue_box.move_choice(1)
+                    return
+
+                if key == constants.KEY_CONFIRM:
+                    choice_index = self.dialogue_box.get_selected_choice()
+                    choice = self.dialogue_manager.get_choices()[choice_index]
+                    self._handle_dialogue_choice(choice)
+                    return
+                
+                return
+
             if key in (constants.KEY_CONFIRM, constants.KEY_INTERACT, constants.KEY_SKIP):
                 self._advance_dialogue()
-            return
+                return
+
         if key == constants.KEY_INTERACT:
             self._interact()
             return
+               
         self.keys_held.add(key)
 
     def on_key_release(self, key, modifiers):
@@ -341,6 +361,19 @@ class GameView(arcade.View):
                 self._pending_tutorial = False
             return
         self._apply_line(self.dialogue_manager.current())
+        
+    def _handle_dialogue_choice(self, choice):
+        if choice.get("death"):
+            self._pending_death = self._choice_death
+
+        choice_index = self.dialogue_box.get_selected_choice()
+        self.dialogue_manager.choose(choice_index)
+
+        if self.dialogue_manager.is_active:
+            self._apply_line(self.dialogue_manager.current())
+        else:
+            self.dialogue_box.hide()
+            self._finish_interaction()
 
     def _finish_interaction(self):
         if self._pending_reveal:
@@ -425,7 +458,8 @@ class GameView(arcade.View):
         dialogue_id = target.done_dialogue if (already_died or already_seen) else target.dialogue_id
         self._pending_reveal = None if already_seen else target.reveals
         self._pending_give = target.gives
-        self._pending_death = None if already_died else death
+        self._pending_death = None
+        self._choice_death = None if already_died else death
         self._object_search = True
 
         if dialogue_id:

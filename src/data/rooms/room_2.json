@@ -23,31 +23,31 @@
       "hitbox": [59, 173, 196, 806],
       "leads_to": "room_1"
     },
-    {
-      "name": "glass",
-      "kind": "glass",
-      "hitbox": [603, 705, 470, 500],
-      "rect": [603, 705, 470, 500],
+  {
+    "name": "glass",
+    "kind": "glass",
+    "hitbox": [603, 705, 470, 500],
+    "rect": [603, 705, 470, 500],
+    "sprite": "assets/sprites/poison.png",
+    "dialogue_id": "glass",
+    "done_dialogue": "glass_after",
+    "inspect": {
+      "effect": "sprite",
       "sprite": "assets/sprites/poison.png",
-      "dialogue_id": "glass",
-      "done_dialogue": "glass_after",
-      "inspect": {
-        "effect": "sprite",
-        "sprite": "assets/sprites/poison.png",
-        "zoom": 1.0,
-        "duration": 0.5
-      },
-      "death": {
-        "id": "poison",
-        "flag": "died_poison",
-        "effect": "white_flash",
-        "sfx": "assets/sounds/respiration_poison.mp3",
-        "sfx_volume": 0.7,
-        "void_dialogue": "death_poison_void",
-        "void_scene": "flashback1_1_verre_poison",
-        "aftermath_dialogue": "death_poison_after"
-      }
+      "zoom": 1.0,
+      "duration": 0.5
     },
+    "death": {
+      "id": "poison",
+      "flag": "died_poison",
+      "effect": "white_flash",
+      "sfx": "assets/sounds/respiration_poison.mp3",
+      "sfx_volume": 0.7,
+      "void_dialogue": "death_poison_void",
+      "void_scene": "flashback1_1_verre_poison",
+      "aftermath_dialogue": "death_poison_after"
+    }
+  },
     {
       "name": "ashtray",
       "kind": "ashtray",
